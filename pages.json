@@ -65,7 +65,7 @@
         "pagePath": "pages/mine",
         "iconPath": "static/icons/icon_mine.png",
         "selectedIconPath": "static/icons/icon_mine_active.png",
-        "text": "个人中心"
+        "text": "我的"
       }
     ]
   },

@@ -27,17 +27,15 @@
     <slot name="bottom"></slot>
   </scroll-view>
 </template>
-
 <script>
   export default {
+    props: ['data'],
     data() {
       return {
         dataArr: [[], []],
       };
     },
-    props: ['data'],
     mounted() {
-      // 处理数据
       this.handleData();
     },
     watch: {
@@ -70,7 +68,6 @@
     },
   };
 </script>
-
 <style lang="scss" scoped>
   /* #ifdef H5 || MP-WEIXIN */
   // 通过样式穿透，隐藏H5下，scroll-view下的滚动条

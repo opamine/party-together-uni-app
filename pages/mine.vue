@@ -68,32 +68,43 @@
     </view>
     <view class="social-activity-container">
       <view class="social-activity-content">
-        <water-fall :data="dynamicData" @clickItem="clickItem" @scrolltoupper="scrollToUpper" @scrolltolower="scrollToLower">
-          <template v-slot:default="slotProps">
-            <view class="dynamic-item">
-              <view class="dynamic-item-image">
-                <image :src="slotProps.item.images[0]" mode="widthFix"></image>
-              </view>
-              <view class="dynamic-item-title">{{ slotProps.item.title }}</view>
-              <view class="dynamic-item-action">
-                <view class="publisher-info">
-                  <view class="publisher-avatar">
-                    <image :src="slotProps.item.publisherAvatar"></image>
+        <swiper :current="currentTab" style="height: 100%">
+          <swiper-item>
+            <water-fall
+              :data="dynamicData"
+              @clickItem="clickItem"
+              @scrolltoupper="scrollToUpper"
+              @scrolltolower="scrollToLower"
+            >
+              <template v-slot:default="slotProps">
+                <view class="dynamic-item">
+                  <view class="dynamic-item-image">
+                    <image :src="slotProps.item.images[0]" mode="widthFix"></image>
                   </view>
-                  <view class="publisher-nick-name">{{ slotProps.item.publisher }}</view>
+                  <view class="dynamic-item-title">{{ slotProps.item.title }}</view>
+                  <view class="dynamic-item-action">
+                    <view class="publisher-info">
+                      <view class="publisher-avatar">
+                        <image :src="slotProps.item.publisherAvatar"></image>
+                      </view>
+                      <view class="publisher-nick-name">{{ slotProps.item.publisher }}</view>
+                    </view>
+                    <view class="like-info">
+                      <uni-icons
+                        :type="slotProps.item.like ? 'heart-filled' : 'heart'"
+                        :color="slotProps.item.like ? '#e44747' : '#5f5f5f'"
+                        size="18"
+                      ></uni-icons>
+                      <view class="like-count">{{ slotProps.item.likeCount }}</view>
+                    </view>
+                  </view>
                 </view>
-                <view class="like-info">
-                  <uni-icons
-                    :type="slotProps.item.like ? 'heart-filled' : 'heart'"
-                    :color="slotProps.item.like ? '#e44747' : '#5f5f5f'"
-                    size="18"
-                  ></uni-icons>
-                  <view class="like-count">{{ slotProps.item.likeCount }}</view>
-                </view>
-              </view>
-            </view>
-          </template>
-        </water-fall>
+              </template>
+            </water-fall>
+          </swiper-item>
+          <swiper-item>2</swiper-item>
+          <swiper-item>3</swiper-item>
+        </swiper>
       </view>
     </view>
   </view>
@@ -101,7 +112,9 @@
 <script>
   import tuiTabs from '../components/thorui/tui-tabs/tui-tabs.vue';
   import waterFall from '../components/water-fall/water-fall.vue';
+
   const InfoTagsFields = ['age', 'region', 'career', 'mbti'];
+
   export default {
     components: {
       tuiTabs,

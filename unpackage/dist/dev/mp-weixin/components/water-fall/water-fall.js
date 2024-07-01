@@ -1,12 +1,12 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
+  props: ["data"],
   data() {
     return {
       dataArr: [[], []]
     };
   },
-  props: ["data"],
   mounted() {
     this.handleData();
   },
