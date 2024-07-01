@@ -1,0 +1,20 @@
+// 日历 uni-calendar
+.uni-calendar-item {
+  &--isDay {
+    background-color: #ff5a5f !important;
+    &-text {
+      color: #000 !important ;
+    }
+  }
+  &--checked {
+    background-color: #000 !important;
+  }
+  &--multiple {
+    background-color: #000 !important;
+  }
+}
+
+// 按钮 uni-button
+.uni-button-color {
+  color: #000 !important;
+}

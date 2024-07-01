@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "咖啡点单",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#ffffff",
+  "disableScroll": true,
+  "usingComponents": {
+    "uni-icons": "../uni_modules/uni-icons/components/uni-icons/uni-icons",
+    "uni-notice-bar": "../uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar"
+  }
+}

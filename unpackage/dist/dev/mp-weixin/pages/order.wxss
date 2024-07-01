@@ -1,0 +1,184 @@
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.order-container.data-v-eb44ff31 {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.order-container .store-info.data-v-eb44ff31 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background-color: #fff;
+}
+.order-container .store-info .store-location .store-name.data-v-eb44ff31 {
+  font-size: 16px;
+  font-weight: 600;
+}
+.order-container .store-info .store-location .store-distance.data-v-eb44ff31 {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #666666;
+}
+.order-container .store-info .pick-up-type.data-v-eb44ff31 {
+  display: flex;
+  padding: 4px;
+  background-color: #f6f6f6;
+  border-radius: 17.5px;
+  font-size: 14px;
+}
+.order-container .store-info .pick-up-type .pick-up-type-item.data-v-eb44ff31 {
+  padding: 4px 8px;
+  border-radius: 13.5px;
+}
+.order-container .store-info .pick-up-type .pick-up-type-item.data-v-eb44ff31:first-of-type {
+  margin-right: 8px;
+}
+.order-container .store-info .pick-up-type .pick-up-type-item.active.data-v-eb44ff31 {
+  background-color: #000;
+  color: #fff;
+}
+.order-container .menu-container.data-v-eb44ff31 {
+  flex: 1;
+  display: flex;
+}
+.order-container .menu-container .menu-left.data-v-eb44ff31 {
+  width: 90px;
+  margin-right: 8px;
+}
+.order-container .menu-container .menu-left .category-list .category-item.data-v-eb44ff31 {
+  padding: 6px 0;
+}
+.order-container .menu-container .menu-left .category-list .category-item .category-item-name.data-v-eb44ff31 {
+  height: 38px;
+  padding-left: 16px;
+  border-top-right-radius: 19px;
+  border-bottom-right-radius: 19px;
+  line-height: 38px;
+  font-size: 14px;
+  color: #666;
+}
+.order-container .menu-container .menu-left .category-list .category-item.active .category-item-name.data-v-eb44ff31 {
+  background-color: #e5e5e5;
+  color: #333;
+  font-weight: 600;
+}
+.order-container .menu-container .menu-right.data-v-eb44ff31 {
+  flex: 1;
+}
+.order-container .menu-container .menu-right .categroy-goods-list .categroy-goods.data-v-eb44ff31 {
+  margin-bottom: 12px;
+}
+.order-container .menu-container .menu-right .categroy-goods-list .categroy-goods .category-info.data-v-eb44ff31 {
+  height: 40px;
+}
+.order-container .menu-container .menu-right .categroy-goods-list .categroy-goods .category-info .category-name.data-v-eb44ff31 {
+  font-size: 15px;
+  font-weight: 600;
+}
+.order-container .menu-container .menu-right .categroy-goods-list .categroy-goods .category-info .category-desc.data-v-eb44ff31 {
+  font-size: 12px;
+  color: #999999;
+}
+.order-container .menu-container .menu-right .categroy-goods-list .categroy-goods .goods-list .product.data-v-eb44ff31 {
+  display: flex;
+  margin-top: 16px;
+}
+.order-container .menu-container .menu-right .categroy-goods-list .categroy-goods .goods-list .product .product-picture.data-v-eb44ff31 {
+  margin-right: 8px;
+}
+.order-container .menu-container .menu-right .categroy-goods-list .categroy-goods .goods-list .product .product-picture image.data-v-eb44ff31 {
+  display: block;
+  width: 80px;
+  height: 80px;
+}
+.order-container .menu-container .menu-right .categroy-goods-list .categroy-goods .goods-list .product .product-info-price.data-v-eb44ff31 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.order-container .menu-container .menu-right .categroy-goods-list .categroy-goods .goods-list .product .product-info-price .product-info .product-name.data-v-eb44ff31 {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  font-size: 15px;
+  color: #333;
+}
+.order-container .menu-container .menu-right .categroy-goods-list .categroy-goods .goods-list .product .product-info-price .product-info .product-desc.data-v-eb44ff31 {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-size: 12px;
+  color: #999;
+}
+.order-container .menu-container .menu-right .categroy-goods-list .categroy-goods .goods-list .product .product-info-price .product-price-buy.data-v-eb44ff31 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.order-container .menu-container .menu-right .categroy-goods-list .categroy-goods .goods-list .product .product-info-price .product-price-buy .product-price.data-v-eb44ff31 {
+  display: flex;
+}
+.order-container .menu-container .menu-right .categroy-goods-list .categroy-goods .goods-list .product .product-info-price .product-price-buy .product-price .discount-price.data-v-eb44ff31 {
+  margin-right: 6px;
+  color: #f65a2a;
+}
+.order-container .menu-container .menu-right .categroy-goods-list .categroy-goods .goods-list .product .product-info-price .product-price-buy .product-price .discount-price .unit.data-v-eb44ff31 {
+  margin-right: 2px;
+  font-size: 12px;
+}
+.order-container .menu-container .menu-right .categroy-goods-list .categroy-goods .goods-list .product .product-info-price .product-price-buy .product-price .discount-price .num.data-v-eb44ff31 {
+  font-size: 14px;
+  font-weight: 600;
+}
+.order-container .menu-container .menu-right .categroy-goods-list .categroy-goods .goods-list .product .product-info-price .product-price-buy .product-price .origin-price.data-v-eb44ff31 {
+  color: #777;
+  text-decoration: line-through;
+}
+.order-container .menu-container .menu-right .categroy-goods-list .categroy-goods .goods-list .product .product-info-price .product-price-buy .product-price .origin-price .unit.data-v-eb44ff31 {
+  margin-right: 2px;
+  font-size: 12px;
+}
+.order-container .menu-container .menu-right .categroy-goods-list .categroy-goods .goods-list .product .product-info-price .product-price-buy .product-price .origin-price .num.data-v-eb44ff31 {
+  font-size: 12px;
+}
+.order-container .menu-container .menu-right .categroy-goods-list .no-more.data-v-eb44ff31 {
+  height: 40px;
+  line-height: 25px;
+  font-size: 12px;
+  color: #999;
+  text-align: center;
+}

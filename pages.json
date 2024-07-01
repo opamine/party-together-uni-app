@@ -1,0 +1,79 @@
+{
+  "pages": [
+    {
+      "path": "pages/index",
+      "style": {
+        "navigationBarTitleText": "咖啡店首页",
+        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#f8f8f8",
+        "disableScroll": true
+      }
+    },
+    {
+      "path": "pages/order",
+      "style": {
+        "navigationBarTitleText": "咖啡点单",
+        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#ffffff",
+        "disableScroll": true
+      }
+    },
+    {
+      "path": "pages/fans",
+      "style": {
+        "navigationBarTitleText": "我的好友",
+        "disableScroll": true
+      }
+    },
+    {
+      "path": "pages/mine",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "个人中心",
+        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#f8f8f8",
+        // "disableScroll": true
+        "enablePullDownRefresh": true
+      }
+    }
+  ],
+  "tabBar": {
+    "color": "#646464",
+    "selectedColor": "#000000",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index",
+        "iconPath": "static/icons/icon_home.png",
+        "selectedIconPath": "static/icons/icon_home_active.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/order",
+        "iconPath": "static/icons/icon_time.png",
+        "selectedIconPath": "static/icons/icon_time_active.png",
+        "text": "点单"
+      },
+      {
+        "pagePath": "pages/fans",
+        "iconPath": "static/icons/icon_people.png",
+        "selectedIconPath": "static/icons/icon_people_active.png",
+        "text": "我的好友"
+      },
+      {
+        "pagePath": "pages/mine",
+        "iconPath": "static/icons/icon_mine.png",
+        "selectedIconPath": "static/icons/icon_mine_active.png",
+        "text": "个人中心"
+      }
+    ]
+  },
+  "globalStyle": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "这是你的小程序名称",
+    "navigationBarBackgroundColor": "#000000",
+    "backgroundColor": "#F8F8F8"
+  },
+  "uniIdRouter": {}
+}
