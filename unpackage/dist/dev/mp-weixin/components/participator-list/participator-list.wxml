@@ -1,0 +1,1 @@
+<view class="participator-list-view data-v-01ae09b0"><view class="avatars-container data-v-01ae09b0" style="{{'width:' + b}}"><image wx:for="{{a}}" wx:for-item="item" wx:key="a" class="data-v-01ae09b0" src="{{item.b}}" style="{{'top:' + 0 + ';' + ('left:' + item.c)}}"></image></view><view class="describle-container data-v-01ae09b0">{{c}}人参与 </view></view>

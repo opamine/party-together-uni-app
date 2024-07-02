@@ -2,7 +2,6 @@
   <scroll-view
     class="scroll-view"
     :scroll-y="true"
-    :refresher-enabled="true"
     @scrolltoupper="scrolltoupper"
     @scrolltolower="scrolltolower"
     :style="{ height: '100%' }"

@@ -7,6 +7,8 @@
   "usingComponents": {
     "tui-tabs": "../components/thorui/tui-tabs/tui-tabs",
     "water-fall": "../components/water-fall/water-fall",
-    "uni-icons": "../uni_modules/uni-icons/components/uni-icons/uni-icons"
+    "participator-list": "../components/participator-list/participator-list",
+    "uni-icons": "../uni_modules/uni-icons/components/uni-icons/uni-icons",
+    "uni-dateformat": "../uni_modules/uni-dateformat/components/uni-dateformat/uni-dateformat"
   }
 }

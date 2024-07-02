@@ -68,8 +68,9 @@
     </view>
     <view class="social-activity-container">
       <view class="social-activity-content">
-        <swiper :current="currentTab" style="height: 100%">
+        <swiper :current="currentTab" :duration="300" style="height: 100%">
           <swiper-item>
+            <!-- 动态组件 -->
             <water-fall
               :data="dynamicData"
               @clickItem="clickItem"
@@ -102,8 +103,110 @@
               </template>
             </water-fall>
           </swiper-item>
-          <swiper-item>2</swiper-item>
-          <swiper-item>3</swiper-item>
+          <swiper-item>
+            <scroll-view>
+              <!-- 活动参与组件 -->
+              <view class="activities-list">
+                <view v-for="item in activityData" :key="item.id" class="activity-item">
+                  <view class="activity-info">
+                    <view class="activity-image">
+                      <image :src="item.images[0]" mode="aspectFill"></image>
+                    </view>
+                    <view class="activity-desc">
+                      <view class="activity-title">
+                        {{ item.title }}
+                      </view>
+                      <view class="activity-desc-sub">
+                        <view class="activity-time">
+                          <view class="icon"
+                            ><uni-icons type="calendar" size="16"></uni-icons
+                          ></view>
+                          <view class="text"
+                            ><uni-dateformat
+                              :date="item.startTime"
+                              format="yyyy.MM.dd hh:mm"
+                            ></uni-dateformat
+                          ></view>
+                        </view>
+                        <view class="activity-address">
+                          <view class="icon"
+                            ><uni-icons type="location" size="16"></uni-icons
+                          ></view>
+                          <view class="text">{{ item.addressName }}</view>
+                        </view>
+                        <view class="activity-publisher">
+                          <view class="icon"><uni-icons type="person" size="16"></uni-icons></view>
+                          <view class="text">{{ item.publisher }}</view>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                  <view class="activity-actions">
+                    <view class="participator-container">
+                      <participator-list></participator-list>
+                    </view>
+                    <view class="action-btn-container">
+                      <view class="action-btn">活动回顾</view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </scroll-view>
+          </swiper-item>
+          <swiper-item>
+            <scroll-view>
+              <scroll-view>
+                <!-- 活动参与组件 -->
+                <view class="activities-list">
+                  <view v-for="item in publishData" :key="item.id" class="activity-item">
+                    <view class="activity-info">
+                      <view class="activity-image">
+                        <image :src="item.images[0]" mode="aspectFill"></image>
+                      </view>
+                      <view class="activity-desc">
+                        <view class="activity-title">
+                          {{ item.title }}
+                        </view>
+                        <view class="activity-desc-sub">
+                          <view class="activity-time">
+                            <view class="icon"
+                              ><uni-icons type="calendar" size="16"></uni-icons
+                            ></view>
+                            <view class="text"
+                              ><uni-dateformat
+                                :date="item.startTime"
+                                format="yyyy.MM.dd hh:mm"
+                              ></uni-dateformat
+                            ></view>
+                          </view>
+                          <view class="activity-address">
+                            <view class="icon"
+                              ><uni-icons type="location" size="16"></uni-icons
+                            ></view>
+                            <view class="text">{{ item.addressName }}</view>
+                          </view>
+                          <view class="activity-publisher">
+                            <view class="icon"
+                              ><uni-icons type="person" size="16"></uni-icons
+                            ></view>
+                            <view class="text">{{ item.publisher }}</view>
+                          </view>
+                        </view>
+                      </view>
+                    </view>
+                    <view class="activity-actions">
+                      <view class="participator-container">
+                        <participator-list></participator-list>
+                      </view>
+                      <view class="action-btn-container">
+                        <view class="action-btn">活动回顾</view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </scroll-view>
+            </scroll-view>
+          </swiper-item>
         </swiper>
       </view>
     </view>
@@ -112,6 +215,7 @@
 <script>
   import tuiTabs from '../components/thorui/tui-tabs/tui-tabs.vue';
   import waterFall from '../components/water-fall/water-fall.vue';
+  import participatorList from '../components/participator-list/participator-list.vue';
 
   const InfoTagsFields = ['age', 'region', 'career', 'mbti'];
 
@@ -119,6 +223,7 @@
     components: {
       tuiTabs,
       waterFall,
+      participatorList,
     },
     data() {
       return {
@@ -141,7 +246,7 @@
             name: '动态',
           },
           {
-            name: '活动',
+            name: '活动参与',
           },
           {
             name: '我的发布',
@@ -153,7 +258,7 @@
             title: '这是动态标题',
             content: '这是动态内容',
             images: [
-              'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20240701193658.jpg',
+              'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/01.jpg',
             ],
             publisher: '周啊粥',
             publisherAvatar: 'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png',
@@ -164,7 +269,7 @@
             id: 1,
             title: '这是动态标题',
             content: '这是动态内容',
-            images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/IMG_E3164.JPG'],
+            images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/02.JPG'],
             publisher: '周啊粥',
             publisherAvatar: 'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png',
             like: false,
@@ -174,7 +279,7 @@
             id: 2,
             title: '这是动态标题',
             content: '这是动态内容',
-            images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/IMG_E3164.JPG'],
+            images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/03.JPG'],
             publisher: '周啊粥',
             publisherAvatar: 'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png',
             like: false,
@@ -184,15 +289,41 @@
             id: 3,
             title: '这是动态标题',
             content: '这是动态内容',
-            images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/IMG_E3164.JPG'],
+            images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/04.JPG'],
             publisher: '周啊粥',
             publisherAvatar: 'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png',
             like: false,
             likeCount: 20,
           },
         ],
-        activityData: [],
-        publishData: [],
+        activityData: [
+          {
+            title:
+              '这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题',
+            content: '这是一个很长的活动内容',
+            images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/10.JPG'],
+            publisher: '丸子',
+            publisherAvatar: 'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png',
+            startTime: 1719900150185,
+            addressName: '文宋阁·肆舍',
+            location: '浙江省杭州市萧山区望京C1座35楼E-F室',
+            lnglat: [120.254429, 30.237911],
+          },
+        ],
+        publishData: [
+          {
+            title:
+              '这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题',
+            content: '这是一个很长的活动内容',
+            images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/21.JPG'],
+            publisher: '周啊粥',
+            publisherAvatar: 'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png',
+            startTime: 1821121211551,
+            addressName: '西湖杨公堤',
+            location: '浙江省杭州市萧山区望京C1座35楼E-F室',
+            lnglat: [120.254429, 30.237911],
+          },
+        ],
       };
     },
     methods: {
@@ -226,7 +357,7 @@
       padding: 16px;
       padding-top: 100px;
       background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
-        url('https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20240701193658.jpg');
+        url('https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/22.JPG');
       background-size: 100%;
       .mine-info {
         display: flex;
@@ -366,6 +497,76 @@
               font-size: 12px;
               .like-count {
                 margin-left: 4px;
+              }
+            }
+          }
+        }
+        .activities-list {
+          padding: 8px;
+          .activity-item {
+            padding: 8px;
+            background-color: #fff;
+            border-radius: 4px;
+            .activity-info {
+              display: flex;
+              .activity-image {
+                margin-right: 6px;
+                image {
+                  display: block;
+                  width: 180px;
+                  height: 120px;
+                  border-radius: 4px;
+                }
+              }
+              .activity-desc {
+                flex: 1;
+                .activity-title {
+                  font-size: 14px;
+                  font-weight: 600;
+                  word-break: break-all;
+                  text-overflow: ellipsis;
+                  display: -webkit-box;
+                  -webkit-box-orient: vertical;
+                  -webkit-line-clamp: 2; /* 这里是超出几行省略 */
+                  overflow: hidden;
+                }
+                .activity-desc-sub {
+                  font-size: 12px;
+                  color: #696969;
+                  .activity-time,
+                  .activity-address,
+                  .activity-publisher {
+                    display: flex;
+                    align-items: center;
+                    .icon {
+                      margin-right: 4px;
+                    }
+                  }
+                  .activity-time {
+                    margin-top: 8px;
+                  }
+                  .activity-address {
+                    margin-top: 2px;
+                  }
+                  .activity-publisher {
+                    margin-top: 2px;
+                  }
+                }
+              }
+            }
+            .activity-actions {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-top: 12px;
+              .action-btn {
+                height: 30px;
+                padding: 0 12px;
+                background-color: #333;
+                border-radius: 15px;
+                line-height: 30px;
+                color: #fff;
+                font-size: 13px;
               }
             }
           }

@@ -2,11 +2,13 @@
 const common_vendor = require("../common/vendor.js");
 const tuiTabs = () => "../components/thorui/tui-tabs/tui-tabs.js";
 const waterFall = () => "../components/water-fall/water-fall.js";
+const participatorList = () => "../components/participator-list/participator-list.js";
 const InfoTagsFields = ["age", "region", "career", "mbti"];
 const _sfc_main = {
   components: {
     tuiTabs,
-    waterFall
+    waterFall,
+    participatorList
   },
   data() {
     return {
@@ -29,7 +31,7 @@ const _sfc_main = {
           name: "动态"
         },
         {
-          name: "活动"
+          name: "活动参与"
         },
         {
           name: "我的发布"
@@ -41,7 +43,7 @@ const _sfc_main = {
           title: "这是动态标题",
           content: "这是动态内容",
           images: [
-            "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20240701193658.jpg"
+            "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/01.jpg"
           ],
           publisher: "周啊粥",
           publisherAvatar: "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png",
@@ -52,7 +54,7 @@ const _sfc_main = {
           id: 1,
           title: "这是动态标题",
           content: "这是动态内容",
-          images: ["https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/IMG_E3164.JPG"],
+          images: ["https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/02.JPG"],
           publisher: "周啊粥",
           publisherAvatar: "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png",
           like: false,
@@ -62,7 +64,7 @@ const _sfc_main = {
           id: 2,
           title: "这是动态标题",
           content: "这是动态内容",
-          images: ["https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/IMG_E3164.JPG"],
+          images: ["https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/03.JPG"],
           publisher: "周啊粥",
           publisherAvatar: "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png",
           like: false,
@@ -72,15 +74,39 @@ const _sfc_main = {
           id: 3,
           title: "这是动态标题",
           content: "这是动态内容",
-          images: ["https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/IMG_E3164.JPG"],
+          images: ["https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/04.JPG"],
           publisher: "周啊粥",
           publisherAvatar: "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png",
           like: false,
           likeCount: 20
         }
       ],
-      activityData: [],
-      publishData: []
+      activityData: [
+        {
+          title: "这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题",
+          content: "这是一个很长的活动内容",
+          images: ["https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/10.JPG"],
+          publisher: "丸子",
+          publisherAvatar: "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png",
+          startTime: 1719900150185,
+          addressName: "文宋阁·肆舍",
+          location: "浙江省杭州市萧山区望京C1座35楼E-F室",
+          lnglat: [120.254429, 30.237911]
+        }
+      ],
+      publishData: [
+        {
+          title: "这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题",
+          content: "这是一个很长的活动内容",
+          images: ["https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/21.JPG"],
+          publisher: "周啊粥",
+          publisherAvatar: "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png",
+          startTime: 1821121211551,
+          addressName: "西湖杨公堤",
+          location: "浙江省杭州市萧山区望京C1座35楼E-F室",
+          lnglat: [120.254429, 30.237911]
+        }
+      ]
     };
   },
   methods: {
@@ -107,12 +133,16 @@ if (!Array) {
   const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
   const _component_tui_tabs = common_vendor.resolveComponent("tui-tabs");
   const _easycom_water_fall2 = common_vendor.resolveComponent("water-fall");
-  (_easycom_uni_icons2 + _component_tui_tabs + _easycom_water_fall2)();
+  const _easycom_uni_dateformat2 = common_vendor.resolveComponent("uni-dateformat");
+  const _easycom_participator_list2 = common_vendor.resolveComponent("participator-list");
+  (_easycom_uni_icons2 + _component_tui_tabs + _easycom_water_fall2 + _easycom_uni_dateformat2 + _easycom_participator_list2)();
 }
 const _easycom_uni_icons = () => "../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
 const _easycom_water_fall = () => "../components/water-fall/water-fall.js";
+const _easycom_uni_dateformat = () => "../uni_modules/uni-dateformat/components/uni-dateformat/uni-dateformat.js";
+const _easycom_participator_list = () => "../components/participator-list/participator-list.js";
 if (!Math) {
-  (_easycom_uni_icons + _easycom_water_fall)();
+  (_easycom_uni_icons + _easycom_water_fall + _easycom_uni_dateformat + _easycom_participator_list)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
@@ -178,7 +208,67 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     m: common_vendor.p({
       data: $data.dynamicData
     }),
-    n: $data.currentTab
+    n: common_vendor.f($data.activityData, (item, k0, i0) => {
+      return {
+        a: item.images[0],
+        b: common_vendor.t(item.title),
+        c: "1c081928-5-" + i0,
+        d: "1c081928-6-" + i0,
+        e: common_vendor.p({
+          date: item.startTime,
+          format: "yyyy.MM.dd hh:mm"
+        }),
+        f: "1c081928-7-" + i0,
+        g: common_vendor.t(item.addressName),
+        h: "1c081928-8-" + i0,
+        i: common_vendor.t(item.publisher),
+        j: "1c081928-9-" + i0,
+        k: item.id
+      };
+    }),
+    o: common_vendor.p({
+      type: "calendar",
+      size: "16"
+    }),
+    p: common_vendor.p({
+      type: "location",
+      size: "16"
+    }),
+    q: common_vendor.p({
+      type: "person",
+      size: "16"
+    }),
+    r: common_vendor.f($data.publishData, (item, k0, i0) => {
+      return {
+        a: item.images[0],
+        b: common_vendor.t(item.title),
+        c: "1c081928-10-" + i0,
+        d: "1c081928-11-" + i0,
+        e: common_vendor.p({
+          date: item.startTime,
+          format: "yyyy.MM.dd hh:mm"
+        }),
+        f: "1c081928-12-" + i0,
+        g: common_vendor.t(item.addressName),
+        h: "1c081928-13-" + i0,
+        i: common_vendor.t(item.publisher),
+        j: "1c081928-14-" + i0,
+        k: item.id
+      };
+    }),
+    s: common_vendor.p({
+      type: "calendar",
+      size: "16"
+    }),
+    t: common_vendor.p({
+      type: "location",
+      size: "16"
+    }),
+    v: common_vendor.p({
+      type: "person",
+      size: "16"
+    }),
+    w: $data.currentTab
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/uniapp/party-together-uni-app/pages/mine.vue"]]);
