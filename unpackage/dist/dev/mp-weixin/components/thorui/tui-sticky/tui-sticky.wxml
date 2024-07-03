@@ -1,0 +1,1 @@
+<view class="tui-sticky-class data-v-2e485390" id="{{f}}"><view wx:if="{{a}}" class="data-v-2e485390" style="{{'height:' + b + ';' + ('background:' + c)}}"></view><view class="{{['data-v-2e485390', d && 'tui-sticky-fixed']}}" style="{{'top:' + e}}"><slot name="header"></slot></view><slot name="content"></slot></view>

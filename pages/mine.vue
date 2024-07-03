@@ -1,6 +1,18 @@
 <template>
+  <!-- <uni-nav-bar :fixed="true" title="导航栏组件" height="100rpx" :border="false" :statusBar="true"></uni-nav-bar> -->
+  <view
+    class="mine-header"
+    :style="{
+      height: navHeight + 'px',
+      paddingTop: statusBarHeight + 'px',
+      boxSizing: 'border-box',
+      opacity: mineHeaderOpacity,
+    }"
+  >
+    {{ userInfo.nickName }}
+  </view>
   <view class="mine-container">
-    <view class="mine-content">
+    <view class="mine-content" :style="{ paddingTop: navHeight + 'px' }">
       <view class="mine-info">
         <view class="avatar-container">
           <image class="avatar" :src="userInfo.avatar" mode="aspectFill"></image>
@@ -56,162 +68,152 @@
         </view>
       </view>
     </view>
-    <view class="mine-social-activity-tabs">
-      <tui-tabs
-        :tabs="tabs"
-        :currentTab="currentTab"
-        @change="changeTab"
-        sliderBgColor="#000000"
-        selectedColor="#000"
-        :height="90"
-      ></tui-tabs>
-    </view>
+    <tui-sticky :scrollTop="scrollTop" :stickyTop="navHeight" stickyHeight="90rpx">
+      <template v-slot:header>
+        <view class="mine-social-activity-tabs">
+          <tui-tabs
+            :tabs="tabs"
+            :currentTab="currentTab"
+            @change="changeTab"
+            sliderBgColor="#000000"
+            selectedColor="#000"
+            :height="90"
+          ></tui-tabs>
+        </view>
+      </template>
+    </tui-sticky>
+
     <view class="social-activity-container">
       <view class="social-activity-content">
-        <swiper :current="currentTab" :duration="300" style="height: 100%">
-          <swiper-item>
-            <!-- 动态组件 -->
-            <water-fall
-              :data="dynamicData"
-              @clickItem="clickItem"
-              @scrolltoupper="scrollToUpper"
-              @scrolltolower="scrollToLower"
-            >
-              <template v-slot:default="slotProps">
-                <view class="dynamic-item">
-                  <view class="dynamic-item-image">
-                    <image :src="slotProps.item.images[0]" mode="widthFix"></image>
+        <view v-if="currentTab === 0">
+          <!-- 动态组件 -->
+          <water-fall
+            :data="dynamicData"
+            @clickItem="clickItem"
+            @scrolltoupper="scrollToUpper"
+            @scrolltolower="scrollToLower"
+          >
+            <template v-slot:default="slotProps">
+              <view class="dynamic-item">
+                <view class="dynamic-item-image">
+                  <image :src="slotProps.item.images[0]" mode="widthFix"></image>
+                </view>
+                <view class="dynamic-item-title">{{ slotProps.item.title }}</view>
+                <view class="dynamic-item-action">
+                  <view class="publisher-info">
+                    <view class="publisher-avatar">
+                      <image :src="slotProps.item.publisherAvatar"></image>
+                    </view>
+                    <view class="publisher-nick-name">{{ slotProps.item.publisher }}</view>
                   </view>
-                  <view class="dynamic-item-title">{{ slotProps.item.title }}</view>
-                  <view class="dynamic-item-action">
-                    <view class="publisher-info">
-                      <view class="publisher-avatar">
-                        <image :src="slotProps.item.publisherAvatar"></image>
-                      </view>
-                      <view class="publisher-nick-name">{{ slotProps.item.publisher }}</view>
-                    </view>
-                    <view class="like-info">
-                      <uni-icons
-                        :type="slotProps.item.like ? 'heart-filled' : 'heart'"
-                        :color="slotProps.item.like ? '#e44747' : '#5f5f5f'"
-                        size="36rpx"
-                      ></uni-icons>
-                      <view class="like-count">{{ slotProps.item.likeCount }}</view>
-                    </view>
+                  <view class="like-info">
+                    <uni-icons
+                      :type="slotProps.item.like ? 'heart-filled' : 'heart'"
+                      :color="slotProps.item.like ? '#e44747' : '#5f5f5f'"
+                      size="36rpx"
+                    ></uni-icons>
+                    <view class="like-count">{{ slotProps.item.likeCount }}</view>
                   </view>
                 </view>
-              </template>
-            </water-fall>
-          </swiper-item>
-          <swiper-item>
-            <scroll-view :scroll-y="true" style="height: 100%">
-              <!-- 活动参与组件 -->
-              <view class="activities-list">
-                <view v-for="item in activityData" :key="item.id" class="activity-item">
-                  <view class="activity-info">
-                    <view class="activity-image">
-                      <image :src="item.images[0]" mode="aspectFill"></image>
-                    </view>
-                    <view class="activity-desc">
-                      <view class="activity-title">
-                        {{ item.title }}
-                      </view>
-                      <view class="activity-desc-sub">
-                        <view class="activity-time">
-                          <view class="icon"
-                            ><uni-icons type="calendar" size="32rpx"></uni-icons
-                          ></view>
-                          <view class="text"
-                            ><uni-dateformat
-                              :date="item.startTime"
-                              format="yyyy.MM.dd hh:mm"
-                            ></uni-dateformat
-                          ></view>
-                        </view>
-                        <view class="activity-address">
-                          <view class="icon"
-                            ><uni-icons type="location" size="32rpx"></uni-icons
-                          ></view>
-                          <view class="text">{{ item.addressName }}</view>
-                        </view>
-                        <view class="activity-publisher">
-                          <view class="icon"><uni-icons type="person" size="32rpx"></uni-icons></view>
-                          <view class="text">{{ item.publisher }}</view>
-                        </view>
-                      </view>
-                    </view>
+              </view>
+            </template>
+          </water-fall>
+        </view>
+        <view v-if="currentTab === 1">
+          <!-- 活动参与组件 -->
+          <view class="activities-list">
+            <view v-for="item in activityData" :key="item.id" class="activity-item">
+              <view class="activity-info">
+                <view class="activity-image">
+                  <image :src="item.images[0]" mode="aspectFill"></image>
+                </view>
+                <view class="activity-desc">
+                  <view class="activity-title">
+                    {{ item.title }}
                   </view>
-                  <view class="activity-actions">
-                    <view class="participator-container">
-                      <participator-list></participator-list>
+                  <view class="activity-desc-sub">
+                    <view class="activity-time">
+                      <view class="icon"><uni-icons type="calendar" size="32rpx"></uni-icons></view>
+                      <view class="text"
+                        ><uni-dateformat
+                          :date="item.startTime"
+                          format="yyyy.MM.dd hh:mm"
+                        ></uni-dateformat
+                      ></view>
                     </view>
-                    <view class="action-btn-container">
-                      <view class="action-btn">活动回顾</view>
+                    <view class="activity-address">
+                      <view class="icon"><uni-icons type="location" size="32rpx"></uni-icons></view>
+                      <view class="text">{{ item.addressName }}</view>
+                    </view>
+                    <view class="activity-publisher">
+                      <view class="icon"><uni-icons type="person" size="32rpx"></uni-icons></view>
+                      <view class="text">{{ item.publisher }}</view>
                     </view>
                   </view>
                 </view>
               </view>
-            </scroll-view>
-          </swiper-item>
-          <swiper-item>
-              <scroll-view :scroll-y="true" style="height: 100%;">
-                <!-- 活动参与组件 -->
-                <view class="activities-list">
-                  <view v-for="item in publishData" :key="item.id" class="activity-item">
-                    <view class="activity-info">
-                      <view class="activity-image">
-                        <image :src="item.images[0]" mode="aspectFill"></image>
-                      </view>
-                      <view class="activity-desc">
-                        <view class="activity-title">
-                          {{ item.title }}
-                        </view>
-                        <view class="activity-desc-sub">
-                          <view class="activity-time">
-                            <view class="icon"
-                              ><uni-icons type="calendar" size="16"></uni-icons
-                            ></view>
-                            <view class="text"
-                              ><uni-dateformat
-                                :date="item.startTime"
-                                format="yyyy.MM.dd hh:mm"
-                              ></uni-dateformat
-                            ></view>
-                          </view>
-                          <view class="activity-address">
-                            <view class="icon"
-                              ><uni-icons type="location" size="16"></uni-icons
-                            ></view>
-                            <view class="text">{{ item.addressName }}</view>
-                          </view>
-                          <view class="activity-publisher">
-                            <view class="icon"
-                              ><uni-icons type="person" size="16"></uni-icons
-                            ></view>
-                            <view class="text">{{ item.publisher }}</view>
-                          </view>
-                        </view>
-                      </view>
+              <view class="activity-actions">
+                <view class="participator-container">
+                  <participator-list></participator-list>
+                </view>
+                <view class="action-btn-container">
+                  <view class="action-btn">活动回顾</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view v-if="currentTab === 2">
+          <!-- 我的发布组件 -->
+          <view class="activities-list">
+            <view v-for="item in publishData" :key="item.id" class="activity-item">
+              <view class="activity-info">
+                <view class="activity-image">
+                  <image :src="item.images[0]" mode="aspectFill"></image>
+                </view>
+                <view class="activity-desc">
+                  <view class="activity-title">
+                    {{ item.title }}
+                  </view>
+                  <view class="activity-desc-sub">
+                    <view class="activity-time">
+                      <view class="icon"><uni-icons type="calendar" size="16"></uni-icons></view>
+                      <view class="text"
+                        ><uni-dateformat
+                          :date="item.startTime"
+                          format="yyyy.MM.dd hh:mm"
+                        ></uni-dateformat
+                      ></view>
                     </view>
-                    <view class="activity-actions">
-                      <view class="participator-container">
-                        <participator-list></participator-list>
-                      </view>
-                      <view class="action-btn-container">
-                        <view class="action-btn">活动回顾</view>
-                      </view>
+                    <view class="activity-address">
+                      <view class="icon"><uni-icons type="location" size="16"></uni-icons></view>
+                      <view class="text">{{ item.addressName }}</view>
+                    </view>
+                    <view class="activity-publisher">
+                      <view class="icon"><uni-icons type="person" size="16"></uni-icons></view>
+                      <view class="text">{{ item.publisher }}</view>
                     </view>
                   </view>
                 </view>
-              </scroll-view>
-          </swiper-item>
-        </swiper>
+              </view>
+              <view class="activity-actions">
+                <view class="participator-container">
+                  <participator-list></participator-list>
+                </view>
+                <view class="action-btn-container">
+                  <view class="action-btn">活动回顾</view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
       </view>
     </view>
   </view>
 </template>
 <script>
   import tuiTabs from '../components/thorui/tui-tabs/tui-tabs.vue';
+  import tuiSticky from '../components/thorui/tui-sticky/tui-sticky.vue';
   import waterFall from '../components/water-fall/water-fall.vue';
   import participatorList from '../components/participator-list/participator-list.vue';
 
@@ -220,11 +222,17 @@
   export default {
     components: {
       tuiTabs,
+      tuiSticky,
       waterFall,
       participatorList,
     },
     data() {
       return {
+        navHeight: 0,
+        statusBarHeight: 0,
+        navigationBarHeight: 0,
+        mineHeaderOpacity: 0,
+        scrollTop: 0,
         userInfo: {
           id: 1998,
           nickName: '周啊粥',
@@ -349,6 +357,23 @@
         ],
       };
     },
+    onLoad() {
+      this.statusBarHeight = uni.getSystemInfoSync().statusBarHeight;
+      // #ifdef MP-WEIXIN
+      const custom = wx.getMenuButtonBoundingClientRect();
+      this.navigationBarHeight =
+        custom.height + (custom.top - uni.getSystemInfoSync().statusBarHeight) * 2;
+      // #endif
+      this.navHeight = this.statusBarHeight + this.navigationBarHeight;
+    },
+    onPageScroll: function (e) {
+      this.scrollTop = e.scrollTop;
+      if (e.scrollTop <= uni.upx2px(150)) {
+        this.mineHeaderOpacity = e.scrollTop / uni.upx2px(150);
+      } else {
+        this.mineHeaderOpacity = 1;
+      }
+    },
     methods: {
       changeTab(e) {
         this.currentTab = e.index;
@@ -371,16 +396,21 @@
   };
 </script>
 <style lang="scss">
-  .mine-container {
+  .mine-header {
+    position: fixed;
     display: flex;
-    flex-direction: column;
-    height: 100%;
-    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 70px;
+    background-color: #ffffff;
+    z-index: 999;
+  }
+  .mine-container {
     .mine-content {
       padding: 32rpx;
-      padding-top: 100px;
       background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
-        url('https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/22.JPG');
+        url('https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/01.jpg');
       background-size: 100%;
       .mine-info {
         display: flex;
@@ -535,7 +565,7 @@
             background-color: #fff;
             border-radius: 4px;
             &:last-of-type {
-              margin-bottom: 0
+              margin-bottom: 0;
             }
             .activity-info {
               display: flex;

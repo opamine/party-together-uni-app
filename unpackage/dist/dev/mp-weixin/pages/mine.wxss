@@ -23,16 +23,19 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.mine-container {
+.mine-header {
+  position: fixed;
   display: flex;
-  flex-direction: column;
-  height: 100%;
-  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+  background-color: #ffffff;
+  z-index: 999;
 }
 .mine-container .mine-content {
   padding: 32rpx;
-  padding-top: 100px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0), black), url("https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/22.JPG");
+  background-image: linear-gradient(rgba(0, 0, 0, 0), black), url("https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/01.jpg");
   background-size: 100%;
 }
 .mine-container .mine-content .mine-info {

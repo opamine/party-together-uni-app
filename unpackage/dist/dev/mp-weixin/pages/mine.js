@@ -1,17 +1,24 @@
 "use strict";
 const common_vendor = require("../common/vendor.js");
 const tuiTabs = () => "../components/thorui/tui-tabs/tui-tabs.js";
+const tuiSticky = () => "../components/thorui/tui-sticky/tui-sticky.js";
 const waterFall = () => "../components/water-fall/water-fall.js";
 const participatorList = () => "../components/participator-list/participator-list.js";
 const InfoTagsFields = ["age", "region", "career", "mbti"];
 const _sfc_main = {
   components: {
     tuiTabs,
+    tuiSticky,
     waterFall,
     participatorList
   },
   data() {
     return {
+      navHeight: 0,
+      statusBarHeight: 0,
+      navigationBarHeight: 0,
+      mineHeaderOpacity: 0,
+      scrollTop: 0,
       userInfo: {
         id: 1998,
         nickName: "周啊粥",
@@ -132,6 +139,20 @@ const _sfc_main = {
       ]
     };
   },
+  onLoad() {
+    this.statusBarHeight = common_vendor.index.getSystemInfoSync().statusBarHeight;
+    const custom = common_vendor.wx$1.getMenuButtonBoundingClientRect();
+    this.navigationBarHeight = custom.height + (custom.top - common_vendor.index.getSystemInfoSync().statusBarHeight) * 2;
+    this.navHeight = this.statusBarHeight + this.navigationBarHeight;
+  },
+  onPageScroll: function(e) {
+    this.scrollTop = e.scrollTop;
+    if (e.scrollTop <= common_vendor.index.upx2px(150)) {
+      this.mineHeaderOpacity = e.scrollTop / common_vendor.index.upx2px(150);
+    } else {
+      this.mineHeaderOpacity = 1;
+    }
+  },
   methods: {
     changeTab(e) {
       this.currentTab = e.index;
@@ -155,10 +176,11 @@ const _sfc_main = {
 if (!Array) {
   const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
   const _component_tui_tabs = common_vendor.resolveComponent("tui-tabs");
+  const _component_tui_sticky = common_vendor.resolveComponent("tui-sticky");
   const _easycom_water_fall2 = common_vendor.resolveComponent("water-fall");
   const _easycom_uni_dateformat2 = common_vendor.resolveComponent("uni-dateformat");
   const _easycom_participator_list2 = common_vendor.resolveComponent("participator-list");
-  (_easycom_uni_icons2 + _component_tui_tabs + _easycom_water_fall2 + _easycom_uni_dateformat2 + _easycom_participator_list2)();
+  (_easycom_uni_icons2 + _component_tui_tabs + _component_tui_sticky + _easycom_water_fall2 + _easycom_uni_dateformat2 + _easycom_participator_list2)();
 }
 const _easycom_uni_icons = () => "../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
 const _easycom_water_fall = () => "../components/water-fall/water-fall.js";
@@ -168,12 +190,16 @@ if (!Math) {
   (_easycom_uni_icons + _easycom_water_fall + _easycom_uni_dateformat + _easycom_participator_list)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return {
-    a: $data.userInfo.avatar,
-    b: common_vendor.t($data.userInfo.nickName),
-    c: common_vendor.t($data.userInfo.account),
-    d: common_vendor.t($data.userInfo.signature || "这个人还没有个性签名"),
-    e: common_vendor.f($data.InfoTagsFields, (item, k0, i0) => {
+  return common_vendor.e({
+    a: common_vendor.t($data.userInfo.nickName),
+    b: $data.navHeight + "px",
+    c: $data.statusBarHeight + "px",
+    d: $data.mineHeaderOpacity,
+    e: $data.userInfo.avatar,
+    f: common_vendor.t($data.userInfo.nickName),
+    g: common_vendor.t($data.userInfo.account),
+    h: common_vendor.t($data.userInfo.signature || "这个人还没有个性签名"),
+    i: common_vendor.f($data.InfoTagsFields, (item, k0, i0) => {
       return common_vendor.e({
         a: item === "age"
       }, item === "age" ? {
@@ -191,26 +217,34 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         f: item
       });
     }),
-    f: common_vendor.p({
+    j: common_vendor.p({
       type: "gear",
       size: "28rpx",
       color: "#fff"
     }),
-    g: common_vendor.o($options.changeTab),
-    h: common_vendor.p({
+    k: $data.navHeight + "px",
+    l: common_vendor.o($options.changeTab),
+    m: common_vendor.p({
       tabs: $data.tabs,
       currentTab: $data.currentTab,
       sliderBgColor: "#000000",
       selectedColor: "#000",
       height: 90
     }),
-    i: common_vendor.w((slotProps, s0, i0) => {
+    n: common_vendor.p({
+      scrollTop: $data.scrollTop,
+      stickyTop: $data.navHeight,
+      stickyHeight: "90rpx"
+    }),
+    o: $data.currentTab === 0
+  }, $data.currentTab === 0 ? {
+    p: common_vendor.w((slotProps, s0, i0) => {
       return {
         a: slotProps.item.images[0],
         b: common_vendor.t(slotProps.item.title),
         c: slotProps.item.publisherAvatar,
         d: common_vendor.t(slotProps.item.publisher),
-        e: "1c081928-4-" + i0 + ",1c081928-3",
+        e: "1c081928-5-" + i0 + ",1c081928-4",
         f: common_vendor.p({
           type: slotProps.item.like ? "heart-filled" : "heart",
           color: slotProps.item.like ? "#e44747" : "#5f5f5f",
@@ -222,77 +256,83 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       };
     }, {
       name: "d",
-      path: "i",
-      vueId: "1c081928-3"
+      path: "p",
+      vueId: "1c081928-4"
     }),
-    j: common_vendor.o($options.clickItem),
-    k: common_vendor.o($options.scrollToUpper),
-    l: common_vendor.o($options.scrollToLower),
-    m: common_vendor.p({
-      data: $data.dynamicData
-    }),
-    n: common_vendor.f($data.activityData, (item, k0, i0) => {
-      return {
-        a: item.images[0],
-        b: common_vendor.t(item.title),
-        c: "1c081928-5-" + i0,
-        d: "1c081928-6-" + i0,
-        e: common_vendor.p({
-          date: item.startTime,
-          format: "yyyy.MM.dd hh:mm"
-        }),
-        f: "1c081928-7-" + i0,
-        g: common_vendor.t(item.addressName),
-        h: "1c081928-8-" + i0,
-        i: common_vendor.t(item.publisher),
-        j: "1c081928-9-" + i0,
-        k: item.id
-      };
-    }),
-    o: common_vendor.p({
-      type: "calendar",
-      size: "32rpx"
-    }),
-    p: common_vendor.p({
-      type: "location",
-      size: "32rpx"
-    }),
-    q: common_vendor.p({
-      type: "person",
-      size: "32rpx"
-    }),
-    r: common_vendor.f($data.publishData, (item, k0, i0) => {
-      return {
-        a: item.images[0],
-        b: common_vendor.t(item.title),
-        c: "1c081928-10-" + i0,
-        d: "1c081928-11-" + i0,
-        e: common_vendor.p({
-          date: item.startTime,
-          format: "yyyy.MM.dd hh:mm"
-        }),
-        f: "1c081928-12-" + i0,
-        g: common_vendor.t(item.addressName),
-        h: "1c081928-13-" + i0,
-        i: common_vendor.t(item.publisher),
-        j: "1c081928-14-" + i0,
-        k: item.id
-      };
-    }),
-    s: common_vendor.p({
-      type: "calendar",
-      size: "16"
-    }),
+    q: common_vendor.o($options.clickItem),
+    r: common_vendor.o($options.scrollToUpper),
+    s: common_vendor.o($options.scrollToLower),
     t: common_vendor.p({
+      data: $data.dynamicData
+    })
+  } : {}, {
+    v: $data.currentTab === 1
+  }, $data.currentTab === 1 ? {
+    w: common_vendor.f($data.activityData, (item, k0, i0) => {
+      return {
+        a: item.images[0],
+        b: common_vendor.t(item.title),
+        c: "1c081928-6-" + i0,
+        d: "1c081928-7-" + i0,
+        e: common_vendor.p({
+          date: item.startTime,
+          format: "yyyy.MM.dd hh:mm"
+        }),
+        f: "1c081928-8-" + i0,
+        g: common_vendor.t(item.addressName),
+        h: "1c081928-9-" + i0,
+        i: common_vendor.t(item.publisher),
+        j: "1c081928-10-" + i0,
+        k: item.id
+      };
+    }),
+    x: common_vendor.p({
+      type: "calendar",
+      size: "32rpx"
+    }),
+    y: common_vendor.p({
+      type: "location",
+      size: "32rpx"
+    }),
+    z: common_vendor.p({
+      type: "person",
+      size: "32rpx"
+    })
+  } : {}, {
+    A: $data.currentTab === 2
+  }, $data.currentTab === 2 ? {
+    B: common_vendor.f($data.publishData, (item, k0, i0) => {
+      return {
+        a: item.images[0],
+        b: common_vendor.t(item.title),
+        c: "1c081928-11-" + i0,
+        d: "1c081928-12-" + i0,
+        e: common_vendor.p({
+          date: item.startTime,
+          format: "yyyy.MM.dd hh:mm"
+        }),
+        f: "1c081928-13-" + i0,
+        g: common_vendor.t(item.addressName),
+        h: "1c081928-14-" + i0,
+        i: common_vendor.t(item.publisher),
+        j: "1c081928-15-" + i0,
+        k: item.id
+      };
+    }),
+    C: common_vendor.p({
+      type: "calendar",
+      size: "16"
+    }),
+    D: common_vendor.p({
       type: "location",
       size: "16"
     }),
-    v: common_vendor.p({
+    E: common_vendor.p({
       type: "person",
       size: "16"
-    }),
-    w: $data.currentTab
-  };
+    })
+  } : {});
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/uniapp/party-together-uni-app/pages/mine.vue"]]);
+_sfc_main.__runtimeHooks = 1;
 wx.createPage(MiniProgramPage);

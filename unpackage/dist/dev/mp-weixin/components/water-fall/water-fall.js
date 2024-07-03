@@ -28,14 +28,6 @@ const _sfc_main = {
     // 子元素点击事件
     clickItem(item) {
       this.$emit("clickItem", item);
-    },
-    // 滚动到顶部触发
-    scrolltoupper() {
-      this.$emit("scrolltoupper");
-    },
-    // 滚动到底部触发
-    scrolltolower() {
-      this.$emit("scrolltolower");
     }
   }
 };
@@ -56,9 +48,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         b: index === 0 ? "8px" : "0px",
         c: index
       };
-    }),
-    b: common_vendor.o((...args) => $options.scrolltoupper && $options.scrolltoupper(...args)),
-    c: common_vendor.o((...args) => $options.scrolltolower && $options.scrolltolower(...args))
+    })
   };
 }
 const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-c724d0a7"], ["__file", "D:/project/uniapp/party-together-uni-app/components/water-fall/water-fall.vue"]]);
