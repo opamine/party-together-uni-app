@@ -7,7 +7,7 @@
         </view>
         <view class="describle-container">
           <view class="nickName">
-            <text style="margin-right: 8px">{{ userInfo.nickName }}</text>
+            <text>{{ userInfo.nickName }}</text>
           </view>
           <view class="account">派对账号：{{ userInfo.account }}</view>
         </view>
@@ -22,7 +22,7 @@
               v-if="item === 'age'"
               custom-prefix="iconfont"
               type="icon-40nan-1"
-              size="12"
+              size="24rpx"
               color="#7fc1fe"
               style="margin-right: 4px"
             />
@@ -52,7 +52,7 @@
         </view>
         <view class="right">
           <view class="right-btn">编辑资料</view>
-          <view class="right-btn"><uni-icons type="gear" size="20" color="#fff" /></view>
+          <view class="right-btn"><uni-icons type="gear" size="28rpx" color="#fff" /></view>
         </view>
       </view>
     </view>
@@ -94,7 +94,7 @@
                       <uni-icons
                         :type="slotProps.item.like ? 'heart-filled' : 'heart'"
                         :color="slotProps.item.like ? '#e44747' : '#5f5f5f'"
-                        size="18"
+                        size="36rpx"
                       ></uni-icons>
                       <view class="like-count">{{ slotProps.item.likeCount }}</view>
                     </view>
@@ -104,7 +104,7 @@
             </water-fall>
           </swiper-item>
           <swiper-item>
-            <scroll-view>
+            <scroll-view :scroll-y="true" style="height: 100%">
               <!-- 活动参与组件 -->
               <view class="activities-list">
                 <view v-for="item in activityData" :key="item.id" class="activity-item">
@@ -119,7 +119,7 @@
                       <view class="activity-desc-sub">
                         <view class="activity-time">
                           <view class="icon"
-                            ><uni-icons type="calendar" size="16"></uni-icons
+                            ><uni-icons type="calendar" size="32rpx"></uni-icons
                           ></view>
                           <view class="text"
                             ><uni-dateformat
@@ -130,12 +130,12 @@
                         </view>
                         <view class="activity-address">
                           <view class="icon"
-                            ><uni-icons type="location" size="16"></uni-icons
+                            ><uni-icons type="location" size="32rpx"></uni-icons
                           ></view>
                           <view class="text">{{ item.addressName }}</view>
                         </view>
                         <view class="activity-publisher">
-                          <view class="icon"><uni-icons type="person" size="16"></uni-icons></view>
+                          <view class="icon"><uni-icons type="person" size="32rpx"></uni-icons></view>
                           <view class="text">{{ item.publisher }}</view>
                         </view>
                       </view>
@@ -154,8 +154,7 @@
             </scroll-view>
           </swiper-item>
           <swiper-item>
-            <scroll-view>
-              <scroll-view>
+              <scroll-view :scroll-y="true" style="height: 100%;">
                 <!-- 活动参与组件 -->
                 <view class="activities-list">
                   <view v-for="item in publishData" :key="item.id" class="activity-item">
@@ -205,7 +204,6 @@
                   </view>
                 </view>
               </scroll-view>
-            </scroll-view>
           </swiper-item>
         </swiper>
       </view>
@@ -257,9 +255,7 @@
             id: 0,
             title: '这是动态标题',
             content: '这是动态内容',
-            images: [
-              'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/01.jpg',
-            ],
+            images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/01.jpg'],
             publisher: '周啊粥',
             publisherAvatar: 'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png',
             like: true,
@@ -298,6 +294,33 @@
         ],
         activityData: [
           {
+            id: 0,
+            title:
+              '这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题',
+            content: '这是一个很长的活动内容',
+            images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/10.JPG'],
+            publisher: '丸子',
+            publisherAvatar: 'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png',
+            startTime: 1719900150185,
+            addressName: '文宋阁·肆舍',
+            location: '浙江省杭州市萧山区望京C1座35楼E-F室',
+            lnglat: [120.254429, 30.237911],
+          },
+          {
+            id: 1,
+            title:
+              '这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题',
+            content: '这是一个很长的活动内容',
+            images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/10.JPG'],
+            publisher: '丸子',
+            publisherAvatar: 'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png',
+            startTime: 1719900150185,
+            addressName: '文宋阁·肆舍',
+            location: '浙江省杭州市萧山区望京C1座35楼E-F室',
+            lnglat: [120.254429, 30.237911],
+          },
+          {
+            id: 2,
             title:
               '这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题',
             content: '这是一个很长的活动内容',
@@ -354,7 +377,7 @@
     height: 100%;
     box-sizing: border-box;
     .mine-content {
-      padding: 16px;
+      padding: 32rpx;
       padding-top: 100px;
       background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
         url('https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/22.JPG');
@@ -364,8 +387,8 @@
         .avatar-container {
           .avatar {
             display: block;
-            height: 80px;
-            width: 80px;
+            height: 150rpx;
+            width: 150rpx;
             border-radius: 50%;
           }
         }
@@ -374,36 +397,36 @@
           flex-direction: column;
           justify-content: space-around;
           margin-left: 12px;
-          padding-top: 6px;
-          padding-bottom: 6px;
+          padding-top: 12rpx;
+          padding-bottom: 12rpx;
           .nickName {
-            font-size: 19px;
+            font-size: 38rpx;
             font-weight: 600;
             color: #fff;
           }
           .account {
             color: #8d8a8e;
-            font-size: 13px;
+            font-size: 22rpx;
           }
         }
       }
       .mine-signature {
-        margin-top: 16px;
-        font-size: 13px;
+        margin-top: 32rpx;
+        font-size: 26rpx;
         color: #fff;
       }
       .mine-info-tags {
-        margin-top: 16px;
+        margin-top: 32rpx;
         .info-tags-container {
           display: flex;
           .info-tag {
-            margin-right: 4px;
-            padding: 0 8px;
-            height: 22px;
-            line-height: 22px;
+            margin-right: 8rpx;
+            padding: 0 16rpx;
+            height: 44rpx;
+            line-height: 44rpx;
             background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 11px;
-            font-size: 10px;
+            border-radius: 22rpx;
+            font-size: 20rpx;
             color: #fff;
           }
         }
@@ -412,36 +435,39 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-top: 16px;
+        margin-top: 32rpx;
         .left {
           display: flex;
           .left-item {
             margin-right: 16px;
             text-align: center;
             .count {
-              font-size: 14px;
+              font-size: 28rpx;
               font-weight: 600;
               color: #fff;
             }
             .cate {
-              font-size: 11px;
+              font-size: 22rpx;
               color: #d0cfcf;
             }
           }
         }
         .right {
           display: flex;
-          font-size: 13px;
+          font-size: 24rpx;
           .right-btn {
-            height: 24px;
-            padding: 0 12px;
-            margin-left: 16px;
-            line-height: 24px;
+            height: 48rpx;
+            padding: 0 28rpx;
+            line-height: 48rpx;
             background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
+            border-radius: 24rpx;
             border: 1px solid #fff;
-            font-size: 14px;
+            font-size: 26rpx;
+            font-weight: 600;
             color: #fff;
+            &:first-of-type {
+              margin-right: 24rpx;
+            }
           }
         }
       }
@@ -463,65 +489,69 @@
             }
           }
           .dynamic-item-title {
-            padding: 8px;
-            font-size: 14px;
+            padding: 16rpx;
+            font-size: 26rpx;
             color: #333;
           }
           .dynamic-item-action {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 8px 12px;
+            padding: 0 16rpx 16rpx;
             .publisher-info {
               display: flex;
               align-items: center;
               .publisher-avatar {
-                margin-right: 8px;
+                margin-right: 16rpx;
                 image {
                   display: block;
-                  width: 25px;
-                  height: 25px;
+                  width: 42rpx;
+                  height: 42rpx;
                   border-radius: 50%;
                   border: 1px solid #00000010;
                   overflow: hidden;
                 }
               }
               .publisher-nick-name {
-                font-size: 12px;
+                font-size: 24rpx;
                 color: #515151;
               }
             }
             .like-info {
               display: flex;
               align-items: center;
-              font-size: 12px;
+              font-size: 24rpx;
               .like-count {
-                margin-left: 4px;
+                margin-left: 8rpx;
               }
             }
           }
         }
         .activities-list {
-          padding: 8px;
+          padding: 16rpx;
           .activity-item {
-            padding: 8px;
+            padding: 16rpx;
+            margin-bottom: 16rpx;
             background-color: #fff;
             border-radius: 4px;
+            &:last-of-type {
+              margin-bottom: 0
+            }
             .activity-info {
               display: flex;
               .activity-image {
-                margin-right: 6px;
+                margin-right: 16rpx;
                 image {
                   display: block;
-                  width: 180px;
-                  height: 120px;
+                  width: 320rpx;
+                  height: 200rpx;
                   border-radius: 4px;
                 }
               }
               .activity-desc {
                 flex: 1;
                 .activity-title {
-                  font-size: 14px;
+                  font-size: 28rpx;
                   font-weight: 600;
                   word-break: break-all;
                   text-overflow: ellipsis;
@@ -531,7 +561,7 @@
                   overflow: hidden;
                 }
                 .activity-desc-sub {
-                  font-size: 12px;
+                  font-size: 24rpx;
                   color: #696969;
                   .activity-time,
                   .activity-address,
@@ -539,17 +569,17 @@
                     display: flex;
                     align-items: center;
                     .icon {
-                      margin-right: 4px;
+                      margin-right: 8rpx;
                     }
                   }
                   .activity-time {
-                    margin-top: 8px;
+                    margin-top: 16rpx;
                   }
                   .activity-address {
-                    margin-top: 2px;
+                    margin-top: 4rpx;
                   }
                   .activity-publisher {
-                    margin-top: 2px;
+                    margin-top: 4rpx;
                   }
                 }
               }
@@ -558,15 +588,15 @@
               display: flex;
               justify-content: space-between;
               align-items: center;
-              margin-top: 12px;
+              margin-top: 24rpx;
               .action-btn {
-                height: 30px;
-                padding: 0 12px;
+                height: 60rpx;
+                padding: 0 24rpx;
                 background-color: #333;
-                border-radius: 15px;
-                line-height: 30px;
+                border-radius: 30rpx;
+                line-height: 60rpx;
                 color: #fff;
-                font-size: 13px;
+                font-size: 24rpx;
               }
             }
           }

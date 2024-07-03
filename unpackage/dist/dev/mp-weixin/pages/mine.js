@@ -42,9 +42,7 @@ const _sfc_main = {
           id: 0,
           title: "这是动态标题",
           content: "这是动态内容",
-          images: [
-            "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/01.jpg"
-          ],
+          images: ["https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/01.jpg"],
           publisher: "周啊粥",
           publisherAvatar: "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png",
           like: true,
@@ -83,6 +81,31 @@ const _sfc_main = {
       ],
       activityData: [
         {
+          id: 0,
+          title: "这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题",
+          content: "这是一个很长的活动内容",
+          images: ["https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/10.JPG"],
+          publisher: "丸子",
+          publisherAvatar: "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png",
+          startTime: 1719900150185,
+          addressName: "文宋阁·肆舍",
+          location: "浙江省杭州市萧山区望京C1座35楼E-F室",
+          lnglat: [120.254429, 30.237911]
+        },
+        {
+          id: 1,
+          title: "这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题",
+          content: "这是一个很长的活动内容",
+          images: ["https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/10.JPG"],
+          publisher: "丸子",
+          publisherAvatar: "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png",
+          startTime: 1719900150185,
+          addressName: "文宋阁·肆舍",
+          location: "浙江省杭州市萧山区望京C1座35楼E-F室",
+          lnglat: [120.254429, 30.237911]
+        },
+        {
+          id: 2,
           title: "这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题",
           content: "这是一个很长的活动内容",
           images: ["https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/10.JPG"],
@@ -158,7 +181,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         c: common_vendor.p({
           ["custom-prefix"]: "iconfont",
           type: "icon-40nan-1",
-          size: "12",
+          size: "24rpx",
           color: "#7fc1fe"
         })
       } : {}, {
@@ -170,7 +193,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     f: common_vendor.p({
       type: "gear",
-      size: "20",
+      size: "28rpx",
       color: "#fff"
     }),
     g: common_vendor.o($options.changeTab),
@@ -191,7 +214,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         f: common_vendor.p({
           type: slotProps.item.like ? "heart-filled" : "heart",
           color: slotProps.item.like ? "#e44747" : "#5f5f5f",
-          size: "18"
+          size: "36rpx"
         }),
         g: common_vendor.t(slotProps.item.likeCount),
         h: i0,
@@ -228,15 +251,15 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     o: common_vendor.p({
       type: "calendar",
-      size: "16"
+      size: "32rpx"
     }),
     p: common_vendor.p({
       type: "location",
-      size: "16"
+      size: "32rpx"
     }),
     q: common_vendor.p({
       type: "person",
-      size: "16"
+      size: "32rpx"
     }),
     r: common_vendor.f($data.publishData, (item, k0, i0) => {
       return {

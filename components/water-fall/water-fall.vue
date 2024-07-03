@@ -83,14 +83,14 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 8px;
+    padding: 16rpx;
     box-sizing: border-box;
   }
 
   .column {
     flex-shrink: 0;
     .column-item {
-      margin-bottom: 8px;
+      margin-bottom: 16rpx;
       &:last-of-type {
         margin-bottom: 0;
       }
