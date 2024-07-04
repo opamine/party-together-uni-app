@@ -46,48 +46,11 @@ const _sfc_main = {
         }
       ],
       tabsHeight: common_vendor.index.upx2px(90),
-      dynamicData: [
-        {
-          id: 0,
-          title: "这是动态标题",
-          content: "这是动态内容",
-          images: ["https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/01.jpg"],
-          publisher: "周啊粥",
-          publisherAvatar: "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png",
-          like: true,
-          likeCount: 10
-        },
-        {
-          id: 1,
-          title: "这是动态标题",
-          content: "这是动态内容",
-          images: ["https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/02.JPG"],
-          publisher: "周啊粥",
-          publisherAvatar: "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png",
-          like: false,
-          likeCount: 20
-        },
-        {
-          id: 2,
-          title: "这是动态标题",
-          content: "这是动态内容",
-          images: ["https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/03.JPG"],
-          publisher: "周啊粥",
-          publisherAvatar: "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png",
-          like: false,
-          likeCount: 20
-        },
-        {
-          id: 3,
-          title: "这是动态标题",
-          content: "这是动态内容",
-          images: ["https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/04.JPG"],
-          publisher: "周啊粥",
-          publisherAvatar: "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png",
-          like: false,
-          likeCount: 20
-        }
-      ],
+      dynamicData: [],
+      current: 1,
+      size: 10,
+      total: 100,
+      dynamicDataLoading: false,
       activityData: [
         {
           id: 0,
@@ -161,18 +124,52 @@ const _sfc_main = {
       this.mineHeaderOpacity = 1;
     }
   },
+  onReachBottom() {
+    console.log("onReachBottom");
+    switch (this.currentTab) {
+      case 0:
+        if (this.dynamicData.length >= this.total)
+          return;
+        this.dynamicDataLoading = true;
+        setTimeout(() => {
+          this.current++;
+          for (let i = 0; i < 10; i++) {
+            this.dynamicData.push({
+              id: this.dynamicData.length,
+              title: "这是动态标题",
+              content: "这是动态内容",
+              images: ["https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/01.jpg"],
+              publisher: "周啊粥",
+              publisherAvatar: "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png",
+              like: true,
+              likeCount: 10
+            });
+          }
+        }, 1e3);
+        break;
+    }
+  },
+  onReady() {
+    for (let i = 0; i < 10; i++) {
+      this.dynamicData.push({
+        id: this.dynamicData.length,
+        title: "这是动态标题",
+        content: "这是动态内容",
+        images: ["https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/01.jpg"],
+        publisher: "周啊粥",
+        publisherAvatar: "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png",
+        like: true,
+        likeCount: 10
+      });
+      this.total = 100;
+    }
+  },
   methods: {
     changeTab(e) {
       this.currentTab = e.index;
     },
     clickItem(item) {
       console.log(item);
-    },
-    scrollToUpper() {
-      console.log("滚到顶了");
-    },
-    scrollToLower() {
-      console.log("滚到底了");
     }
   },
   onPullDownRefresh() {
@@ -185,19 +182,21 @@ if (!Array) {
   const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
   const _easycom_u_tabs2 = common_vendor.resolveComponent("u-tabs");
   const _easycom_u_sticky2 = common_vendor.resolveComponent("u-sticky");
+  const _easycom_u_loadmore2 = common_vendor.resolveComponent("u-loadmore");
   const _easycom_water_fall2 = common_vendor.resolveComponent("water-fall");
   const _easycom_uni_dateformat2 = common_vendor.resolveComponent("uni-dateformat");
   const _easycom_participator_list2 = common_vendor.resolveComponent("participator-list");
-  (_easycom_uni_icons2 + _easycom_u_tabs2 + _easycom_u_sticky2 + _easycom_water_fall2 + _easycom_uni_dateformat2 + _easycom_participator_list2)();
+  (_easycom_uni_icons2 + _easycom_u_tabs2 + _easycom_u_sticky2 + _easycom_u_loadmore2 + _easycom_water_fall2 + _easycom_uni_dateformat2 + _easycom_participator_list2)();
 }
 const _easycom_uni_icons = () => "../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
 const _easycom_u_tabs = () => "../uni_modules/vk-uview-ui/components/u-tabs/u-tabs.js";
 const _easycom_u_sticky = () => "../uni_modules/vk-uview-ui/components/u-sticky/u-sticky.js";
+const _easycom_u_loadmore = () => "../uni_modules/vk-uview-ui/components/u-loadmore/u-loadmore.js";
 const _easycom_water_fall = () => "../components/water-fall/water-fall.js";
 const _easycom_uni_dateformat = () => "../uni_modules/uni-dateformat/components/uni-dateformat/uni-dateformat.js";
 const _easycom_participator_list = () => "../components/participator-list/participator-list.js";
 if (!Math) {
-  (_easycom_uni_icons + _easycom_u_tabs + _easycom_u_sticky + _easycom_water_fall + _easycom_uni_dateformat + _easycom_participator_list)();
+  (_easycom_uni_icons + _easycom_u_tabs + _easycom_u_sticky + _easycom_u_loadmore + _easycom_water_fall + _easycom_uni_dateformat + _easycom_participator_list)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
@@ -267,78 +266,85 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       path: "p",
       vueId: "1c081928-4"
     }),
-    q: common_vendor.o($options.clickItem),
-    r: common_vendor.o($options.scrollToUpper),
-    s: common_vendor.o($options.scrollToLower),
-    t: common_vendor.p({
+    q: common_vendor.p({
+      status: $data.dynamicDataLoading ? "loading" : $data.dynamicData.length >= $data.total ? "nomore" : "loadmore",
+      ["load-text"]: {
+        loadmore: "上拉加载",
+        loading: "",
+        nomore: "没有更多了"
+      },
+      ["font-size"]: "24"
+    }),
+    r: common_vendor.o($options.clickItem),
+    s: common_vendor.p({
       data: $data.dynamicData
     }),
-    v: $data.currentTab === 0,
-    w: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
-    x: common_vendor.f($data.activityData, (item, k0, i0) => {
+    t: $data.currentTab === 0,
+    v: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
+    w: common_vendor.f($data.activityData, (item, k0, i0) => {
       return {
         a: item.images[0],
         b: common_vendor.t(item.title),
-        c: "1c081928-6-" + i0,
-        d: "1c081928-7-" + i0,
+        c: "1c081928-7-" + i0,
+        d: "1c081928-8-" + i0,
         e: common_vendor.p({
           date: item.startTime,
           format: "yyyy.MM.dd hh:mm"
         }),
-        f: "1c081928-8-" + i0,
+        f: "1c081928-9-" + i0,
         g: common_vendor.t(item.addressName),
-        h: "1c081928-9-" + i0,
+        h: "1c081928-10-" + i0,
         i: common_vendor.t(item.publisher),
-        j: "1c081928-10-" + i0,
+        j: "1c081928-11-" + i0,
         k: item.id
       };
     }),
-    y: common_vendor.p({
+    x: common_vendor.p({
       type: "calendar",
+      size: "32rpx"
+    }),
+    y: common_vendor.p({
+      type: "location",
       size: "32rpx"
     }),
     z: common_vendor.p({
-      type: "location",
-      size: "32rpx"
-    }),
-    A: common_vendor.p({
       type: "person",
       size: "32rpx"
     }),
-    B: $data.currentTab === 1,
-    C: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
-    D: common_vendor.f($data.publishData, (item, k0, i0) => {
+    A: $data.currentTab === 1,
+    B: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
+    C: common_vendor.f($data.publishData, (item, k0, i0) => {
       return {
         a: item.images[0],
         b: common_vendor.t(item.title),
-        c: "1c081928-11-" + i0,
-        d: "1c081928-12-" + i0,
+        c: "1c081928-12-" + i0,
+        d: "1c081928-13-" + i0,
         e: common_vendor.p({
           date: item.startTime,
           format: "yyyy.MM.dd hh:mm"
         }),
-        f: "1c081928-13-" + i0,
+        f: "1c081928-14-" + i0,
         g: common_vendor.t(item.addressName),
-        h: "1c081928-14-" + i0,
+        h: "1c081928-15-" + i0,
         i: common_vendor.t(item.publisher),
-        j: "1c081928-15-" + i0,
+        j: "1c081928-16-" + i0,
         k: item.id
       };
     }),
-    E: common_vendor.p({
+    D: common_vendor.p({
       type: "calendar",
       size: "16"
     }),
-    F: common_vendor.p({
+    E: common_vendor.p({
       type: "location",
       size: "16"
     }),
-    G: common_vendor.p({
+    F: common_vendor.p({
       type: "person",
       size: "16"
     }),
-    H: $data.currentTab === 2,
-    I: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px"
+    G: $data.currentTab === 2,
+    H: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px"
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/uniapp/party-together-uni-app/pages/mine.vue"]]);

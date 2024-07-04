@@ -90,12 +90,7 @@
           }"
         >
           <!-- 动态组件 -->
-          <water-fall
-            :data="dynamicData"
-            @clickItem="clickItem"
-            @scrolltoupper="scrollToUpper"
-            @scrolltolower="scrollToLower"
-          >
+          <water-fall :data="dynamicData" @clickItem="clickItem">
             <template v-slot:default="slotProps">
               <view class="dynamic-item">
                 <view class="dynamic-item-image">
@@ -121,8 +116,17 @@
               </view>
             </template>
             <template v-slot:bottom>
-              <view class="no-more">没有更多了</view>
-              <view class="loading"> </view>
+              <u-loadmore
+                :status="
+                  dynamicDataLoading
+                    ? 'loading'
+                    : dynamicData.length >= total
+                    ? 'nomore'
+                    : 'loadmore'
+                "
+                :load-text="{ loadmore: '上拉加载', loading: '', nomore: '没有更多了' }"
+                font-size="24"
+              />
             </template>
           </water-fall>
         </view>
@@ -275,48 +279,11 @@
           },
         ],
         tabsHeight: uni.upx2px(90),
-        dynamicData: [
-          {
-            id: 0,
-            title: '这是动态标题',
-            content: '这是动态内容',
-            images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/01.jpg'],
-            publisher: '周啊粥',
-            publisherAvatar: 'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png',
-            like: true,
-            likeCount: 10,
-          },
-          {
-            id: 1,
-            title: '这是动态标题',
-            content: '这是动态内容',
-            images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/02.JPG'],
-            publisher: '周啊粥',
-            publisherAvatar: 'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png',
-            like: false,
-            likeCount: 20,
-          },
-          {
-            id: 2,
-            title: '这是动态标题',
-            content: '这是动态内容',
-            images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/03.JPG'],
-            publisher: '周啊粥',
-            publisherAvatar: 'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png',
-            like: false,
-            likeCount: 20,
-          },
-          {
-            id: 3,
-            title: '这是动态标题',
-            content: '这是动态内容',
-            images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/04.JPG'],
-            publisher: '周啊粥',
-            publisherAvatar: 'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png',
-            like: false,
-            likeCount: 20,
-          },
-        ],
+        dynamicData: [],
+        current: 1,
+        size: 10,
+        total: 100,
+        dynamicDataLoading: false,
         activityData: [
           {
             id: 0,
@@ -398,18 +365,56 @@
         this.mineHeaderOpacity = 1;
       }
     },
+    onReachBottom() {
+      console.log('onReachBottom');
+      switch (this.currentTab) {
+        case 0:
+          if (this.dynamicData.length >= this.total) return;
+          this.dynamicDataLoading = true;
+          setTimeout(() => {
+            this.current++;
+            for (let i = 0; i < 10; i++) {
+              this.dynamicData.push({
+                id: this.dynamicData.length,
+                title: '这是动态标题',
+                content: '这是动态内容',
+                images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/01.jpg'],
+                publisher: '周啊粥',
+                publisherAvatar:
+                  'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png',
+                like: true,
+                likeCount: 10,
+              });
+            }
+          }, 1000);
+          break;
+
+        default:
+          break;
+      }
+    },
+    onReady() {
+      // 创建初始模拟数据
+      for (let i = 0; i < 10; i++) {
+        this.dynamicData.push({
+          id: this.dynamicData.length,
+          title: '这是动态标题',
+          content: '这是动态内容',
+          images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/01.jpg'],
+          publisher: '周啊粥',
+          publisherAvatar: 'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png',
+          like: true,
+          likeCount: 10,
+        });
+        this.total = 100;
+      }
+    },
     methods: {
       changeTab(e) {
         this.currentTab = e.index;
       },
       clickItem(item) {
         console.log(item);
-      },
-      scrollToUpper() {
-        console.log('滚到顶了');
-      },
-      scrollToLower() {
-        console.log('滚到底了');
       },
     },
     onPullDownRefresh() {
