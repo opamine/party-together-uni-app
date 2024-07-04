@@ -28,6 +28,8 @@
   @import './style/index.scss';
   /* 修改覆盖 uni-componnets 样式 */
   @import './style/uni-components.scss';
+  /* uview UI */
+  @import "./uni_modules/vk-uview-ui/index.scss";
   page {
     background-color: #f8f8f8;
   }

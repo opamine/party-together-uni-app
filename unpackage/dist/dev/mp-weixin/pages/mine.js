@@ -1,23 +1,23 @@
 "use strict";
 const common_vendor = require("../common/vendor.js");
-const tuiTabs = () => "../components/thorui/tui-tabs/tui-tabs.js";
-const tuiSticky = () => "../components/thorui/tui-sticky/tui-sticky.js";
 const waterFall = () => "../components/water-fall/water-fall.js";
 const participatorList = () => "../components/participator-list/participator-list.js";
 const InfoTagsFields = ["age", "region", "career", "mbti"];
 const _sfc_main = {
   components: {
-    tuiTabs,
-    tuiSticky,
     waterFall,
     participatorList
   },
   data() {
     return {
       screenHeight: 0,
+      // px
       navHeight: 0,
+      // px
       statusBarHeight: 0,
+      // px
       navigationBarHeight: 0,
+      // px
       mineHeaderOpacity: 0,
       scrollTop: 0,
       userInfo: {
@@ -141,6 +141,11 @@ const _sfc_main = {
       ]
     };
   },
+  computed: {
+    navHeightOfRpx() {
+      return this.navHeight / (common_vendor.index.upx2px(100) / 100);
+    }
+  },
   onLoad() {
     this.screenHeight = common_vendor.index.getSystemInfoSync().windowHeight;
     this.statusBarHeight = common_vendor.index.getSystemInfoSync().statusBarHeight;
@@ -178,19 +183,21 @@ const _sfc_main = {
 };
 if (!Array) {
   const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
-  const _component_tui_tabs = common_vendor.resolveComponent("tui-tabs");
-  const _component_tui_sticky = common_vendor.resolveComponent("tui-sticky");
+  const _easycom_u_tabs2 = common_vendor.resolveComponent("u-tabs");
+  const _easycom_u_sticky2 = common_vendor.resolveComponent("u-sticky");
   const _easycom_water_fall2 = common_vendor.resolveComponent("water-fall");
   const _easycom_uni_dateformat2 = common_vendor.resolveComponent("uni-dateformat");
   const _easycom_participator_list2 = common_vendor.resolveComponent("participator-list");
-  (_easycom_uni_icons2 + _component_tui_tabs + _component_tui_sticky + _easycom_water_fall2 + _easycom_uni_dateformat2 + _easycom_participator_list2)();
+  (_easycom_uni_icons2 + _easycom_u_tabs2 + _easycom_u_sticky2 + _easycom_water_fall2 + _easycom_uni_dateformat2 + _easycom_participator_list2)();
 }
 const _easycom_uni_icons = () => "../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
+const _easycom_u_tabs = () => "../uni_modules/vk-uview-ui/components/u-tabs/u-tabs.js";
+const _easycom_u_sticky = () => "../uni_modules/vk-uview-ui/components/u-sticky/u-sticky.js";
 const _easycom_water_fall = () => "../components/water-fall/water-fall.js";
 const _easycom_uni_dateformat = () => "../uni_modules/uni-dateformat/components/uni-dateformat/uni-dateformat.js";
 const _easycom_participator_list = () => "../components/participator-list/participator-list.js";
 if (!Math) {
-  (_easycom_uni_icons + _easycom_water_fall + _easycom_uni_dateformat + _easycom_participator_list)();
+  (_easycom_uni_icons + _easycom_u_tabs + _easycom_u_sticky + _easycom_water_fall + _easycom_uni_dateformat + _easycom_participator_list)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
@@ -227,19 +234,19 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     k: $data.navHeight + "px",
     l: common_vendor.o($options.changeTab),
-    m: common_vendor.p({
-      tabs: $data.tabs,
-      currentTab: $data.currentTab,
-      sliderBgColor: "#000000",
-      selectedColor: "#000",
-      height: 90
-    }),
+    m: common_vendor.o(($event) => $data.currentTab = $event),
     n: common_vendor.p({
-      scrollTop: $data.scrollTop,
-      stickyTop: $data.navHeight,
-      stickyHeight: "90rpx"
+      list: $data.tabs,
+      ["is-scroll"]: false,
+      ["active-color"]: "#000",
+      height: 90,
+      modelValue: $data.currentTab
     }),
-    o: common_vendor.w((slotProps, s0, i0) => {
+    o: common_vendor.p({
+      ["offset-top"]: $options.navHeightOfRpx,
+      ["h5-nav-height"]: $data.navHeight
+    }),
+    p: common_vendor.w((slotProps, s0, i0) => {
       return {
         a: slotProps.item.images[0],
         b: common_vendor.t(slotProps.item.title),
@@ -257,18 +264,18 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       };
     }, {
       name: "d",
-      path: "o",
+      path: "p",
       vueId: "1c081928-4"
     }),
-    p: common_vendor.o($options.clickItem),
-    q: common_vendor.o($options.scrollToUpper),
-    r: common_vendor.o($options.scrollToLower),
-    s: common_vendor.p({
+    q: common_vendor.o($options.clickItem),
+    r: common_vendor.o($options.scrollToUpper),
+    s: common_vendor.o($options.scrollToLower),
+    t: common_vendor.p({
       data: $data.dynamicData
     }),
-    t: $data.currentTab === 0,
-    v: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
-    w: common_vendor.f($data.activityData, (item, k0, i0) => {
+    v: $data.currentTab === 0,
+    w: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
+    x: common_vendor.f($data.activityData, (item, k0, i0) => {
       return {
         a: item.images[0],
         b: common_vendor.t(item.title),
@@ -286,21 +293,21 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         k: item.id
       };
     }),
-    x: common_vendor.p({
+    y: common_vendor.p({
       type: "calendar",
       size: "32rpx"
     }),
-    y: common_vendor.p({
+    z: common_vendor.p({
       type: "location",
       size: "32rpx"
     }),
-    z: common_vendor.p({
+    A: common_vendor.p({
       type: "person",
       size: "32rpx"
     }),
-    A: $data.currentTab === 1,
-    B: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
-    C: common_vendor.f($data.publishData, (item, k0, i0) => {
+    B: $data.currentTab === 1,
+    C: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
+    D: common_vendor.f($data.publishData, (item, k0, i0) => {
       return {
         a: item.images[0],
         b: common_vendor.t(item.title),
@@ -318,20 +325,20 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         k: item.id
       };
     }),
-    D: common_vendor.p({
+    E: common_vendor.p({
       type: "calendar",
       size: "16"
     }),
-    E: common_vendor.p({
+    F: common_vendor.p({
       type: "location",
       size: "16"
     }),
-    F: common_vendor.p({
+    G: common_vendor.p({
       type: "person",
       size: "16"
     }),
-    G: $data.currentTab === 2,
-    H: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px"
+    H: $data.currentTab === 2,
+    I: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px"
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/uniapp/party-together-uni-app/pages/mine.vue"]]);

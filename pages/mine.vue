@@ -68,21 +68,18 @@
         </view>
       </view>
     </view>
-    <tui-sticky :scrollTop="scrollTop" :stickyTop="navHeight" stickyHeight="90rpx">
-      <template v-slot:header>
-        <view class="mine-social-activity-tabs">
-          <tui-tabs
-            :tabs="tabs"
-            :currentTab="currentTab"
-            @change="changeTab"
-            sliderBgColor="#000000"
-            selectedColor="#000"
-            :height="90"
-          ></tui-tabs>
-        </view>
-      </template>
-    </tui-sticky>
-
+    <u-sticky :offset-top="navHeightOfRpx" :h5-nav-height="navHeight">
+      <view class="mine-social-activity-tabs">
+        <u-tabs
+          :list="tabs"
+          :is-scroll="false"
+          v-model="currentTab"
+          @change="changeTab"
+          active-color="#000"
+          :height="90"
+        ></u-tabs>
+      </view>
+    </u-sticky>
     <view class="social-activity-container">
       <view class="social-activity-content">
         <view
@@ -122,6 +119,10 @@
                   </view>
                 </view>
               </view>
+            </template>
+            <template v-slot:bottom>
+              <view class="no-more">没有更多了</view>
+              <view class="loading"> </view>
             </template>
           </water-fall>
         </view>
@@ -230,8 +231,6 @@
   </view>
 </template>
 <script>
-  import tuiTabs from '../components/thorui/tui-tabs/tui-tabs.vue';
-  import tuiSticky from '../components/thorui/tui-sticky/tui-sticky.vue';
   import waterFall from '../components/water-fall/water-fall.vue';
   import participatorList from '../components/participator-list/participator-list.vue';
 
@@ -239,17 +238,15 @@
 
   export default {
     components: {
-      tuiTabs,
-      tuiSticky,
       waterFall,
       participatorList,
     },
     data() {
       return {
-        screenHeight: 0,
-        navHeight: 0,
-        statusBarHeight: 0,
-        navigationBarHeight: 0,
+        screenHeight: 0, // px
+        navHeight: 0, // px
+        statusBarHeight: 0, // px
+        navigationBarHeight: 0, // px
         mineHeaderOpacity: 0,
         scrollTop: 0,
         userInfo: {
@@ -376,6 +373,11 @@
           },
         ],
       };
+    },
+    computed: {
+      navHeightOfRpx() {
+        return this.navHeight / (uni.upx2px(100) / 100);
+      },
     },
     onLoad() {
       this.screenHeight = uni.getSystemInfoSync().windowHeight;

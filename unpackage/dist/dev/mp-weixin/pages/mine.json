@@ -5,11 +5,11 @@
   "navigationBarBackgroundColor": "#f8f8f8",
   "enablePullDownRefresh": true,
   "usingComponents": {
-    "tui-tabs": "../components/thorui/tui-tabs/tui-tabs",
-    "tui-sticky": "../components/thorui/tui-sticky/tui-sticky",
     "water-fall": "../components/water-fall/water-fall",
     "participator-list": "../components/participator-list/participator-list",
     "uni-icons": "../uni_modules/uni-icons/components/uni-icons/uni-icons",
+    "u-tabs": "../uni_modules/vk-uview-ui/components/u-tabs/u-tabs",
+    "u-sticky": "../uni_modules/vk-uview-ui/components/u-sticky/u-sticky",
     "uni-dateformat": "../uni_modules/uni-dateformat/components/uni-dateformat/uni-dateformat"
   }
 }
