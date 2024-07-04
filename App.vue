@@ -29,7 +29,6 @@
   /* 修改覆盖 uni-componnets 样式 */
   @import './style/uni-components.scss';
   page {
-    height: 100%;
     background-color: #f8f8f8;
   }
 </style>

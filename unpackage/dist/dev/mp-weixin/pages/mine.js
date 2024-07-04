@@ -14,6 +14,7 @@ const _sfc_main = {
   },
   data() {
     return {
+      screenHeight: 0,
       navHeight: 0,
       statusBarHeight: 0,
       navigationBarHeight: 0,
@@ -44,6 +45,7 @@ const _sfc_main = {
           name: "我的发布"
         }
       ],
+      tabsHeight: common_vendor.index.upx2px(90),
       dynamicData: [
         {
           id: 0,
@@ -140,6 +142,7 @@ const _sfc_main = {
     };
   },
   onLoad() {
+    this.screenHeight = common_vendor.index.getSystemInfoSync().windowHeight;
     this.statusBarHeight = common_vendor.index.getSystemInfoSync().statusBarHeight;
     const custom = common_vendor.wx$1.getMenuButtonBoundingClientRect();
     this.navigationBarHeight = custom.height + (custom.top - common_vendor.index.getSystemInfoSync().statusBarHeight) * 2;
@@ -190,7 +193,7 @@ if (!Math) {
   (_easycom_uni_icons + _easycom_water_fall + _easycom_uni_dateformat + _easycom_participator_list)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return common_vendor.e({
+  return {
     a: common_vendor.t($data.userInfo.nickName),
     b: $data.navHeight + "px",
     c: $data.statusBarHeight + "px",
@@ -236,9 +239,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       stickyTop: $data.navHeight,
       stickyHeight: "90rpx"
     }),
-    o: $data.currentTab === 0
-  }, $data.currentTab === 0 ? {
-    p: common_vendor.w((slotProps, s0, i0) => {
+    o: common_vendor.w((slotProps, s0, i0) => {
       return {
         a: slotProps.item.images[0],
         b: common_vendor.t(slotProps.item.title),
@@ -256,18 +257,17 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       };
     }, {
       name: "d",
-      path: "p",
+      path: "o",
       vueId: "1c081928-4"
     }),
-    q: common_vendor.o($options.clickItem),
-    r: common_vendor.o($options.scrollToUpper),
-    s: common_vendor.o($options.scrollToLower),
-    t: common_vendor.p({
+    p: common_vendor.o($options.clickItem),
+    q: common_vendor.o($options.scrollToUpper),
+    r: common_vendor.o($options.scrollToLower),
+    s: common_vendor.p({
       data: $data.dynamicData
-    })
-  } : {}, {
-    v: $data.currentTab === 1
-  }, $data.currentTab === 1 ? {
+    }),
+    t: $data.currentTab === 0,
+    v: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
     w: common_vendor.f($data.activityData, (item, k0, i0) => {
       return {
         a: item.images[0],
@@ -297,11 +297,10 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     z: common_vendor.p({
       type: "person",
       size: "32rpx"
-    })
-  } : {}, {
-    A: $data.currentTab === 2
-  }, $data.currentTab === 2 ? {
-    B: common_vendor.f($data.publishData, (item, k0, i0) => {
+    }),
+    A: $data.currentTab === 1,
+    B: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
+    C: common_vendor.f($data.publishData, (item, k0, i0) => {
       return {
         a: item.images[0],
         b: common_vendor.t(item.title),
@@ -319,19 +318,21 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         k: item.id
       };
     }),
-    C: common_vendor.p({
+    D: common_vendor.p({
       type: "calendar",
       size: "16"
     }),
-    D: common_vendor.p({
+    E: common_vendor.p({
       type: "location",
       size: "16"
     }),
-    E: common_vendor.p({
+    F: common_vendor.p({
       type: "person",
       size: "16"
-    })
-  } : {});
+    }),
+    G: $data.currentTab === 2,
+    H: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px"
+  };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/uniapp/party-together-uni-app/pages/mine.vue"]]);
 _sfc_main.__runtimeHooks = 1;

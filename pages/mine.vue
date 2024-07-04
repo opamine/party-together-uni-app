@@ -85,7 +85,13 @@
 
     <view class="social-activity-container">
       <view class="social-activity-content">
-        <view v-if="currentTab === 0">
+        <view
+          v-show="currentTab === 0"
+          :style="{
+            boxSizing: 'border-box',
+            minHeight: screenHeight - navHeight - tabsHeight + 'px',
+          }"
+        >
           <!-- 动态组件 -->
           <water-fall
             :data="dynamicData"
@@ -119,7 +125,13 @@
             </template>
           </water-fall>
         </view>
-        <view v-if="currentTab === 1">
+        <view
+          v-show="currentTab === 1"
+          :style="{
+            boxSizing: 'border-box',
+            minHeight: screenHeight - navHeight - tabsHeight + 'px',
+          }"
+        >
           <!-- 活动参与组件 -->
           <view class="activities-list">
             <view v-for="item in activityData" :key="item.id" class="activity-item">
@@ -163,7 +175,13 @@
             </view>
           </view>
         </view>
-        <view v-if="currentTab === 2">
+        <view
+          v-show="currentTab === 2"
+          :style="{
+            boxSizing: 'border-box',
+            minHeight: screenHeight - navHeight - tabsHeight + 'px',
+          }"
+        >
           <!-- 我的发布组件 -->
           <view class="activities-list">
             <view v-for="item in publishData" :key="item.id" class="activity-item">
@@ -228,6 +246,7 @@
     },
     data() {
       return {
+        screenHeight: 0,
         navHeight: 0,
         statusBarHeight: 0,
         navigationBarHeight: 0,
@@ -258,6 +277,7 @@
             name: '我的发布',
           },
         ],
+        tabsHeight: uni.upx2px(90),
         dynamicData: [
           {
             id: 0,
@@ -358,6 +378,7 @@
       };
     },
     onLoad() {
+      this.screenHeight = uni.getSystemInfoSync().windowHeight;
       this.statusBarHeight = uni.getSystemInfoSync().statusBarHeight;
       // #ifdef MP-WEIXIN
       const custom = wx.getMenuButtonBoundingClientRect();
@@ -368,6 +389,7 @@
     },
     onPageScroll: function (e) {
       this.scrollTop = e.scrollTop;
+      // 150 是用户头像的高度，如果滚动超过这个距离，需要在顶部展示用户的头像和昵称
       if (e.scrollTop <= uni.upx2px(150)) {
         this.mineHeaderOpacity = e.scrollTop / uni.upx2px(150);
       } else {
