@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "uni-icons": "../../uni_modules/uni-icons/components/uni-icons/uni-icons",
+    "uni-dateformat": "../../uni_modules/uni-dateformat/components/uni-dateformat/uni-dateformat",
+    "participator-list": "../../components/participator-list/participator-list",
+    "u-loadmore": "../../uni_modules/vk-uview-ui/components/u-loadmore/u-loadmore"
+  }
+}

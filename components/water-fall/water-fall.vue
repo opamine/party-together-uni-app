@@ -51,7 +51,6 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 16rpx;
     box-sizing: border-box;
   }
 

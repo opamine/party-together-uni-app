@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "water-fall": "../../components/water-fall/water-fall",
+    "uni-icons": "../../uni_modules/uni-icons/components/uni-icons/uni-icons",
+    "u-loadmore": "../../uni_modules/vk-uview-ui/components/u-loadmore/u-loadmore"
+  }
+}

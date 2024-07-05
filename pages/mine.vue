@@ -1,6 +1,6 @@
 <template>
-  <!-- <uni-nav-bar :fixed="true" title="导航栏组件" height="100rpx" :border="false" :statusBar="true"></uni-nav-bar> -->
   <view
+    v-if="navHeight"
     class="mine-header"
     :style="{
       height: navHeight + 'px',
@@ -80,163 +80,43 @@
         ></u-tabs>
       </view>
     </u-sticky>
-    <view class="social-activity-container">
-      <view class="social-activity-content">
-        <view
-          v-show="currentTab === 0"
-          :style="{
-            boxSizing: 'border-box',
-            minHeight: screenHeight - navHeight - tabsHeight + 'px',
-          }"
-        >
-          <!-- 动态组件 -->
-          <water-fall :data="dynamicData" @clickItem="clickItem">
-            <template v-slot:default="slotProps">
-              <view class="dynamic-item">
-                <view class="dynamic-item-image">
-                  <image :src="slotProps.item.images[0]" mode="widthFix"></image>
-                </view>
-                <view class="dynamic-item-title">{{ slotProps.item.title }}</view>
-                <view class="dynamic-item-action">
-                  <view class="publisher-info">
-                    <view class="publisher-avatar">
-                      <image :src="slotProps.item.publisherAvatar"></image>
-                    </view>
-                    <view class="publisher-nick-name">{{ slotProps.item.publisher }}</view>
-                  </view>
-                  <view class="like-info">
-                    <uni-icons
-                      :type="slotProps.item.like ? 'heart-filled' : 'heart'"
-                      :color="slotProps.item.like ? '#e44747' : '#5f5f5f'"
-                      size="36rpx"
-                    ></uni-icons>
-                    <view class="like-count">{{ slotProps.item.likeCount }}</view>
-                  </view>
-                </view>
-              </view>
-            </template>
-            <template v-slot:bottom>
-              <u-loadmore
-                :status="
-                  dynamicDataLoading
-                    ? 'loading'
-                    : dynamicData.length >= total
-                    ? 'nomore'
-                    : 'loadmore'
-                "
-                :load-text="{ loadmore: '上拉加载', loading: '', nomore: '没有更多了' }"
-                font-size="24"
-              />
-            </template>
-          </water-fall>
-        </view>
-        <view
-          v-show="currentTab === 1"
-          :style="{
-            boxSizing: 'border-box',
-            minHeight: screenHeight - navHeight - tabsHeight + 'px',
-          }"
-        >
-          <!-- 活动参与组件 -->
-          <view class="activities-list">
-            <view v-for="item in activityData" :key="item.id" class="activity-item">
-              <view class="activity-info">
-                <view class="activity-image">
-                  <image :src="item.images[0]" mode="aspectFill"></image>
-                </view>
-                <view class="activity-desc">
-                  <view class="activity-title">
-                    {{ item.title }}
-                  </view>
-                  <view class="activity-desc-sub">
-                    <view class="activity-time">
-                      <view class="icon"><uni-icons type="calendar" size="32rpx"></uni-icons></view>
-                      <view class="text"
-                        ><uni-dateformat
-                          :date="item.startTime"
-                          format="yyyy.MM.dd hh:mm"
-                        ></uni-dateformat
-                      ></view>
-                    </view>
-                    <view class="activity-address">
-                      <view class="icon"><uni-icons type="location" size="32rpx"></uni-icons></view>
-                      <view class="text">{{ item.addressName }}</view>
-                    </view>
-                    <view class="activity-publisher">
-                      <view class="icon"><uni-icons type="person" size="32rpx"></uni-icons></view>
-                      <view class="text">{{ item.publisher }}</view>
-                    </view>
-                  </view>
-                </view>
-              </view>
-              <view class="activity-actions">
-                <view class="participator-container">
-                  <participator-list></participator-list>
-                </view>
-                <view class="action-btn-container">
-                  <view class="action-btn">活动回顾</view>
-                </view>
-              </view>
-            </view>
-          </view>
-        </view>
-        <view
-          v-show="currentTab === 2"
-          :style="{
-            boxSizing: 'border-box',
-            minHeight: screenHeight - navHeight - tabsHeight + 'px',
-          }"
-        >
-          <!-- 我的发布组件 -->
-          <view class="activities-list">
-            <view v-for="item in publishData" :key="item.id" class="activity-item">
-              <view class="activity-info">
-                <view class="activity-image">
-                  <image :src="item.images[0]" mode="aspectFill"></image>
-                </view>
-                <view class="activity-desc">
-                  <view class="activity-title">
-                    {{ item.title }}
-                  </view>
-                  <view class="activity-desc-sub">
-                    <view class="activity-time">
-                      <view class="icon"><uni-icons type="calendar" size="16"></uni-icons></view>
-                      <view class="text"
-                        ><uni-dateformat
-                          :date="item.startTime"
-                          format="yyyy.MM.dd hh:mm"
-                        ></uni-dateformat
-                      ></view>
-                    </view>
-                    <view class="activity-address">
-                      <view class="icon"><uni-icons type="location" size="16"></uni-icons></view>
-                      <view class="text">{{ item.addressName }}</view>
-                    </view>
-                    <view class="activity-publisher">
-                      <view class="icon"><uni-icons type="person" size="16"></uni-icons></view>
-                      <view class="text">{{ item.publisher }}</view>
-                    </view>
-                  </view>
-                </view>
-              </view>
-              <view class="activity-actions">
-                <view class="participator-container">
-                  <participator-list></participator-list>
-                </view>
-                <view class="action-btn-container">
-                  <view class="action-btn">活动回顾</view>
-                </view>
-              </view>
-            </view>
-          </view>
-        </view>
-      </view>
+    <view
+      v-show="currentTab === 0"
+      :style="{
+        boxSizing: 'border-box',
+        minHeight: screenHeight - navHeight - tabsHeight + 'px',
+      }"
+    >
+      <!-- 动态组件 -->
+      <dynamic-list ref="dynamicList"></dynamic-list>
+    </view>
+    <view
+      v-show="currentTab === 1"
+      :style="{
+        boxSizing: 'border-box',
+        minHeight: screenHeight - navHeight - tabsHeight + 'px',
+      }"
+    >
+      <!-- 活动参与组件 -->
+      <activity-list ref="activityList" mode="participate"></activity-list>
+    </view>
+    <view
+      v-show="currentTab === 2"
+      :style="{
+        boxSizing: 'border-box',
+        minHeight: screenHeight - navHeight - tabsHeight + 'px',
+      }"
+    >
+      <!-- 我的发布组件 -->
+      <activity-list ref="publishList" mode="publish"></activity-list>
     </view>
   </view>
 </template>
 <script>
   import waterFall from '../components/water-fall/water-fall.vue';
   import participatorList from '../components/participator-list/participator-list.vue';
+  import dynamicList from './dynamic/dynamicList.vue';
+  import activityList from './activity/activityList.vue';
 
   const InfoTagsFields = ['age', 'region', 'career', 'mbti'];
 
@@ -244,6 +124,8 @@
     components: {
       waterFall,
       participatorList,
+      dynamicList,
+      activityList,
     },
     data() {
       return {
@@ -252,7 +134,6 @@
         statusBarHeight: 0, // px
         navigationBarHeight: 0, // px
         mineHeaderOpacity: 0,
-        scrollTop: 0,
         userInfo: {
           id: 1998,
           nickName: '周啊粥',
@@ -279,69 +160,10 @@
           },
         ],
         tabsHeight: uni.upx2px(90),
-        dynamicData: [],
-        current: 1,
-        size: 10,
-        total: 100,
-        dynamicDataLoading: false,
-        activityData: [
-          {
-            id: 0,
-            title:
-              '这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题',
-            content: '这是一个很长的活动内容',
-            images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/10.JPG'],
-            publisher: '丸子',
-            publisherAvatar: 'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png',
-            startTime: 1719900150185,
-            addressName: '文宋阁·肆舍',
-            location: '浙江省杭州市萧山区望京C1座35楼E-F室',
-            lnglat: [120.254429, 30.237911],
-          },
-          {
-            id: 1,
-            title:
-              '这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题',
-            content: '这是一个很长的活动内容',
-            images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/10.JPG'],
-            publisher: '丸子',
-            publisherAvatar: 'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png',
-            startTime: 1719900150185,
-            addressName: '文宋阁·肆舍',
-            location: '浙江省杭州市萧山区望京C1座35楼E-F室',
-            lnglat: [120.254429, 30.237911],
-          },
-          {
-            id: 2,
-            title:
-              '这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题',
-            content: '这是一个很长的活动内容',
-            images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/10.JPG'],
-            publisher: '丸子',
-            publisherAvatar: 'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png',
-            startTime: 1719900150185,
-            addressName: '文宋阁·肆舍',
-            location: '浙江省杭州市萧山区望京C1座35楼E-F室',
-            lnglat: [120.254429, 30.237911],
-          },
-        ],
-        publishData: [
-          {
-            title:
-              '这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题这是一个很长的活动标题',
-            content: '这是一个很长的活动内容',
-            images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/21.JPG'],
-            publisher: '周啊粥',
-            publisherAvatar: 'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png',
-            startTime: 1821121211551,
-            addressName: '西湖杨公堤',
-            location: '浙江省杭州市萧山区望京C1座35楼E-F室',
-            lnglat: [120.254429, 30.237911],
-          },
-        ],
       };
     },
     computed: {
+      // 导航栏高度 rpx 为单位，u-sticky 组件需要使用
       navHeightOfRpx() {
         return this.navHeight / (uni.upx2px(100) / 100);
       },
@@ -356,8 +178,7 @@
       // #endif
       this.navHeight = this.statusBarHeight + this.navigationBarHeight;
     },
-    onPageScroll: function (e) {
-      this.scrollTop = e.scrollTop;
+    onPageScroll(e) {
       // 150 是用户头像的高度，如果滚动超过这个距离，需要在顶部展示用户的头像和昵称
       if (e.scrollTop <= uni.upx2px(150)) {
         this.mineHeaderOpacity = e.scrollTop / uni.upx2px(150);
@@ -366,55 +187,24 @@
       }
     },
     onReachBottom() {
-      console.log('onReachBottom');
+      console.log('reachBottom');
       switch (this.currentTab) {
         case 0:
-          if (this.dynamicData.length >= this.total) return;
-          this.dynamicDataLoading = true;
-          setTimeout(() => {
-            this.current++;
-            for (let i = 0; i < 10; i++) {
-              this.dynamicData.push({
-                id: this.dynamicData.length,
-                title: '这是动态标题',
-                content: '这是动态内容',
-                images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/01.jpg'],
-                publisher: '周啊粥',
-                publisherAvatar:
-                  'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png',
-                like: true,
-                likeCount: 10,
-              });
-            }
-          }, 1000);
+          this.$refs.dynamicList.getData();
           break;
-
+        case 1:
+          this.$refs.activityList.getData();
+          break;
+        case 2:
+          this.$refs.publishList.getData();
+          break;
         default:
           break;
-      }
-    },
-    onReady() {
-      // 创建初始模拟数据
-      for (let i = 0; i < 10; i++) {
-        this.dynamicData.push({
-          id: this.dynamicData.length,
-          title: '这是动态标题',
-          content: '这是动态内容',
-          images: ['https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/01.jpg'],
-          publisher: '周啊粥',
-          publisherAvatar: 'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png',
-          like: true,
-          likeCount: 10,
-        });
-        this.total = 100;
       }
     },
     methods: {
       changeTab(e) {
         this.currentTab = e.index;
-      },
-      clickItem(item) {
-        console.log(item);
       },
     },
     onPullDownRefresh() {
@@ -526,137 +316,6 @@
             color: #fff;
             &:first-of-type {
               margin-right: 24rpx;
-            }
-          }
-        }
-      }
-    }
-    .social-activity-container {
-      flex: 1;
-      overflow: auto;
-      .social-activity-content {
-        height: 100%;
-        .dynamic-item {
-          flex: 1;
-          background-color: #fff;
-          border-radius: 4px;
-          overflow: auto;
-          .dynamic-item-image {
-            width: 100%;
-            image {
-              width: 100%;
-            }
-          }
-          .dynamic-item-title {
-            padding: 16rpx;
-            font-size: 26rpx;
-            color: #333;
-          }
-          .dynamic-item-action {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 16rpx 16rpx;
-            .publisher-info {
-              display: flex;
-              align-items: center;
-              .publisher-avatar {
-                margin-right: 16rpx;
-                image {
-                  display: block;
-                  width: 42rpx;
-                  height: 42rpx;
-                  border-radius: 50%;
-                  border: 1px solid #00000010;
-                  overflow: hidden;
-                }
-              }
-              .publisher-nick-name {
-                font-size: 24rpx;
-                color: #515151;
-              }
-            }
-            .like-info {
-              display: flex;
-              align-items: center;
-              font-size: 24rpx;
-              .like-count {
-                margin-left: 8rpx;
-              }
-            }
-          }
-        }
-        .activities-list {
-          padding: 16rpx;
-          .activity-item {
-            padding: 16rpx;
-            margin-bottom: 16rpx;
-            background-color: #fff;
-            border-radius: 4px;
-            &:last-of-type {
-              margin-bottom: 0;
-            }
-            .activity-info {
-              display: flex;
-              .activity-image {
-                margin-right: 16rpx;
-                image {
-                  display: block;
-                  width: 320rpx;
-                  height: 200rpx;
-                  border-radius: 4px;
-                }
-              }
-              .activity-desc {
-                flex: 1;
-                .activity-title {
-                  font-size: 28rpx;
-                  font-weight: 600;
-                  word-break: break-all;
-                  text-overflow: ellipsis;
-                  display: -webkit-box;
-                  -webkit-box-orient: vertical;
-                  -webkit-line-clamp: 2; /* 这里是超出几行省略 */
-                  overflow: hidden;
-                }
-                .activity-desc-sub {
-                  font-size: 24rpx;
-                  color: #696969;
-                  .activity-time,
-                  .activity-address,
-                  .activity-publisher {
-                    display: flex;
-                    align-items: center;
-                    .icon {
-                      margin-right: 8rpx;
-                    }
-                  }
-                  .activity-time {
-                    margin-top: 16rpx;
-                  }
-                  .activity-address {
-                    margin-top: 4rpx;
-                  }
-                  .activity-publisher {
-                    margin-top: 4rpx;
-                  }
-                }
-              }
-            }
-            .activity-actions {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              margin-top: 24rpx;
-              .action-btn {
-                height: 60rpx;
-                padding: 0 24rpx;
-                background-color: #333;
-                border-radius: 30rpx;
-                line-height: 60rpx;
-                color: #fff;
-                font-size: 24rpx;
-              }
             }
           }
         }
