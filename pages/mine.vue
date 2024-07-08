@@ -68,7 +68,7 @@
         </view>
       </view>
     </view>
-    <u-sticky :offset-top="navHeightOfRpx" :h5-nav-height="navHeight" @fixed="onTabsFixed">
+    <u-sticky :offset-top="navHeightOfRpx" :h5-nav-height="navHeight">
       <view class="mine-social-activity-tabs">
         <u-tabs
           :list="tabs"
@@ -231,9 +231,6 @@
           });
         }
       },
-      onTabsFixed() {
-        console.log(this.scrollTop);
-      },
     },
   };
 </script>
@@ -246,13 +243,14 @@
     width: 100%;
     height: 70px;
     background-color: #ffffff;
+    font-weight: 600;
     z-index: 999;
   }
   .mine-container {
     .mine-content {
       padding: 32rpx;
       background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
-        url('https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/01.jpg');
+        url('https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/baground01.jpg');
       background-size: 100%;
       .mine-info {
         display: flex;

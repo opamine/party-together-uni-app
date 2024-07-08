@@ -107,9 +107,6 @@ const _sfc_main = {
           duration: 0
         });
       }
-    },
-    onTabsFixed() {
-      console.log(this.scrollTop);
     }
   }
 };
@@ -175,26 +172,25 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       height: 90,
       modelValue: $data.currentTab
     }),
-    p: common_vendor.o($options.onTabsFixed),
-    q: common_vendor.p({
+    p: common_vendor.p({
       ["offset-top"]: $options.navHeightOfRpx,
       ["h5-nav-height"]: $data.navHeight
     }),
-    r: common_vendor.sr("dynamicList", "1c081928-4"),
-    s: $data.currentTab === 0,
-    t: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
-    v: common_vendor.sr("activityList", "1c081928-5"),
-    w: common_vendor.p({
+    q: common_vendor.sr("dynamicList", "1c081928-4"),
+    r: $data.currentTab === 0,
+    s: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
+    t: common_vendor.sr("activityList", "1c081928-5"),
+    v: common_vendor.p({
       mode: "participate"
     }),
-    x: $data.currentTab === 1,
-    y: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
-    z: common_vendor.sr("publishList", "1c081928-6"),
-    A: common_vendor.p({
+    w: $data.currentTab === 1,
+    x: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
+    y: common_vendor.sr("publishList", "1c081928-6"),
+    z: common_vendor.p({
       mode: "publish"
     }),
-    B: $data.currentTab === 2,
-    C: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px"
+    A: $data.currentTab === 2,
+    B: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px"
   });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/uniapp/party-together-uni-app/pages/mine.vue"]]);

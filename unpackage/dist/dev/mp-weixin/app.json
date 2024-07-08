@@ -26,7 +26,7 @@
       {
         "pagePath": "pages/order",
         "iconPath": "static/icons/icon_club.png",
-        "selectedIconPath": "static/icons/icon_club.png",
+        "selectedIconPath": "static/icons/icon_club_active.png",
         "text": "俱乐部"
       },
       {
