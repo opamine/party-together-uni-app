@@ -64,11 +64,11 @@
         </view>
         <view class="right">
           <view class="right-btn">编辑资料</view>
-          <view class="right-btn"><uni-icons type="gear" size="28rpx" color="#fff" /></view>
+          <view class="right-btn"><uni-icons type="gear" size="30rpx" color="#fff" /></view>
         </view>
       </view>
     </view>
-    <u-sticky :offset-top="navHeightOfRpx" :h5-nav-height="navHeight">
+    <u-sticky :offset-top="navHeightOfRpx" :h5-nav-height="navHeight" @fixed="onTabsFixed">
       <view class="mine-social-activity-tabs">
         <u-tabs
           :list="tabs"
@@ -76,6 +76,8 @@
           v-model="currentTab"
           @change="changeTab"
           active-color="#000"
+          inactive-color="#989898"
+          :bold="false"
           :height="90"
         ></u-tabs>
       </view>
@@ -134,6 +136,8 @@
         statusBarHeight: 0, // px
         navigationBarHeight: 0, // px
         mineHeaderOpacity: 0,
+        mineContentHeight: 0,
+        scrollTop: 0,
         userInfo: {
           id: 1998,
           nickName: '周啊粥',
@@ -179,12 +183,18 @@
       this.navHeight = this.statusBarHeight + this.navigationBarHeight;
     },
     onPageScroll(e) {
+      this.scrollTop = e.scrollTop;
       // 150 是用户头像的高度，如果滚动超过这个距离，需要在顶部展示用户的头像和昵称
       if (e.scrollTop <= uni.upx2px(150)) {
         this.mineHeaderOpacity = e.scrollTop / uni.upx2px(150);
       } else {
         this.mineHeaderOpacity = 1;
       }
+    },
+    onPullDownRefresh() {
+      setTimeout(() => {
+        uni.stopPullDownRefresh();
+      }, 1000);
     },
     onReachBottom() {
       console.log('reachBottom');
@@ -202,15 +212,28 @@
           break;
       }
     },
+    onReady() {
+      uni
+        .createSelectorQuery()
+        .select('.mine-content')
+        .boundingClientRect((data) => {
+          this.mineContentHeight = data.height;
+        })
+        .exec();
+    },
     methods: {
       changeTab(e) {
         this.currentTab = e.index;
+        if (this.scrollTop >= this.mineContentHeight - this.navHeight) {
+          uni.pageScrollTo({
+            scrollTop: this.mineContentHeight - this.navHeight,
+            duration: 0,
+          });
+        }
       },
-    },
-    onPullDownRefresh() {
-      setTimeout(() => {
-        uni.stopPullDownRefresh();
-      }, 1000);
+      onTabsFixed() {
+        console.log(this.scrollTop);
+      },
     },
   };
 </script>

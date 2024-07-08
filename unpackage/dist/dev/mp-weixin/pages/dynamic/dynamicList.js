@@ -1,4 +1,5 @@
 "use strict";
+const utils_index = require("../../utils/index.js");
 const common_vendor = require("../../common/vendor.js");
 const waterFall = () => "../../components/water-fall/water-fall.js";
 const _sfc_main = {
@@ -30,7 +31,12 @@ const _sfc_main = {
             id: i + (this.current - 1) * this.size,
             title: "这是动态标题",
             content: "这是动态内容",
-            images: ["https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/01.jpg"],
+            images: [
+              `https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/0${utils_index.getRandomIntInclusive(
+                1,
+                5
+              )}.JPG`
+            ],
             publisher: "周啊粥",
             publisherAvatar: "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png",
             like: true,

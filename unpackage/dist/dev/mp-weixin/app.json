@@ -19,21 +19,21 @@
     "list": [
       {
         "pagePath": "pages/index",
-        "iconPath": "static/icons/icon_home.png",
-        "selectedIconPath": "static/icons/icon_home_active.png",
-        "text": "首页"
+        "iconPath": "static/icons/icon_square.png",
+        "selectedIconPath": "static/icons/icon_square_active.png",
+        "text": "广场"
       },
       {
         "pagePath": "pages/order",
-        "iconPath": "static/icons/icon_time.png",
-        "selectedIconPath": "static/icons/icon_time_active.png",
-        "text": "点单"
+        "iconPath": "static/icons/icon_club.png",
+        "selectedIconPath": "static/icons/icon_club.png",
+        "text": "俱乐部"
       },
       {
         "pagePath": "pages/fans",
-        "iconPath": "static/icons/icon_people.png",
-        "selectedIconPath": "static/icons/icon_people_active.png",
-        "text": "我的好友"
+        "iconPath": "static/icons/icon_message.png",
+        "selectedIconPath": "static/icons/icon_message_active.png",
+        "text": "消息"
       },
       {
         "pagePath": "pages/mine",

@@ -23,6 +23,8 @@ const _sfc_main = {
       navigationBarHeight: 0,
       // px
       mineHeaderOpacity: 0,
+      mineContentHeight: 0,
+      scrollTop: 0,
       userInfo: {
         id: 1998,
         nickName: "周啊粥",
@@ -65,11 +67,17 @@ const _sfc_main = {
     this.navHeight = this.statusBarHeight + this.navigationBarHeight;
   },
   onPageScroll(e) {
+    this.scrollTop = e.scrollTop;
     if (e.scrollTop <= common_vendor.index.upx2px(150)) {
       this.mineHeaderOpacity = e.scrollTop / common_vendor.index.upx2px(150);
     } else {
       this.mineHeaderOpacity = 1;
     }
+  },
+  onPullDownRefresh() {
+    setTimeout(() => {
+      common_vendor.index.stopPullDownRefresh();
+    }, 1e3);
   },
   onReachBottom() {
     console.log("reachBottom");
@@ -85,15 +93,24 @@ const _sfc_main = {
         break;
     }
   },
+  onReady() {
+    common_vendor.index.createSelectorQuery().select(".mine-content").boundingClientRect((data) => {
+      this.mineContentHeight = data.height;
+    }).exec();
+  },
   methods: {
     changeTab(e) {
       this.currentTab = e.index;
+      if (this.scrollTop >= this.mineContentHeight - this.navHeight) {
+        common_vendor.index.pageScrollTo({
+          scrollTop: this.mineContentHeight - this.navHeight,
+          duration: 0
+        });
+      }
+    },
+    onTabsFixed() {
+      console.log(this.scrollTop);
     }
-  },
-  onPullDownRefresh() {
-    setTimeout(() => {
-      common_vendor.index.stopPullDownRefresh();
-    }, 1e3);
   }
 };
 if (!Array) {
@@ -143,7 +160,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     k: common_vendor.p({
       type: "gear",
-      size: "28rpx",
+      size: "30rpx",
       color: "#fff"
     }),
     l: $data.navHeight + "px",
@@ -153,28 +170,31 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       list: $data.tabs,
       ["is-scroll"]: false,
       ["active-color"]: "#000",
+      ["inactive-color"]: "#989898",
+      bold: false,
       height: 90,
       modelValue: $data.currentTab
     }),
-    p: common_vendor.p({
+    p: common_vendor.o($options.onTabsFixed),
+    q: common_vendor.p({
       ["offset-top"]: $options.navHeightOfRpx,
       ["h5-nav-height"]: $data.navHeight
     }),
-    q: common_vendor.sr("dynamicList", "1c081928-4"),
-    r: $data.currentTab === 0,
-    s: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
-    t: common_vendor.sr("activityList", "1c081928-5"),
-    v: common_vendor.p({
+    r: common_vendor.sr("dynamicList", "1c081928-4"),
+    s: $data.currentTab === 0,
+    t: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
+    v: common_vendor.sr("activityList", "1c081928-5"),
+    w: common_vendor.p({
       mode: "participate"
     }),
-    w: $data.currentTab === 1,
-    x: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
-    y: common_vendor.sr("publishList", "1c081928-6"),
-    z: common_vendor.p({
+    x: $data.currentTab === 1,
+    y: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
+    z: common_vendor.sr("publishList", "1c081928-6"),
+    A: common_vendor.p({
       mode: "publish"
     }),
-    A: $data.currentTab === 2,
-    B: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px"
+    B: $data.currentTab === 2,
+    C: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px"
   });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/project/uniapp/party-together-uni-app/pages/mine.vue"]]);
