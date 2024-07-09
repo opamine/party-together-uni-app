@@ -7,9 +7,6 @@
   background-color: #fff;
   border-radius: 4px;
 }
-.activities-list .activity-item.data-v-7e55ff70:last-of-type {
-  margin-bottom: 0;
-}
 .activities-list .activity-item .activity-info.data-v-7e55ff70 {
   display: flex;
 }

@@ -35,6 +35,3 @@
 .column .column-item.data-v-c724d0a7 {
   margin-bottom: 16rpx;
 }
-.column .column-item.data-v-c724d0a7:last-of-type {
-  margin-bottom: 0;
-}

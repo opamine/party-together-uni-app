@@ -58,9 +58,6 @@
     flex-shrink: 0;
     .column-item {
       margin-bottom: 16rpx;
-      &:last-of-type {
-        margin-bottom: 0;
-      }
     }
   }
 </style>

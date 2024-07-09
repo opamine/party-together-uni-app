@@ -107,9 +107,6 @@
       margin-bottom: 16rpx;
       background-color: #fff;
       border-radius: 4px;
-      &:last-of-type {
-        margin-bottom: 0;
-      }
       .activity-info {
         display: flex;
         .activity-image {
