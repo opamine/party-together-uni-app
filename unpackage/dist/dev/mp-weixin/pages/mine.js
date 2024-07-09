@@ -25,18 +25,7 @@ const _sfc_main = {
       mineHeaderOpacity: 0,
       mineContentHeight: 0,
       scrollTop: 0,
-      userInfo: {
-        id: 1998,
-        nickName: "周啊粥",
-        account: "zzhou998",
-        avatar: "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png",
-        signature: "❤ 逆水行舟，不进则退",
-        gender: "male",
-        age: 26,
-        region: "浙江杭州",
-        career: "互联网从业者",
-        mbti: "INTJ"
-      },
+      userInfo: {},
       InfoTagsFields,
       currentTab: 0,
       tabs: [
@@ -60,11 +49,17 @@ const _sfc_main = {
     }
   },
   onLoad() {
+    console.log("onLoad");
+    const app = getApp();
+    const { statusBarHeight, navigationBarHeight, navHeight } = app.globalData;
     this.screenHeight = common_vendor.index.getSystemInfoSync().windowHeight;
-    this.statusBarHeight = common_vendor.index.getSystemInfoSync().statusBarHeight;
-    const custom = common_vendor.wx$1.getMenuButtonBoundingClientRect();
-    this.navigationBarHeight = custom.height + (custom.top - common_vendor.index.getSystemInfoSync().statusBarHeight) * 2;
-    this.navHeight = this.statusBarHeight + this.navigationBarHeight;
+    this.statusBarHeight = statusBarHeight;
+    this.navigationBarHeight = navigationBarHeight;
+    this.navHeight = navHeight;
+  },
+  onShow() {
+    const app = getApp();
+    this.userInfo = app.globalData.userInfo;
   },
   onPageScroll(e) {
     this.scrollTop = e.scrollTop;
@@ -99,8 +94,7 @@ const _sfc_main = {
     }).exec();
   },
   methods: {
-    changeTab(e) {
-      this.currentTab = e.index;
+    changeTab() {
       if (this.scrollTop >= this.mineContentHeight - this.navHeight) {
         common_vendor.index.pageScrollTo({
           scrollTop: this.mineContentHeight - this.navHeight,

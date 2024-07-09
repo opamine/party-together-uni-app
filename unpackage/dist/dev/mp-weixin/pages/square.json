@@ -1,0 +1,12 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "广场",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#f8f8f8",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "activity-list": "./activity/activityList",
+    "dynamic-list": "./dynamic/dynamicList",
+    "u-tabs-swiper": "../uni_modules/vk-uview-ui/components/u-tabs-swiper/u-tabs-swiper"
+  }
+}

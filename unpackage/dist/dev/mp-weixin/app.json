@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/square",
     "pages/index",
     "pages/order",
     "pages/fans",
@@ -18,7 +19,7 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "pages/index",
+        "pagePath": "pages/square",
         "iconPath": "static/icons/icon_square.png",
         "selectedIconPath": "static/icons/icon_square_active.png",
         "text": "广场"

@@ -117,7 +117,7 @@
           image {
             display: block;
             width: 320rpx;
-            height: 200rpx;
+            height: 220rpx;
             border-radius: 4px;
           }
         }

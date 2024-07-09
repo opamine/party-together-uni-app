@@ -1,6 +1,17 @@
 {
   "pages": [
     {
+      "path": "pages/square",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "广场",
+        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#f8f8f8",
+        // "disableScroll": true
+        "enablePullDownRefresh": true
+      }
+    },
+    {
       "path": "pages/index",
       "style": {
         "navigationBarTitleText": "咖啡店首页",
@@ -44,7 +55,7 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "pages/index",
+        "pagePath": "pages/square",
         "iconPath": "static/icons/icon_square.png",
         "selectedIconPath": "static/icons/icon_square_active.png",
         "text": "广场"

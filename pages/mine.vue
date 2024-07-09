@@ -138,18 +138,7 @@
         mineHeaderOpacity: 0,
         mineContentHeight: 0,
         scrollTop: 0,
-        userInfo: {
-          id: 1998,
-          nickName: '周啊粥',
-          account: 'zzhou998',
-          avatar: 'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png',
-          signature: '❤ 逆水行舟，不进则退',
-          gender: 'male',
-          age: 26,
-          region: '浙江杭州',
-          career: '互联网从业者',
-          mbti: 'INTJ',
-        },
+        userInfo: {},
         InfoTagsFields,
         currentTab: 0,
         tabs: [
@@ -173,14 +162,21 @@
       },
     },
     onLoad() {
+      console.log('onLoad');
+      const app = getApp();
+      const { statusBarHeight, navigationBarHeight, navHeight } = app.globalData;
+      // 去除底部导航栏，可视窗口的高度
       this.screenHeight = uni.getSystemInfoSync().windowHeight;
-      this.statusBarHeight = uni.getSystemInfoSync().statusBarHeight;
-      // #ifdef MP-WEIXIN
-      const custom = wx.getMenuButtonBoundingClientRect();
-      this.navigationBarHeight =
-        custom.height + (custom.top - uni.getSystemInfoSync().statusBarHeight) * 2;
-      // #endif
-      this.navHeight = this.statusBarHeight + this.navigationBarHeight;
+      // 手机状态栏高度
+      this.statusBarHeight = statusBarHeight;
+      // 默认导航栏高度（小程序拥有）
+      this.navigationBarHeight = navigationBarHeight;
+      // 状态栏+导航栏 高度
+      this.navHeight = navHeight;
+    },
+    onShow() {
+      const app = getApp();
+      this.userInfo = app.globalData.userInfo;
     },
     onPageScroll(e) {
       this.scrollTop = e.scrollTop;
@@ -222,8 +218,7 @@
         .exec();
     },
     methods: {
-      changeTab(e) {
-        this.currentTab = e.index;
+      changeTab() {
         if (this.scrollTop >= this.mineContentHeight - this.navHeight) {
           uni.pageScrollTo({
             scrollTop: this.mineContentHeight - this.navHeight,
@@ -241,7 +236,6 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 70px;
     background-color: #ffffff;
     font-weight: 600;
     z-index: 999;
