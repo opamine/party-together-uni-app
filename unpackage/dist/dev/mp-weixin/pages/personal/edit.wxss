@@ -1,0 +1,64 @@
+.edit-container.data-v-5d1a1aa6 {
+  background-color: #fff;
+  padding: 40rpx 16rpx;
+}
+.edit-container .avatar-container.data-v-5d1a1aa6 {
+  display: flex;
+  justify-content: center;
+}
+.edit-container .avatar-container .avatar-content.data-v-5d1a1aa6 {
+  position: relative;
+}
+.edit-container .avatar-container .avatar-content .avatar.data-v-5d1a1aa6 {
+  display: block;
+  height: 170rpx;
+  width: 170rpx;
+  border-radius: 50%;
+  border: 1px solid #dddddd;
+}
+.edit-container .avatar-container .avatar-content .camera-icon.data-v-5d1a1aa6 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 50rpx;
+  height: 50rpx;
+  right: 0;
+  bottom: 0;
+  background-color: #333;
+  border-radius: 50%;
+}
+.edit-container .base-info-container.data-v-5d1a1aa6 {
+  margin-top: 40rpx;
+}
+.edit-container .base-info-container .base-info-item.data-v-5d1a1aa6 {
+  display: flex;
+  align-items: center;
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+  border-bottom: 1px solid #f1f1f1;
+}
+.edit-container .base-info-container .base-info-item.data-v-5d1a1aa6:last-of-type {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.edit-container .base-info-container .base-info-item .label.data-v-5d1a1aa6 {
+  width: 150rpx;
+  font-size: 28rpx;
+  color: #666;
+}
+.edit-container .base-info-container .base-info-item .value.data-v-5d1a1aa6 {
+  flex: 1;
+  text-align: right;
+  font-size: 28rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.edit-container .base-info-container .base-info-item .value image.data-v-5d1a1aa6 {
+  width: 200rpx;
+  height: 160rpx;
+}
+.edit-container .base-info-container .base-info-item .right-icon-container.data-v-5d1a1aa6 {
+  margin-left: 12rpx;
+}

@@ -12,15 +12,6 @@
       }
     },
     {
-      "path": "pages/index",
-      "style": {
-        "navigationBarTitleText": "咖啡店首页",
-        "navigationBarTextStyle": "black",
-        "navigationBarBackgroundColor": "#f8f8f8",
-        "disableScroll": true
-      }
-    },
-    {
       "path": "pages/order",
       "style": {
         "navigationBarTitleText": "咖啡点单",
@@ -44,6 +35,16 @@
         "navigationBarTextStyle": "black",
         "navigationBarBackgroundColor": "#f8f8f8",
         // "disableScroll": true
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/personal/edit",
+      "style": {
+        "navigationBarTitleText": "编辑资料",
+        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#ffffff",
+        "disableScroll": true,
         "enablePullDownRefresh": true
       }
     }

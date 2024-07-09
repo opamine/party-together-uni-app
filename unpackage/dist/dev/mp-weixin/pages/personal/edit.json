@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "编辑资料",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#ffffff",
+  "disableScroll": true,
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "uni-icons": "../../uni_modules/uni-icons/components/uni-icons/uni-icons",
+    "uni-dateformat": "../../uni_modules/uni-dateformat/components/uni-dateformat/uni-dateformat"
+  }
+}

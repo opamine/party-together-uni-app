@@ -8,6 +8,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/personal/edit",
+          "pathName": "pages/personal/edit",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/square",
           "pathName": "pages/square",
           "query": "",

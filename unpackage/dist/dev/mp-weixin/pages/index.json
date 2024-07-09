@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "咖啡店首页",
-  "navigationBarTextStyle": "black",
-  "navigationBarBackgroundColor": "#f8f8f8",
-  "disableScroll": true,
-  "usingComponents": {
-    "uni-icons": "../uni_modules/uni-icons/components/uni-icons/uni-icons"
-  }
-}

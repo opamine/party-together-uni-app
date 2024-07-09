@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/square",
-    "pages/index",
     "pages/order",
     "pages/fans",
-    "pages/mine"
+    "pages/mine",
+    "pages/personal/edit"
   ],
   "window": {
     "navigationBarTextStyle": "white",

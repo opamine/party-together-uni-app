@@ -4,10 +4,10 @@ const common_vendor = require("./common/vendor.js");
 const uni_modules_vkUviewUi_index = require("./uni_modules/vk-uview-ui/index.js");
 if (!Math) {
   "./pages/square.js";
-  "./pages/index.js";
   "./pages/order.js";
   "./pages/fans.js";
   "./pages/mine.js";
+  "./pages/personal/edit.js";
 }
 const _sfc_main = {
   globalData: {
@@ -24,12 +24,14 @@ const _sfc_main = {
       nickName: "周啊粥",
       account: "zzhou998",
       avatar: "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png",
-      signature: "❤ 逆水行舟，不进则退",
+      signature: "❤ 逆水行舟，不进则退哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈asasasas",
       gender: "male",
       age: 26,
+      birthday: 8839584e5,
       region: "浙江杭州",
       career: "互联网从业者",
-      mbti: "INTJ"
+      mbti: "INTJ",
+      backgroundImage: "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/baground01.jpg"
     }
   },
   onLaunch: function(e) {

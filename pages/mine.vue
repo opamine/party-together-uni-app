@@ -63,7 +63,7 @@
           </view>
         </view>
         <view class="right">
-          <view class="right-btn">编辑资料</view>
+          <view class="right-btn" @click="handleEditPersonal">编辑资料</view>
           <view class="right-btn"><uni-icons type="gear" size="30rpx" color="#fff" /></view>
         </view>
       </view>
@@ -225,6 +225,11 @@
             duration: 0,
           });
         }
+      },
+      handleEditPersonal() {
+        uni.navigateTo({
+          url: '/pages/personal/edit',
+        });
       },
     },
   };
