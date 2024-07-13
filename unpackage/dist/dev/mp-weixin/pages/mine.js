@@ -137,6 +137,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     h: common_vendor.t($data.userInfo.account),
     i: common_vendor.t($data.userInfo.signature || "这个人还没有个性签名"),
     j: common_vendor.f($data.InfoTagsFields, (item, k0, i0) => {
+      var _a, _b;
       return common_vendor.e({
         a: item === "age"
       }, item === "age" ? {
@@ -148,10 +149,15 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           color: "#7fc1fe"
         })
       } : {}, {
-        d: common_vendor.t($data.userInfo[item]),
-        e: item === "age" && $data.userInfo[item]
+        d: item === "region"
+      }, item === "region" ? {
+        e: common_vendor.t(((_a = $data.userInfo[item]) == null ? void 0 : _a[0]) ?? "" + ((_b = $data.userInfo[item]) == null ? void 0 : _b[1]) ?? "")
+      } : {
+        f: common_vendor.t($data.userInfo[item])
+      }, {
+        g: item === "age" && $data.userInfo[item]
       }, item === "age" && $data.userInfo[item] ? {} : {}, {
-        f: item
+        h: item
       });
     }),
     k: common_vendor.o((...args) => $options.handleEditPersonal && $options.handleEditPersonal(...args)),

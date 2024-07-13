@@ -1,30 +1,32 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
-const BaseInfoFieldsList = [
-  { fieldName: "账号", fieldKey: "account" },
-  { fieldName: "名字", fieldKey: "nickName" },
-  { fieldName: "个性签名", fieldKey: "signature" },
-  { fieldName: "性别", fieldKey: "gender" },
-  { fieldName: "生日", fieldKey: "birthday" },
-  { fieldName: "地区", fieldKey: "region" },
-  { fieldName: "职业", fieldKey: "career" },
-  { fieldName: "人格类型", fieldKey: "mbti" },
-  { fieldName: "背景图", fieldKey: "backgroundImage" }
-];
 const _sfc_main = {
   data() {
     return {
       userInfo: {},
-      BaseInfoFieldsList
+      BaseUserInfoFieldsList: []
+      // editModalShow: false,
+      // editFieldName: '',
+      // editFieldKey: '',
+      // value: '',
     };
   },
   onLoad() {
     const app = getApp();
-    this.userInfo = app.globalData.userInfo;
+    const { userInfo, BaseUserInfoFieldsList } = app.globalData;
+    this.userInfo = userInfo;
+    this.BaseUserInfoFieldsList = BaseUserInfoFieldsList;
   },
   onReady() {
   },
   onShow() {
+  },
+  methods: {
+    editField(item) {
+      common_vendor.index.navigateTo({
+        url: `/pages/personal/editField?fieldKey=${item.fieldKey}`
+      });
+    }
   }
 };
 if (!Array) {
@@ -45,7 +47,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       size: "30rpx",
       color: "#fff"
     }),
-    c: common_vendor.f($data.BaseInfoFieldsList, (item, k0, i0) => {
+    c: common_vendor.f($data.BaseUserInfoFieldsList, (item, k0, i0) => {
       return common_vendor.e({
         a: common_vendor.t(item.fieldName),
         b: item.fieldKey === "backgroundImage"
@@ -59,13 +61,17 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           date: $data.userInfo[item.fieldKey],
           format: "yyyy-MM-dd"
         })
+      } : item.fieldKey === "region" ? {
+        j: common_vendor.t($data.userInfo[item.fieldKey].join(" "))
       } : {
-        i: common_vendor.t($data.userInfo[item.fieldKey])
+        k: common_vendor.t($data.userInfo[item.fieldKey])
       }, {
         d: item.fieldKey === "gender",
         f: item.fieldKey === "birthday",
-        j: "5d1a1aa6-2-" + i0,
-        k: item.fieldKey
+        i: item.fieldKey === "region",
+        l: "5d1a1aa6-2-" + i0,
+        m: item.fieldKey,
+        n: common_vendor.o(($event) => $options.editField(item), item.fieldKey)
       });
     }),
     d: common_vendor.p({

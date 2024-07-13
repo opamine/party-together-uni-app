@@ -8,7 +8,19 @@ if (!Math) {
   "./pages/fans.js";
   "./pages/mine.js";
   "./pages/personal/edit.js";
+  "./pages/personal/editField.js";
 }
+const BaseUserInfoFieldsList = [
+  { fieldName: "账号", fieldKey: "account" },
+  { fieldName: "昵称", fieldKey: "nickName" },
+  { fieldName: "个性签名", fieldKey: "signature" },
+  { fieldName: "性别", fieldKey: "gender" },
+  { fieldName: "生日", fieldKey: "birthday" },
+  { fieldName: "地区", fieldKey: "region" },
+  { fieldName: "职业", fieldKey: "career" },
+  { fieldName: "人格类型", fieldKey: "mbti" },
+  { fieldName: "背景图", fieldKey: "backgroundImage" }
+];
 const _sfc_main = {
   globalData: {
     statusBarHeight: 0,
@@ -22,19 +34,23 @@ const _sfc_main = {
     userInfo: {
       id: 1998,
       nickName: "周啊粥",
+      nickNameLastModified: 1720773800570,
       account: "zzhou998",
+      accountModified: false,
       avatar: "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png",
-      signature: "❤ 逆水行舟，不进则退哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈asasasas",
+      signature: "❤ 逆水行舟，不进则退",
+      signatureLastModified: 1720773800570,
       gender: "male",
       age: 26,
-      birthday: 8839584e5,
-      region: "浙江杭州",
+      birthday: "1998-01-05",
+      region: ["浙江省", "杭州市", "西湖区"],
       career: "互联网从业者",
       mbti: "INTJ",
       backgroundImage: "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/baground01.jpg"
-    }
+    },
+    BaseUserInfoFieldsList
   },
-  onLaunch: function(e) {
+  onLaunch(e) {
     const statusBarHeight = common_vendor.index.getSystemInfoSync().statusBarHeight;
     const windowWidth = common_vendor.index.getSystemInfoSync().windowWidth;
     this.globalData.statusBarHeight = statusBarHeight;
@@ -44,10 +60,10 @@ const _sfc_main = {
     this.globalData.navHeight = this.globalData.statusBarHeight + this.globalData.navigationBarHeight;
     console.log("App Launch");
   },
-  onShow: function() {
+  onShow() {
     console.log("App Show");
   },
-  onHide: function() {
+  onHide() {
     console.log("App Hide");
   }
 };

@@ -9,7 +9,12 @@
       </view>
     </view>
     <view class="base-info-container">
-      <view v-for="item in BaseInfoFieldsList" :key="item.fieldKey" class="base-info-item">
+      <view
+        v-for="item in BaseUserInfoFieldsList"
+        :key="item.fieldKey"
+        @click="editField(item)"
+        class="base-info-item"
+      >
         <view class="label">{{ item.fieldName }}</view>
         <view class="value">
           <image
@@ -23,6 +28,9 @@
           <view v-else-if="item.fieldKey === 'birthday'">
             <uni-dateformat :date="userInfo[item.fieldKey]" format="yyyy-MM-dd"></uni-dateformat>
           </view>
+          <text v-else-if="item.fieldKey === 'region'">{{
+            userInfo[item.fieldKey].join(' ')
+          }}</text>
           <text v-else>{{ userInfo[item.fieldKey] }}</text>
         </view>
         <view class="right-icon-container">
@@ -31,34 +39,60 @@
       </view>
     </view>
     <view class="more-info-container"></view>
+    <!-- <u-modal
+      v-model="editModalShow"
+      :title="`编辑${editFieldName}`"
+      :title-style="{ fontSize: '30rpx' }"
+      show-cancel-button
+      :cancel-style="{ fontSize: '30rpx' }"
+      confirm-text="保存"
+      :confirm-style="{ fontSize: '30rpx', fontWeight: 600, color: '#333' }"
+      :negative-top="300"
+    >
+      <view class="slot-content">
+        <view class="modal-content" style="padding: 16rpx; font-size: 28rpx">
+          <u-input
+            v-model="value"
+            type="text"
+            :custom-style="{ borderRadius: '12px' }"
+            :border="true"
+          />
+        </view>
+      </view>
+    </u-modal> -->
   </view>
 </template>
 
 <script>
-  const BaseInfoFieldsList = [
-    { fieldName: '账号', fieldKey: 'account' },
-    { fieldName: '名字', fieldKey: 'nickName' },
-    { fieldName: '个性签名', fieldKey: 'signature' },
-    { fieldName: '性别', fieldKey: 'gender' },
-    { fieldName: '生日', fieldKey: 'birthday' },
-    { fieldName: '地区', fieldKey: 'region' },
-    { fieldName: '职业', fieldKey: 'career' },
-    { fieldName: '人格类型', fieldKey: 'mbti' },
-    { fieldName: '背景图', fieldKey: 'backgroundImage' },
-  ];
   export default {
     data() {
       return {
         userInfo: {},
-        BaseInfoFieldsList,
+        BaseUserInfoFieldsList: [],
+        // editModalShow: false,
+        // editFieldName: '',
+        // editFieldKey: '',
+        // value: '',
       };
     },
     onLoad() {
       const app = getApp();
-      this.userInfo = app.globalData.userInfo;
+      const { userInfo, BaseUserInfoFieldsList } = app.globalData;
+      this.userInfo = userInfo;
+      this.BaseUserInfoFieldsList = BaseUserInfoFieldsList;
     },
     onReady() {},
     onShow() {},
+    methods: {
+      editField(item) {
+        // this.editFieldName = fieldName;
+        // this.editFieldKey = fieldKey;
+        // this.editModalShow = true;
+        uni.navigateTo({
+          url: `/pages/personal/editField?fieldKey=${item.fieldKey}`,
+        });
+      },
+    },
   };
 </script>
 <style lang="less" scoped>
@@ -82,8 +116,8 @@
           justify-content: center;
           align-items: center;
           position: absolute;
-          width: 50rpx;
-          height: 50rpx;
+          width: 44rpx;
+          height: 44rpx;
           right: 0;
           bottom: 0;
           background-color: #333;

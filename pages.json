@@ -47,6 +47,16 @@
         "disableScroll": true,
         "enablePullDownRefresh": true
       }
+    },
+    {
+      "path": "pages/personal/editField",
+      "style": {
+        "navigationBarTitleText": "",
+        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#ffffff",
+        "disableScroll": true,
+        "enablePullDownRefresh": true
+      }
     }
   ],
   "tabBar": {

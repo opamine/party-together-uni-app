@@ -38,7 +38,10 @@
               color="#7fc1fe"
               style="margin-right: 4px"
             />
-            <text>{{ userInfo[item] }}</text>
+            <text v-if="item === 'region'">{{
+              userInfo[item]?.[0] ?? '' + userInfo[item]?.[1] ?? ''
+            }}</text>
+            <text v-else>{{ userInfo[item] }}</text>
             <text v-if="item === 'age' && userInfo[item]">岁</text>
           </view>
         </view>

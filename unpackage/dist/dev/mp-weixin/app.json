@@ -4,7 +4,8 @@
     "pages/order",
     "pages/fans",
     "pages/mine",
-    "pages/personal/edit"
+    "pages/personal/edit",
+    "pages/personal/editField"
   ],
   "window": {
     "navigationBarTextStyle": "white",
