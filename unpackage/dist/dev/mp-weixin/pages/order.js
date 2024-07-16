@@ -254,5 +254,5 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     p: common_vendor.o((...args) => $options.handleMenuRightScroll && $options.handleMenuRightScroll(...args))
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-eb44ff31"], ["__file", "D:/project/uniapp/party-together-uni-app/pages/order.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-eb44ff31"]]);
 wx.createPage(MiniProgramPage);

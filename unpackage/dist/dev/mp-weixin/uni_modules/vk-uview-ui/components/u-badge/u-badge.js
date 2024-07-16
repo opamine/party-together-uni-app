@@ -122,5 +122,5 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     g: common_vendor.s($options.boxStyle)
   } : {});
 }
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-f84de764"], ["__file", "D:/project/uniapp/party-together-uni-app/uni_modules/vk-uview-ui/components/u-badge/u-badge.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-f84de764"]]);
 wx.createComponent(Component);

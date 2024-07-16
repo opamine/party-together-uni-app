@@ -104,5 +104,5 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     g: $props.show ? 1 : ""
   };
 }
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-b3b508a8"], ["__file", "D:/project/uniapp/party-together-uni-app/uni_modules/vk-uview-ui/components/u-mask/u-mask.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-b3b508a8"]]);
 wx.createComponent(Component);

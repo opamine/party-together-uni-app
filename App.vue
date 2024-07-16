@@ -32,7 +32,7 @@
         age: 26,
         birthday: '1998-01-05',
         region: ['浙江省', '杭州市', '西湖区'],
-        career: '互联网从业者',
+        career: ['互联网-互联网从业者', '互联网-前端开发工程师'],
         mbti: 'INTJ',
         backgroundImage: 'https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/baground01.jpg',
       },

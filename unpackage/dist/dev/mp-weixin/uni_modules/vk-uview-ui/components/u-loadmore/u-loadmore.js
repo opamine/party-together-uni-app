@@ -157,5 +157,5 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     l: _ctx.$u.addUnit($props.height)
   };
 }
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-e9906cfb"], ["__file", "D:/project/uniapp/party-together-uni-app/uni_modules/vk-uview-ui/components/u-loadmore/u-loadmore.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-e9906cfb"]]);
 wx.createComponent(Component);

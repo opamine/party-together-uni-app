@@ -123,5 +123,5 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     s: $options.headerHeight + "px"
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-246f1857"], ["__file", "D:/project/uniapp/party-together-uni-app/pages/square.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-246f1857"]]);
 wx.createPage(MiniProgramPage);

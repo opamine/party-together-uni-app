@@ -1,5 +1,23 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const MbtiData = [
+  "INTJ",
+  "INTP",
+  "ENTJ",
+  "ENTP",
+  "INFJ",
+  "INFP",
+  "ENFJ",
+  "ENFP",
+  "ISTJ",
+  "ISFJ",
+  "ESTJ",
+  "ESFJ",
+  "ISTP",
+  "ISFP",
+  "ESTP",
+  "ESFP"
+];
 const _sfc_main = {
   data() {
     return {
@@ -23,7 +41,35 @@ const _sfc_main = {
         }
       },
       // 规则回显
-      regionSelectorShow: false
+      regionSelectorShow: false,
+      careerSelectorShow: false,
+      careerOriginData: [
+        {
+          id: 0,
+          name: "互联网",
+          children: [
+            { id: 0, name: "互联网从业者" },
+            { id: 1, name: "前端开发工程师" },
+            { id: 2, name: "后端开发工程师" }
+          ]
+        },
+        {
+          id: 1,
+          name: "科技数码",
+          children: [
+            { id: 0, name: "数码博主" },
+            { id: 1, name: "摄影博主" }
+          ]
+        }
+      ],
+      careerData: [
+        ["互联网", "科技数码"],
+        ["互联网从业者", "前端开发工程师", "后端开发工程师"]
+      ],
+      careerSelectorDefaultSelect: [0, 0],
+      MbtiData,
+      mbtiSelectorShow: false,
+      mbtiSelectorDefaultSelect: [0]
     };
   },
   computed: {
@@ -47,7 +93,7 @@ const _sfc_main = {
     });
     this.editFieldName = targetEditFieldName;
     this.editFieldKey = fieldKey;
-    this.value = userInfo[fieldKey];
+    this.value = fieldKey === "career" ? [...userInfo[fieldKey]] : userInfo[fieldKey];
     switch (fieldKey) {
       case "account":
         this.tip = !userInfo.accountModified ? "账号只可修改一次" : "修改次数已达上限";
@@ -72,6 +118,15 @@ const _sfc_main = {
       case "region":
         this.modifiable = true;
         break;
+      case "career":
+        this.modifiable = true;
+        break;
+      case "mbti":
+        this.modifiable = true;
+        break;
+      default:
+        this.modifiable = true;
+        break;
     }
   },
   methods: {
@@ -92,12 +147,55 @@ const _sfc_main = {
     modifyGender(value) {
       this.value = value;
     },
-    bindDateChange(e) {
+    bindBirthdayDateChange(e) {
       this.value = e.detail.value;
     },
     regionSelectConfirm(val) {
       const newVal = [val.province.name, val.city.name, val.area.name];
       this.value = newVal;
+    },
+    removeCareer(index) {
+      this.value.splice(index, 1);
+    },
+    careerSelectStart() {
+      if (this.value && this.value.length) {
+        const lastCareerArr = this.value[this.value.length - 1].split("-");
+        const columnIndex0 = this.careerOriginData.findIndex(
+          (item) => item.name === lastCareerArr[0]
+        );
+        const columnIndex1 = this.careerOriginData[columnIndex0].children.findIndex(
+          (item) => item.name === lastCareerArr[1]
+        );
+        this.careerSelectorDefaultSelect = [columnIndex0, columnIndex1];
+        this.careerData[1] = this.careerOriginData[columnIndex0].children.map(
+          (item) => item.name
+        );
+      } else {
+        this.careerSelectorDefaultSelect = [0, 0];
+        this.careerData[1] = this.careerOriginData[0].children.map((item) => item.name);
+      }
+      this.careerSelectorShow = true;
+    },
+    careerColumnChange({ column, index }) {
+      if (column === 0) {
+        this.careerData[1] = this.careerOriginData[index].children.map((item) => item.name);
+      }
+    },
+    careerSelectConfirm(val) {
+      const newCareer = this.careerData[0][val[0]] + "-" + this.careerData[1][val[1]];
+      this.value.push(newCareer);
+    },
+    mbtiSelectStart() {
+      if (this.value) {
+        const targetIndex = this.MbtiData.findIndex((item) => item === this.value);
+        this.mbtiSelectorDefaultSelect = targetIndex > -1 ? [targetIndex] : [0];
+      } else {
+        this.mbtiSelectorDefaultSelect = [0];
+      }
+      this.mbtiSelectorShow = true;
+    },
+    mbtiSelectConfirm(e) {
+      this.value = this.MbtiData[e[0]];
     },
     handleSave() {
       console.log(this.editFieldKey);
@@ -175,7 +273,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     w: $data.value,
     x: $options.startDate,
     y: $options.endDate,
-    z: common_vendor.o((...args) => $options.bindDateChange && $options.bindDateChange(...args))
+    z: common_vendor.o((...args) => $options.bindBirthdayDateChange && $options.bindBirthdayDateChange(...args))
   } : {}, {
     A: $data.editFieldKey === "region"
   }, $data.editFieldKey === "region" ? {
@@ -190,12 +288,61 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       modelValue: $data.regionSelectorShow
     })
   } : {}, {
-    G: $data.rule[$data.editFieldKey]
-  }, $data.rule[$data.editFieldKey] ? {
-    H: common_vendor.t($data.rule[$data.editFieldKey].message)
+    G: $data.editFieldKey === "career"
+  }, $data.editFieldKey === "career" ? common_vendor.e({
+    H: common_vendor.f($data.value, (item, index, i0) => {
+      return {
+        a: common_vendor.t(item.split("-")[1]),
+        b: common_vendor.o(($event) => $options.removeCareer(index), item),
+        c: "b1402b4c-5-" + i0,
+        d: item
+      };
+    }),
+    I: common_vendor.p({
+      type: "closeempty",
+      size: "28rpx"
+    }),
+    J: $data.value.length < 2
+  }, $data.value.length < 2 ? {
+    K: common_vendor.p({
+      type: "plusempty",
+      size: "28rpx",
+      color: "#515151"
+    }),
+    L: common_vendor.o((...args) => $options.careerSelectStart && $options.careerSelectStart(...args))
   } : {}, {
-    I: common_vendor.o($options.handleSave),
-    J: common_vendor.p({
+    M: common_vendor.t($data.value && $data.value.length || 0),
+    N: common_vendor.o($options.careerColumnChange),
+    O: common_vendor.o($options.careerSelectConfirm),
+    P: common_vendor.o(($event) => $data.careerSelectorShow = $event),
+    Q: common_vendor.p({
+      mode: "multiSelector",
+      range: $data.careerData,
+      ["default-selector"]: $data.careerSelectorDefaultSelect,
+      ["confirm-color"]: "#333",
+      modelValue: $data.careerSelectorShow
+    })
+  }) : {}, {
+    R: $data.editFieldKey === "mbti"
+  }, $data.editFieldKey === "mbti" ? {
+    S: common_vendor.t($data.value),
+    T: common_vendor.o((...args) => $options.mbtiSelectStart && $options.mbtiSelectStart(...args)),
+    U: common_vendor.o($options.mbtiSelectConfirm),
+    V: common_vendor.o(($event) => $data.mbtiSelectorShow = $event),
+    W: common_vendor.p({
+      mode: "selector",
+      range: $data.MbtiData,
+      ["default-selector"]: $data.mbtiSelectorDefaultSelect,
+      ["confirm-color"]: "#333",
+      modelValue: $data.mbtiSelectorShow
+    })
+  } : {}, {
+    X: $data.rule[$data.editFieldKey]
+  }, $data.rule[$data.editFieldKey] ? {
+    Y: common_vendor.t($data.rule[$data.editFieldKey].message)
+  } : {}, {
+    Z: common_vendor.o($options.handleSave),
+    aa: common_vendor.p({
       ["custom-style"]: {
         backgroundColor: $data.modifiable ? "#333" : "#eee",
         color: $data.modifiable ? "#fff" : "#999",
@@ -207,5 +354,5 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   });
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-b1402b4c"], ["__file", "D:/project/uniapp/party-together-uni-app/pages/personal/editField.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-b1402b4c"]]);
 wx.createPage(MiniProgramPage);

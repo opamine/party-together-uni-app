@@ -56,14 +56,14 @@
             :value="value"
             :start="startDate"
             :end="endDate"
-            @change="bindDateChange"
+            @change="bindBirthdayDateChange"
           >
             <view style="padding: 8rpx 0">{{ value }}</view>
           </picker>
         </view>
       </view>
       <view v-if="editFieldKey === 'region'">
-        <view @click="regionSelectorShow = true" style="padding: 8rpx 0;">
+        <view @click="regionSelectorShow = true" style="padding: 8rpx 0">
           {{ value.join(' ') }}
         </view>
         <u-picker
@@ -72,6 +72,51 @@
           :default-region="value"
           confirm-color="#333"
           @confirm="regionSelectConfirm"
+        ></u-picker>
+      </view>
+      <view v-if="editFieldKey === 'career'">
+        <view class="career-edit-content">
+          <view v-for="(item, index) in value" :key="item" class="career-tag">
+            <text>{{ item.split('-')[1] }}</text>
+            <uni-icons
+              type="closeempty"
+              size="28rpx"
+              style="margin-left: 8rpx"
+              @click="removeCareer(index)"
+            ></uni-icons>
+          </view>
+          <view
+            v-if="value.length < 2"
+            class="career-tag"
+            style="color: #515151"
+            @click="careerSelectStart"
+          >
+            <text>添加职业</text>
+            <uni-icons type="plusempty" size="28rpx" color="#515151"></uni-icons>
+          </view>
+        </view>
+        <view style="text-align: right; color: #ccc"> {{ (value && value.length) || 0 }}/2 </view>
+        <u-picker
+          v-model="careerSelectorShow"
+          mode="multiSelector"
+          :range="careerData"
+          :default-selector="careerSelectorDefaultSelect"
+          confirm-color="#333"
+          @columnchange="careerColumnChange"
+          @confirm="careerSelectConfirm"
+        ></u-picker>
+      </view>
+      <view v-if="editFieldKey === 'mbti'">
+        <view @click="mbtiSelectStart" style="padding: 8rpx 0">
+          {{ value }}
+        </view>
+        <u-picker
+          v-model="mbtiSelectorShow"
+          mode="selector"
+          :range="MbtiData"
+          :default-selector="mbtiSelectorDefaultSelect"
+          confirm-color="#333"
+          @confirm="mbtiSelectConfirm"
         ></u-picker>
       </view>
     </view>
@@ -94,6 +139,24 @@
   </view>
 </template>
 <script>
+  const MbtiData = [
+    'INTJ',
+    'INTP',
+    'ENTJ',
+    'ENTP',
+    'INFJ',
+    'INFP',
+    'ENFJ',
+    'ENFP',
+    'ISTJ',
+    'ISFJ',
+    'ESTJ',
+    'ESFJ',
+    'ISTP',
+    'ISFP',
+    'ESTP',
+    'ESFP',
+  ];
   export default {
     data() {
       return {
@@ -113,6 +176,34 @@
           },
         }, // 规则回显
         regionSelectorShow: false,
+        careerSelectorShow: false,
+        careerOriginData: [
+          {
+            id: 0,
+            name: '互联网',
+            children: [
+              { id: 0, name: '互联网从业者' },
+              { id: 1, name: '前端开发工程师' },
+              { id: 2, name: '后端开发工程师' },
+            ],
+          },
+          {
+            id: 1,
+            name: '科技数码',
+            children: [
+              { id: 0, name: '数码博主' },
+              { id: 1, name: '摄影博主' },
+            ],
+          },
+        ],
+        careerData: [
+          ['互联网', '科技数码'],
+          ['互联网从业者', '前端开发工程师', '后端开发工程师'],
+        ],
+        careerSelectorDefaultSelect: [0, 0],
+        MbtiData,
+        mbtiSelectorShow: false,
+        mbtiSelectorDefaultSelect: [0],
       };
     },
     computed: {
@@ -142,7 +233,8 @@
       // 字段名称及字段赋值
       this.editFieldName = targetEditFieldName;
       this.editFieldKey = fieldKey;
-      this.value = userInfo[fieldKey];
+      // 职业是个数组类型，为了避免修改全局数据，这里做个浅拷贝
+      this.value = fieldKey === 'career' ? [...userInfo[fieldKey]] : userInfo[fieldKey];
 
       // 是否可编辑，可编辑和不可编辑提示
       switch (fieldKey) {
@@ -173,7 +265,14 @@
         case 'region':
           this.modifiable = true;
           break;
+        case 'career':
+          this.modifiable = true;
+          break;
+        case 'mbti':
+          this.modifiable = true;
+          break;
         default:
+          this.modifiable = true;
           break;
       }
     },
@@ -196,12 +295,55 @@
       modifyGender(value) {
         this.value = value;
       },
-      bindDateChange(e) {
+      bindBirthdayDateChange(e) {
         this.value = e.detail.value;
       },
       regionSelectConfirm(val) {
         const newVal = [val.province.name, val.city.name, val.area.name];
         this.value = newVal;
+      },
+      removeCareer(index) {
+        this.value.splice(index, 1);
+      },
+      careerSelectStart() {
+        if (this.value && this.value.length) {
+          const lastCareerArr = this.value[this.value.length - 1].split('-');
+          const columnIndex0 = this.careerOriginData.findIndex(
+            (item) => item.name === lastCareerArr[0]
+          );
+          const columnIndex1 = this.careerOriginData[columnIndex0].children.findIndex(
+            (item) => item.name === lastCareerArr[1]
+          );
+          this.careerSelectorDefaultSelect = [columnIndex0, columnIndex1];
+          this.careerData[1] = this.careerOriginData[columnIndex0].children.map(
+            (item) => item.name
+          );
+        } else {
+          this.careerSelectorDefaultSelect = [0, 0];
+          this.careerData[1] = this.careerOriginData[0].children.map((item) => item.name);
+        }
+        this.careerSelectorShow = true;
+      },
+      careerColumnChange({ column, index }) {
+        if (column === 0) {
+          this.careerData[1] = this.careerOriginData[index].children.map((item) => item.name);
+        }
+      },
+      careerSelectConfirm(val) {
+        const newCareer = this.careerData[0][val[0]] + '-' + this.careerData[1][val[1]];
+        this.value.push(newCareer);
+      },
+      mbtiSelectStart() {
+        if (this.value) {
+          const targetIndex = this.MbtiData.findIndex((item) => item === this.value);
+          this.mbtiSelectorDefaultSelect = targetIndex > -1 ? [targetIndex] : [0];
+        } else {
+          this.mbtiSelectorDefaultSelect = [0];
+        }
+        this.mbtiSelectorShow = true;
+      },
+      mbtiSelectConfirm(e) {
+        this.value = this.MbtiData[e[0]];
       },
       handleSave() {
         console.log(this.editFieldKey);
@@ -229,6 +371,16 @@
         display: flex;
         justify-content: space-between;
         padding: 24rpx 0;
+      }
+      .career-edit-content {
+        display: flex;
+        padding-top: 24rpx;
+        .career-tag {
+          padding: 4rpx 16rpx;
+          margin-right: 12rpx;
+          border-radius: 4px;
+          background-color: #eeeeee;
+        }
       }
     }
     .rule {

@@ -303,5 +303,5 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     h: $props.bgColor
   });
 }
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-750d9d75"], ["__file", "D:/project/uniapp/party-together-uni-app/uni_modules/vk-uview-ui/components/u-tabs/u-tabs.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-750d9d75"]]);
 wx.createComponent(Component);

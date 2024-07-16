@@ -44,6 +44,11 @@
             <text v-else>{{ userInfo[item] }}</text>
             <text v-if="item === 'age' && userInfo[item]">岁</text>
           </view>
+          <template v-if="userInfo.career && userInfo.career.length">
+            <view v-for="item in userInfo.career" :key="item" class="info-tag">
+              <text>{{ item.split('-')[1] }}</text>
+            </view>
+          </template>
         </view>
       </view>
       <view class="mine-socializing">
@@ -123,7 +128,7 @@
   import dynamicList from './dynamic/dynamicList.vue';
   import activityList from './activity/activityList.vue';
 
-  const InfoTagsFields = ['age', 'region', 'career', 'mbti'];
+  const InfoTagsFields = ['age', 'region', 'mbti'];
 
   export default {
     components: {

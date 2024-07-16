@@ -31,6 +31,12 @@
           <text v-else-if="item.fieldKey === 'region'">{{
             userInfo[item.fieldKey].join(' ')
           }}</text>
+          <text v-else-if="item.fieldKey === 'career'">{{
+            (userInfo[item.fieldKey] &&
+              userInfo[item.fieldKey].length &&
+              userInfo[item.fieldKey].map((item) => item.split('-')[1]).join(' ')) ||
+            '选择职业'
+          }}</text>
           <text v-else>{{ userInfo[item.fieldKey] }}</text>
         </view>
         <view class="right-icon-container">
@@ -88,9 +94,13 @@
         // this.editFieldName = fieldName;
         // this.editFieldKey = fieldKey;
         // this.editModalShow = true;
-        uni.navigateTo({
-          url: `/pages/personal/editField?fieldKey=${item.fieldKey}`,
-        });
+
+        if (item.fieldKey === 'backgroundImage') {
+        } else {
+          uni.navigateTo({
+            url: `/pages/personal/editField?fieldKey=${item.fieldKey}`,
+          });
+        }
       },
     },
   };

@@ -44,6 +44,16 @@
   justify-content: space-between;
   padding: 24rpx 0;
 }
+.edit-field-container .form-container .career-edit-content.data-v-b1402b4c {
+  display: flex;
+  padding-top: 24rpx;
+}
+.edit-field-container .form-container .career-edit-content .career-tag.data-v-b1402b4c {
+  padding: 4rpx 16rpx;
+  margin-right: 12rpx;
+  border-radius: 4px;
+  background-color: #eeeeee;
+}
 .edit-field-container .rule.data-v-b1402b4c {
   padding: 24rpx;
   font-size: 24rpx;

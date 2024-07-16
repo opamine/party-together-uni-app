@@ -23,9 +23,13 @@ const _sfc_main = {
   },
   methods: {
     editField(item) {
-      common_vendor.index.navigateTo({
-        url: `/pages/personal/editField?fieldKey=${item.fieldKey}`
-      });
+      if (item.fieldKey === "backgroundImage")
+        ;
+      else {
+        common_vendor.index.navigateTo({
+          url: `/pages/personal/editField?fieldKey=${item.fieldKey}`
+        });
+      }
     }
   }
 };
@@ -63,15 +67,18 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       } : item.fieldKey === "region" ? {
         j: common_vendor.t($data.userInfo[item.fieldKey].join(" "))
+      } : item.fieldKey === "career" ? {
+        l: common_vendor.t($data.userInfo[item.fieldKey] && $data.userInfo[item.fieldKey].length && $data.userInfo[item.fieldKey].map((item2) => item2.split("-")[1]).join(" ") || "选择职业")
       } : {
-        k: common_vendor.t($data.userInfo[item.fieldKey])
+        m: common_vendor.t($data.userInfo[item.fieldKey])
       }, {
         d: item.fieldKey === "gender",
         f: item.fieldKey === "birthday",
         i: item.fieldKey === "region",
-        l: "5d1a1aa6-2-" + i0,
-        m: item.fieldKey,
-        n: common_vendor.o(($event) => $options.editField(item), item.fieldKey)
+        k: item.fieldKey === "career",
+        n: "5d1a1aa6-2-" + i0,
+        o: item.fieldKey,
+        p: common_vendor.o(($event) => $options.editField(item), item.fieldKey)
       });
     }),
     d: common_vendor.p({
@@ -81,5 +88,5 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-5d1a1aa6"], ["__file", "D:/project/uniapp/party-together-uni-app/pages/personal/edit.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-5d1a1aa6"]]);
 wx.createPage(MiniProgramPage);
