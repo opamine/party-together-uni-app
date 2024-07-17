@@ -63,27 +63,6 @@
       </view>
     </view>
     <view class="more-info-container"></view>
-    <!-- <u-modal
-      v-model="editModalShow"
-      :title="`编辑${editFieldName}`"
-      :title-style="{ fontSize: '30rpx' }"
-      show-cancel-button
-      :cancel-style="{ fontSize: '30rpx' }"
-      confirm-text="保存"
-      :confirm-style="{ fontSize: '30rpx', fontWeight: 600, color: '#333' }"
-      :negative-top="300"
-    >
-      <view class="slot-content">
-        <view class="modal-content" style="padding: 16rpx; font-size: 28rpx">
-          <u-input
-            v-model="value"
-            type="text"
-            :custom-style="{ borderRadius: '12px' }"
-            :border="true"
-          />
-        </view>
-      </view>
-    </u-modal> -->
   </view>
 </template>
 
@@ -93,26 +72,19 @@
       return {
         userInfo: {},
         BaseUserInfoFieldsList: [],
-        // editModalShow: false,
-        // editFieldName: '',
-        // editFieldKey: '',
-        // value: '',
       };
     },
     onLoad() {
       const app = getApp();
-      const { userInfo, BaseUserInfoFieldsList } = app.globalData;
-      this.userInfo = userInfo;
-      this.BaseUserInfoFieldsList = BaseUserInfoFieldsList;
+      this.BaseUserInfoFieldsList = app.globalData.BaseUserInfoFieldsList;
     },
-    onReady() {},
-    onShow() {},
+    onShow() {
+      const app = getApp();
+      this.userInfo = app.globalData.userInfo;
+      console.log(this.userInfo.account);
+    },
     methods: {
       editField(item) {
-        // this.editFieldName = fieldName;
-        // this.editFieldKey = fieldKey;
-        // this.editModalShow = true;
-
         if (item.fieldKey === 'backgroundImage') {
         } else {
           uni.navigateTo({
@@ -121,6 +93,7 @@
         }
       },
       backgroundImageUploadSuccess(res) {
+        // 因为 userInfo 为对象类型，这里修改了 userInfo 的 backgroundImage 字段，全局也会被修改
         this.$set(this.userInfo, 'backgroundImage', res.data);
       },
       backgroundImageUploadError(err) {

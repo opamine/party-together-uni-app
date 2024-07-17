@@ -34,7 +34,7 @@ const _sfc_main = {
     userInfo: {
       id: 1998,
       nickName: "周啊粥",
-      nickNameLastModified: 1720773800570,
+      nickNameLastModified: 1620773800570,
       account: "zzhou998",
       accountModified: false,
       avatar: "https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/ramses/avatar.png",

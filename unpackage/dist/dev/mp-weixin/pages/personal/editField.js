@@ -32,11 +32,9 @@ const _sfc_main = {
       // 当前值
       rule: {
         account: {
-          pattern: "",
           message: "6-15 个字符，仅可使用英文（必须）、数字、下划线"
         },
         nickName: {
-          pattern: "",
           message: "请设置 2-24 个字符，不包括 @<>/ 等无效字符哦"
         }
       },
@@ -198,8 +196,36 @@ const _sfc_main = {
       this.value = this.MbtiData[e[0]];
     },
     handleSave() {
+      if (["account", "nickName"].includes(this.editFieldKey)) {
+        if (this.editFieldKey === "account") {
+          const valid = this.value && /^\w{6,15}$/.test(this.value) && /[a-zA-Z]/.exec(this.value);
+          if (!valid) {
+            return common_vendor.index.showToast({
+              icon: "none",
+              title: `账号格式不符`,
+              duration: 2e3
+            });
+          }
+        }
+        if (this.editFieldKey === "nickName") {
+          const valid = this.value && /^[^@<>/]{2,24}$/.test(this.value);
+          console.log(valid);
+          if (!valid) {
+            return common_vendor.index.showToast({
+              icon: "none",
+              title: `昵称格式不符`,
+              duration: 2e3
+            });
+          }
+        }
+      }
+      console.log(this.editFieldName);
       console.log(this.editFieldKey);
       console.log(this.value);
+      const app = getApp();
+      const { userInfo } = app.globalData;
+      userInfo[this.editFieldKey] = this.value;
+      common_vendor.index.navigateBack();
     }
   }
 };

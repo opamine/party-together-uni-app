@@ -5,21 +5,16 @@ const _sfc_main = {
     return {
       userInfo: {},
       BaseUserInfoFieldsList: []
-      // editModalShow: false,
-      // editFieldName: '',
-      // editFieldKey: '',
-      // value: '',
     };
   },
   onLoad() {
     const app = getApp();
-    const { userInfo, BaseUserInfoFieldsList } = app.globalData;
-    this.userInfo = userInfo;
-    this.BaseUserInfoFieldsList = BaseUserInfoFieldsList;
-  },
-  onReady() {
+    this.BaseUserInfoFieldsList = app.globalData.BaseUserInfoFieldsList;
   },
   onShow() {
+    const app = getApp();
+    this.userInfo = app.globalData.userInfo;
+    console.log(this.userInfo.account);
   },
   methods: {
     editField(item) {
