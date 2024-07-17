@@ -6,6 +6,7 @@
   "enablePullDownRefresh": true,
   "usingComponents": {
     "uni-icons": "../../uni_modules/uni-icons/components/uni-icons/uni-icons",
+    "u-upload": "../../uni_modules/vk-uview-ui/components/u-upload/u-upload",
     "uni-dateformat": "../../uni_modules/uni-dateformat/components/uni-dateformat/uni-dateformat"
   }
 }

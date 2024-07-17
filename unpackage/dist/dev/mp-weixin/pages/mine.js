@@ -176,9 +176,11 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       color: "#fff"
     }),
     o: $data.navHeight + "px",
-    p: common_vendor.o($options.changeTab),
-    q: common_vendor.o(($event) => $data.currentTab = $event),
-    r: common_vendor.p({
+    p: `linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
+        url(${$data.userInfo.backgroundImage})`,
+    q: common_vendor.o($options.changeTab),
+    r: common_vendor.o(($event) => $data.currentTab = $event),
+    s: common_vendor.p({
       list: $data.tabs,
       ["is-scroll"]: false,
       ["active-color"]: "#000",
@@ -187,25 +189,25 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       height: 90,
       modelValue: $data.currentTab
     }),
-    s: common_vendor.p({
+    t: common_vendor.p({
       ["offset-top"]: $options.navHeightOfRpx,
       ["h5-nav-height"]: $data.navHeight
     }),
-    t: common_vendor.sr("dynamicList", "1c081928-4"),
-    v: $data.currentTab === 0,
-    w: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
-    x: common_vendor.sr("activityList", "1c081928-5"),
-    y: common_vendor.p({
+    v: common_vendor.sr("dynamicList", "1c081928-4"),
+    w: $data.currentTab === 0,
+    x: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
+    y: common_vendor.sr("activityList", "1c081928-5"),
+    z: common_vendor.p({
       mode: "participate"
     }),
-    z: $data.currentTab === 1,
-    A: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
-    B: common_vendor.sr("publishList", "1c081928-6"),
-    C: common_vendor.p({
+    A: $data.currentTab === 1,
+    B: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
+    C: common_vendor.sr("publishList", "1c081928-6"),
+    D: common_vendor.p({
       mode: "publish"
     }),
-    D: $data.currentTab === 2,
-    E: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px"
+    E: $data.currentTab === 2,
+    F: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px"
   });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);

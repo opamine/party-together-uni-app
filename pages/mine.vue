@@ -12,7 +12,14 @@
     {{ userInfo.nickName }}
   </view>
   <view class="mine-container">
-    <view class="mine-content" :style="{ paddingTop: navHeight + 'px' }">
+    <view
+      class="mine-content"
+      :style="{
+        paddingTop: navHeight + 'px',
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
+        url(${userInfo.backgroundImage})`,
+      }"
+    >
       <view class="mine-info">
         <view class="avatar-container">
           <image class="avatar" :src="userInfo.avatar" mode="aspectFill"></image>
@@ -256,8 +263,6 @@
   .mine-container {
     .mine-content {
       padding: 32rpx;
-      background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
-        url('https://zzh-assets.oss-cn-hangzhou.aliyuncs.com/temp/baground01.jpg');
       background-size: 100%;
       .mine-info {
         display: flex;

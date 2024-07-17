@@ -17,11 +17,29 @@
       >
         <view class="label">{{ item.fieldName }}</view>
         <view class="value">
-          <image
-            v-if="item.fieldKey === 'backgroundImage'"
-            :src="userInfo.backgroundImage"
-            mode="aspectFit"
-          ></image>
+          <view v-if="item.fieldKey === 'backgroundImage'" style="text-align: right">
+            <u-upload
+              ref="uUpload1"
+              :header="{
+                Authorization:
+                  'eyJhbGciOiJSUzI1NIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjU2YjNhMzg1YjY1MjI3ZjBiYmFlODcwIiwiaWF0IjoxNzIxMjAzNzg4LCJleHAiOjE3MjE0NjI5ODh9.UcmK7_bBxiGrj_P7TvW1htND9HHaUWMZZ6-JfHaHJqGrw64A1tOj3ziC_Gg-UTcMkebUwQz03SWOASslJ35M0vX_wsrNi25ZinxRbPfHfY_Y_uP9hdjYa5yHRkxI7pVko8Q2uErpDdNs7_wN_UTJxnmaH5i4ZAfP88q3TLwDuj9uKbk_0EJjIEQYgsVoevzGuYBqZwWaHZfOYLYPPiNXWSW-zo0e9S-NwMNy6RGiAK8nfCjWyytu3t2C2MUgDpMdl_6J-dpZOi3HINAGsieDGf30tY2T06bh9Q-9Z1aDHNNBjz_yQcX10Na_ScR9gvpmBv02vYon2ZKmKo32ZLBwRQ',
+              }"
+              action="http://localhost:3000/api/upload/file"
+              :auto-upload="true"
+              :show-upload-list="false"
+              :custom-btn="true"
+              @on-success="backgroundImageUploadSuccess"
+              @on-error="backgroundImageUploadError"
+              style="display: inline-block"
+            >
+              <template v-slot:addBtn>
+                <view style="text-align: right">
+                  <image :src="userInfo.backgroundImage" mode="aspectFit"></image>
+                </view>
+              </template>
+            </u-upload>
+          </view>
+
           <text v-else-if="item.fieldKey === 'gender'">{{
             userInfo[item.fieldKey] === 'male' ? '男' : '女'
           }}</text>
@@ -101,6 +119,12 @@
             url: `/pages/personal/editField?fieldKey=${item.fieldKey}`,
           });
         }
+      },
+      backgroundImageUploadSuccess(res) {
+        this.$set(this.userInfo, 'backgroundImage', res.data);
+      },
+      backgroundImageUploadError(err) {
+        console.log(err);
       },
     },
   };
