@@ -22,9 +22,9 @@
               ref="uUpload1"
               :header="{
                 Authorization:
-                  'eyJhbGciOiJSUzI1NIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjU2YjNhMzg1YjY1MjI3ZjBiYmFlODcwIiwiaWF0IjoxNzIxMjAzNzg4LCJleHAiOjE3MjE0NjI5ODh9.UcmK7_bBxiGrj_P7TvW1htND9HHaUWMZZ6-JfHaHJqGrw64A1tOj3ziC_Gg-UTcMkebUwQz03SWOASslJ35M0vX_wsrNi25ZinxRbPfHfY_Y_uP9hdjYa5yHRkxI7pVko8Q2uErpDdNs7_wN_UTJxnmaH5i4ZAfP88q3TLwDuj9uKbk_0EJjIEQYgsVoevzGuYBqZwWaHZfOYLYPPiNXWSW-zo0e9S-NwMNy6RGiAK8nfCjWyytu3t2C2MUgDpMdl_6J-dpZOi3HINAGsieDGf30tY2T06bh9Q-9Z1aDHNNBjz_yQcX10Na_ScR9gvpmBv02vYon2ZKmKo32ZLBwRQ',
+                  'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjU2YjNhMzg1YjY1MjI3ZjBiYmFlODcwIiwiaWF0IjoxNzIxMjAzNzg4LCJleHAiOjE3MjE0NjI5ODh9.UcmK7_bBxiGrj_P7TvW1htND9HHaUWMZZ6-JfHaHJqGrw64A1tOj3ziC_Gg-UTcMkebUwQz03SWOASslJ35M0vX_wsrNi25ZinxRbPfHfY_Y_uP9hdjYa5yHRkxI7pVko8Q2uErpDdNs7_wN_UTJxnmaH5i4ZAfP88q3TLwDuj9uKbk_0EJjIEQYgsVoevzGuYBqZwWaHZfOYLYPPiNXWSW-zo0e9S-NwMNy6RGiAK8nfCjWyytu3t2C2MUgDpMdl_6J-dpZOi3HINAGsieDGf30tY2T06bh9Q-9Z1aDHNNBjz_yQcX10Na_ScR9gvpmBv02vYon2ZKmKo32ZLBwRQ',
               }"
-              action="http://localhost:3000/api/upload/file"
+              action="https://ramses.cn/api/upload/file"
               :auto-upload="true"
               :show-upload-list="false"
               :custom-btn="true"
