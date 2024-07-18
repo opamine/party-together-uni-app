@@ -18,6 +18,7 @@
         paddingTop: navHeight + 'px',
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
         url(${userInfo.backgroundImage})`,
+        backgroundSize: '100% auto',
       }"
     >
       <view class="mine-info">
@@ -191,7 +192,7 @@
     },
     onShow() {
       const app = getApp();
-      this.userInfo = app.globalData.userInfo;
+      this.userInfo = { ...app.globalData.userInfo };
     },
     onPageScroll(e) {
       this.scrollTop = e.scrollTop;

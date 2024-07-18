@@ -59,7 +59,7 @@ const _sfc_main = {
   },
   onShow() {
     const app = getApp();
-    this.userInfo = app.globalData.userInfo;
+    this.userInfo = { ...app.globalData.userInfo };
   },
   onPageScroll(e) {
     this.scrollTop = e.scrollTop;

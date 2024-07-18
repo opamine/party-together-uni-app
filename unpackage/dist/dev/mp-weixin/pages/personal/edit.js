@@ -13,8 +13,7 @@ const _sfc_main = {
   },
   onShow() {
     const app = getApp();
-    this.userInfo = app.globalData.userInfo;
-    console.log(this.userInfo.account);
+    this.userInfo = { ...app.globalData.userInfo };
   },
   methods: {
     editField(item) {
@@ -28,6 +27,8 @@ const _sfc_main = {
     },
     backgroundImageUploadSuccess(res) {
       this.$set(this.userInfo, "backgroundImage", res.data);
+      const app = getApp();
+      app.globalData.userInfo.backgroundImage = res.data;
     },
     backgroundImageUploadError(err) {
       console.log(err);
@@ -68,7 +69,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         g: "5d1a1aa6-1-" + i0,
         h: common_vendor.p({
           header: {
-            Authorization: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjU2YjNhMzg1YjY1MjI3ZjBiYmFlODcwIiwiaWF0IjoxNzIxMjAzNzg4LCJleHAiOjE3MjE0NjI5ODh9.UcmK7_bBxiGrj_P7TvW1htND9HHaUWMZZ6-JfHaHJqGrw64A1tOj3ziC_Gg-UTcMkebUwQz03SWOASslJ35M0vX_wsrNi25ZinxRbPfHfY_Y_uP9hdjYa5yHRkxI7pVko8Q2uErpDdNs7_wN_UTJxnmaH5i4ZAfP88q3TLwDuj9uKbk_0EJjIEQYgsVoevzGuYBqZwWaHZfOYLYPPiNXWSW-zo0e9S-NwMNy6RGiAK8nfCjWyytu3t2C2MUgDpMdl_6J-dpZOi3HINAGsieDGf30tY2T06bh9Q-9Z1aDHNNBjz_yQcX10Na_ScR9gvpmBv02vYon2ZKmKo32ZLBwRQ"
+            Authorization: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjU2YjNhMzg1YjY1MjI3ZjBiYmFlODcwIiwiaWF0IjoxNzIxMTAyNTEyLCJleHAiOjE3MjEzNjE3MTJ9.dUTgVvQNDV_x55xg52i8sxVtJ1VRw_WVdgB0cyw83L8gevydNuVI7b9j0fWZBKhnon58oHk2GW-5vFvf0AWU6u7-2UcTpPy90t-kHeEkdjLqn3anEBFlX8PNd81D--CtNGWHrxrPpCENmbAm08QWFrGJ7gqMiCVI6ozl96OvAnSnnpFUddn5sy7U8UfxgVdEfFRD3S-yZrkTua9hgjD9l6gC82Rumrxf_wicNtVtURD8vytTBKogQnyR6UOOOBUa3sSdETWCjPicNf1DwQcuBem76p2fjl2kORkLFnikSs4HvPTX5LqwHaeq99HPVrGd6imHRD9MzCwihddV9zlgYQ"
           },
           action: "https://ramses.cn/api/upload/file",
           ["auto-upload"]: true,
