@@ -57,6 +57,24 @@
         "disableScroll": true,
         "enablePullDownRefresh": true
       }
+    },
+    {
+      "path": "pages/activity/activityRelease",
+      "style": {
+        "navigationBarTitleText": "发布活动",
+        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#ffffff",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/dynamic/dynamicRelease",
+      "style": {
+        "navigationBarTitleText": "发布动态",
+        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#ffffff",
+        "enablePullDownRefresh": false
+      }
     }
   ],
   "tabBar": {

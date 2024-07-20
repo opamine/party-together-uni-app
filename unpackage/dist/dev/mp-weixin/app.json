@@ -5,7 +5,9 @@
     "pages/fans",
     "pages/mine",
     "pages/personal/edit",
-    "pages/personal/editField"
+    "pages/personal/editField",
+    "pages/activity/activityRelease",
+    "pages/dynamic/dynamicRelease"
   ],
   "window": {
     "navigationBarTextStyle": "white",

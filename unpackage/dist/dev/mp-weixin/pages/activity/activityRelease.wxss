@@ -1,0 +1,8 @@
+.activity-release-container.data-v-819605c9 {
+  padding: 16rpx;
+}
+.activity-release-container .base-form-container.data-v-819605c9 {
+  padding: 16rpx;
+  background-color: #fff;
+  border-radius: 4px;
+}

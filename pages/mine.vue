@@ -128,6 +128,14 @@
       <!-- 我的发布组件 -->
       <activity-list ref="publishList" mode="publish"></activity-list>
     </view>
+    <!-- 发布动态和发布活动共用一个按钮，根据 tab 选择来确定按钮的功能 -->
+    <view
+      v-show="currentTab === 0 || currentTab === 2"
+      @click="handlePublish"
+      class="publish-button"
+    >
+      <uni-icons type="plusempty" size="40rpx" color="#fff"></uni-icons>
+    </view>
   </view>
 </template>
 <script>
@@ -247,6 +255,19 @@
           url: '/pages/personal/edit',
         });
       },
+      handlePublish() {
+        console.log(this.currentTab);
+        if (this.currentTab === 0) {
+          uni.navigateTo({
+            url: '/pages/dynamic/dynamicRelease',
+          });
+        }
+        if (this.currentTab === 2) {
+          uni.navigateTo({
+            url: '/pages/activity/activityRelease',
+          });
+        }
+      },
     },
   };
 </script>
@@ -355,5 +376,17 @@
         }
       }
     }
+  }
+  .publish-button {
+    position: fixed;
+    bottom: 20rpx;
+    left: 50%;
+    width: 100rpx;
+    height: 100rpx;
+    margin-left: -50rpx;
+    border-radius: 50%;
+    background-color: #252525;
+    line-height: 100rpx;
+    text-align: center;
   }
 </style>

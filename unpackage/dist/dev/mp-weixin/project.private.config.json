@@ -8,6 +8,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/activity/activityRelease",
+          "pathName": "pages/activity/activityRelease",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/personal/edit",
           "pathName": "pages/personal/edit",
           "query": "",

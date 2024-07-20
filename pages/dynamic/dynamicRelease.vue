@@ -1,0 +1,3 @@
+<template>
+  <view>动态发布页</view>
+</template>

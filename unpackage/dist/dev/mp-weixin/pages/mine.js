@@ -106,6 +106,19 @@ const _sfc_main = {
       common_vendor.index.navigateTo({
         url: "/pages/personal/edit"
       });
+    },
+    handlePublish() {
+      console.log(this.currentTab);
+      if (this.currentTab === 0) {
+        common_vendor.index.navigateTo({
+          url: "/pages/dynamic/dynamicRelease"
+        });
+      }
+      if (this.currentTab === 2) {
+        common_vendor.index.navigateTo({
+          url: "/pages/activity/activityRelease"
+        });
+      }
     }
   }
 };
@@ -207,7 +220,14 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       mode: "publish"
     }),
     E: $data.currentTab === 2,
-    F: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px"
+    F: $data.screenHeight - $data.navHeight - $data.tabsHeight + "px",
+    G: common_vendor.p({
+      type: "plusempty",
+      size: "40rpx",
+      color: "#fff"
+    }),
+    H: $data.currentTab === 0 || $data.currentTab === 2,
+    I: common_vendor.o((...args) => $options.handlePublish && $options.handlePublish(...args))
   });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);

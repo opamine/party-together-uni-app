@@ -9,6 +9,8 @@ if (!Math) {
   "./pages/mine.js";
   "./pages/personal/edit.js";
   "./pages/personal/editField.js";
+  "./pages/activity/activityRelease.js";
+  "./pages/dynamic/dynamicRelease.js";
 }
 const BaseUserInfoFieldsList = [
   { fieldName: "账号", fieldKey: "account" },
