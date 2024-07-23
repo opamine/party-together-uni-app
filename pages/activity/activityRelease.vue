@@ -2,7 +2,6 @@
   <view class="page-container">
     <view class="form-container">
       <u-form :model="form" ref="form1" :errorType="['toast']" :label-width="180">
-        <view class="section-title">活动基础信息</view>
         <view class="base-form-container card">
           <u-form-item label="" prop="title">
             <u-input v-model="form.title" placeholder="活动标题" maxlength="20" />
@@ -244,20 +243,18 @@
       padding: 24rpx;
       overflow-y: auto;
       .section-title {
-        font-size: 26rpx;
+        font-size: 30rpx;
         color: #666;
-      }
-      .base-form-container {
-        margin-top: 16rpx;
+        text-align: center;
       }
       .config-form-container {
-        margin-top: 16rpx;
-        margin-bottom: 16rpx;
+        margin-top: 24rpx;
+        margin-bottom: 24rpx;
       }
       .sign-up-config-form-container {
-        margin-bottom: 16rpx;
+        margin-bottom: 24rpx;
         .sign-up-config-form {
-          margin-top: 16rpx;
+          margin-top: 24rpx;
           padding: 0;
           .action-area {
             display: flex;
@@ -278,7 +275,7 @@
         }
       }
       .contact-form-container {
-        margin-top: 16rpx;
+        margin-top: 24rpx;
       }
     }
     .action-container {
@@ -288,6 +285,7 @@
       padding-bottom: calc(24rpx + constant(safe-area-inset-bottom));
       padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
       background-color: #fff;
+      border-top: 1px solid #eee;
       .draft-button {
         flex: 1;
         height: 80rpx;
