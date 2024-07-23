@@ -91,7 +91,7 @@
           :is-scroll="false"
           v-model="currentTab"
           @change="changeTab"
-          active-color="#000"
+          active-color="#272a30"
           inactive-color="#989898"
           :bold="false"
           :height="90"
@@ -385,7 +385,7 @@
     height: 100rpx;
     margin-left: -50rpx;
     border-radius: 50%;
-    background-color: #252525;
+    background-color: #272a30;
     line-height: 100rpx;
     text-align: center;
   }

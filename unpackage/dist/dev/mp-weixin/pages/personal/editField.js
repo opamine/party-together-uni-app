@@ -370,7 +370,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     Z: common_vendor.o($options.handleSave),
     aa: common_vendor.p({
       ["custom-style"]: {
-        backgroundColor: $data.modifiable ? "#333" : "#eee",
+        backgroundColor: $data.modifiable ? "#272a30" : "#eee",
         color: $data.modifiable ? "#fff" : "#999",
         border: "none"
       },

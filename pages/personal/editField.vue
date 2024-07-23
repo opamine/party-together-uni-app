@@ -125,7 +125,7 @@
     <view class="btn-container"
       ><u-button
         :custom-style="{
-          backgroundColor: modifiable ? '#333' : '#eee',
+          backgroundColor: modifiable ? '#272a30' : '#eee',
           color: modifiable ? '#fff' : '#999',
           border: 'none',
         }"

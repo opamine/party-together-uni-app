@@ -3,10 +3,12 @@
   "navigationBarTextStyle": "black",
   "navigationBarBackgroundColor": "#ffffff",
   "enablePullDownRefresh": false,
+  "disableScroll": true,
   "usingComponents": {
     "u-input": "../../uni_modules/vk-uview-ui/components/u-input/u-input",
     "u-form-item": "../../uni_modules/vk-uview-ui/components/u-form-item/u-form-item",
     "u-upload": "../../uni_modules/vk-uview-ui/components/u-upload/u-upload",
+    "uni-icons": "../../uni_modules/uni-icons/components/uni-icons/uni-icons",
     "u-form": "../../uni_modules/vk-uview-ui/components/u-form/u-form"
   }
 }

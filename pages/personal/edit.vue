@@ -128,7 +128,7 @@
           height: 44rpx;
           right: 0;
           bottom: 0;
-          background-color: #333;
+          background-color: #272a30;
           border-radius: 50%;
         }
       }

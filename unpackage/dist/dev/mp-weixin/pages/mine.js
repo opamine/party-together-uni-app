@@ -196,7 +196,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     s: common_vendor.p({
       list: $data.tabs,
       ["is-scroll"]: false,
-      ["active-color"]: "#000",
+      ["active-color"]: "#272a30",
       ["inactive-color"]: "#989898",
       bold: false,
       height: 90,

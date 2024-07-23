@@ -162,7 +162,7 @@
         .action-btn {
           height: 60rpx;
           padding: 0 24rpx;
-          background-color: #333;
+          background-color: #272a30;
           border-radius: 30rpx;
           line-height: 60rpx;
           color: #fff;

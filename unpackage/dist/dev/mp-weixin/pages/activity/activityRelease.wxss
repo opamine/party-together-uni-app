@@ -1,8 +1,73 @@
-.activity-release-container.data-v-819605c9 {
-  padding: 16rpx;
+.page-container.data-v-819605c9 {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
-.activity-release-container .base-form-container.data-v-819605c9 {
+.page-container .form-container.data-v-819605c9 {
+  flex: 1;
+  padding: 24rpx;
+  overflow-y: auto;
+}
+.page-container .form-container .section-title.data-v-819605c9 {
+  font-size: 26rpx;
+  color: #666;
+}
+.page-container .form-container .base-form-container.data-v-819605c9 {
+  margin-top: 16rpx;
+}
+.page-container .form-container .config-form-container.data-v-819605c9 {
+  margin-top: 16rpx;
+  margin-bottom: 16rpx;
+}
+.page-container .form-container .sign-up-config-form-container.data-v-819605c9 {
+  margin-bottom: 16rpx;
+}
+.page-container .form-container .sign-up-config-form-container .sign-up-config-form.data-v-819605c9 {
+  margin-top: 16rpx;
+  padding: 0;
+}
+.page-container .form-container .sign-up-config-form-container .sign-up-config-form .action-area.data-v-819605c9 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
   padding: 16rpx;
+  background-color: #515151;
+  color: #fff;
+}
+.page-container .form-container .sign-up-config-form-container .sign-up-config-form .add-sign-up-group-btn.data-v-819605c9 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12rpx 0 22rpx;
+}
+.page-container .form-container .contact-form-container.data-v-819605c9 {
+  margin-top: 16rpx;
+}
+.page-container .action-container.data-v-819605c9 {
+  display: flex;
+  justify-content: space-between;
+  padding: 24rpx 32rpx 0;
+  padding-bottom: calc(24rpx + constant(safe-area-inset-bottom));
+  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
   background-color: #fff;
-  border-radius: 4px;
+}
+.page-container .action-container .draft-button.data-v-819605c9 {
+  flex: 1;
+  height: 80rpx;
+  margin-right: 32rpx;
+  border-radius: 40rpx;
+  background-color: #f2f3f7;
+  line-height: 80rpx;
+  text-align: center;
+}
+.page-container .action-container .primary-button.data-v-819605c9 {
+  flex: 1;
+  height: 80rpx;
+  border-radius: 40rpx;
+  background-color: #272a30;
+  color: #fff;
+  line-height: 80rpx;
+  text-align: center;
 }
