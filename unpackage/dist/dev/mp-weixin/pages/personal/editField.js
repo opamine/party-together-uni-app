@@ -310,7 +310,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     F: common_vendor.p({
       mode: "region",
       ["default-region"]: $data.value,
-      ["confirm-color"]: "#333",
+      ["confirm-color"]: "#272a30",
       modelValue: $data.regionSelectorShow
     })
   } : {}, {
@@ -345,7 +345,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       mode: "multiSelector",
       range: $data.careerData,
       ["default-selector"]: $data.careerSelectorDefaultSelect,
-      ["confirm-color"]: "#333",
+      ["confirm-color"]: "#272a30",
       modelValue: $data.careerSelectorShow
     })
   }) : {}, {
@@ -359,7 +359,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       mode: "selector",
       range: $data.MbtiData,
       ["default-selector"]: $data.mbtiSelectorDefaultSelect,
-      ["confirm-color"]: "#333",
+      ["confirm-color"]: "#272a30",
       modelValue: $data.mbtiSelectorShow
     })
   } : {}, {

@@ -17,9 +17,9 @@ const _sfc_main = {
         address: void 0,
         // 活动地址
         signUpDeadline: void 0,
-        // 报名截止
+        // 报名截止时间
         exitDeadline: void 0,
-        // 退出截止
+        // 退出截止时间
         phone: void 0,
         // 负责人联系电话
         groupChatQrcode: void 0
@@ -29,12 +29,17 @@ const _sfc_main = {
       signUpConfigList: [{ id: Date.now(), count: void 0, price: void 0 }],
       rules: {
         title: [{ required: true, message: "请输入活动标题" }],
-        content: [{ required: true, message: "请输入活动内容" }]
-      }
+        content: [{ required: true, message: "请输入活动内容" }],
+        startTime: [{ required: true, message: "请选择活动开始时间" }],
+        endTime: [{ required: true, message: "请选择活动结束时间" }]
+      },
+      tempTimeField: void 0,
+      // 时间选择器要存取的字段
+      timerPickerShow: false
     };
   },
   onReady() {
-    this.$refs.form1.setRules(this.rules);
+    this.$refs.form.setRules(this.rules);
   },
   methods: {
     uploadSuccess(data) {
@@ -59,10 +64,25 @@ const _sfc_main = {
     deleteSignUpGroup(index) {
       this.signUpConfigList.splice(index, 1);
     },
+    selectAddress() {
+      console.log(1);
+      common_vendor.index.navigateTo({
+        url: "/pages/common/location"
+      });
+    },
+    selectTime(field) {
+      this.tempTimeField = field;
+      this.timerPickerShow = true;
+    },
+    timePickerConfirm(val) {
+      this.form[this.tempTimeField] = `${val.year}-${val.month}-${val.day} ${val.hour}:${val.minute}`;
+    },
+    saveDraft() {
+    },
     submit() {
       const re = this.$refs.uploader.upload();
       console.log(re);
-      this.$refs.form1.validate((valid) => {
+      this.$refs.form.validate((valid) => {
         console.log(valid);
         if (valid) {
           common_vendor.index.showToast({
@@ -80,15 +100,17 @@ if (!Array) {
   const _easycom_u_upload2 = common_vendor.resolveComponent("u-upload");
   const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
   const _easycom_u_form2 = common_vendor.resolveComponent("u-form");
-  (_easycom_u_input2 + _easycom_u_form_item2 + _easycom_u_upload2 + _easycom_uni_icons2 + _easycom_u_form2)();
+  const _easycom_u_picker2 = common_vendor.resolveComponent("u-picker");
+  (_easycom_u_input2 + _easycom_u_form_item2 + _easycom_u_upload2 + _easycom_uni_icons2 + _easycom_u_form2 + _easycom_u_picker2)();
 }
 const _easycom_u_input = () => "../../uni_modules/vk-uview-ui/components/u-input/u-input.js";
 const _easycom_u_form_item = () => "../../uni_modules/vk-uview-ui/components/u-form-item/u-form-item.js";
 const _easycom_u_upload = () => "../../uni_modules/vk-uview-ui/components/u-upload/u-upload.js";
 const _easycom_uni_icons = () => "../../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
 const _easycom_u_form = () => "../../uni_modules/vk-uview-ui/components/u-form/u-form.js";
+const _easycom_u_picker = () => "../../uni_modules/vk-uview-ui/components/u-picker/u-picker.js";
 if (!Math) {
-  (_easycom_u_input + _easycom_u_form_item + _easycom_u_upload + _easycom_uni_icons + _easycom_u_form)();
+  (_easycom_u_input + _easycom_u_form_item + _easycom_u_upload + _easycom_uni_icons + _easycom_u_form + _easycom_u_picker)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
@@ -134,76 +156,64 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       label: "",
       ["border-bottom"]: false
     }),
-    p: common_vendor.o(($event) => $data.form.startTime = $event),
-    q: common_vendor.p({
+    p: common_vendor.o(($event) => $options.selectTime("startTime")),
+    q: common_vendor.o(($event) => $data.form.startTime = $event),
+    r: common_vendor.p({
       ["input-align"]: "right",
       disabled: true,
       placeholder: "请选择",
       modelValue: $data.form.startTime
     }),
-    r: common_vendor.p({
+    s: common_vendor.p({
       type: "forward",
       size: "30rpx",
       color: "#c6c6c6"
     }),
-    s: common_vendor.p({
+    t: common_vendor.p({
       label: "活动开始时间",
       prop: "startTime"
     }),
-    t: common_vendor.o(($event) => $data.form.endTime = $event),
-    v: common_vendor.p({
+    v: common_vendor.o(($event) => $options.selectTime("endTime")),
+    w: common_vendor.o(($event) => $data.form.endTime = $event),
+    x: common_vendor.p({
       ["input-align"]: "right",
       disabled: true,
       placeholder: "请选择",
       modelValue: $data.form.endTime
     }),
-    w: common_vendor.p({
+    y: common_vendor.p({
       type: "forward",
       size: "30rpx",
       color: "#c6c6c6"
     }),
-    x: common_vendor.p({
+    z: common_vendor.p({
       label: "活动结束时间",
       prop: "endTime"
     }),
-    y: common_vendor.o(($event) => $data.form.address = $event),
-    z: common_vendor.p({
+    A: common_vendor.o($options.selectAddress),
+    B: common_vendor.o(($event) => $data.form.address = $event),
+    C: common_vendor.p({
       ["input-align"]: "right",
       disabled: true,
       placeholder: "请选择",
       modelValue: $data.form.address
     }),
-    A: common_vendor.p({
+    D: common_vendor.p({
       type: "location",
       size: "36rpx",
       color: "#c6c6c6"
     }),
-    B: common_vendor.p({
+    E: common_vendor.p({
       label: "活动地点",
       prop: "address"
     }),
-    C: common_vendor.o(($event) => $data.form.signUpDeadline = $event),
-    D: common_vendor.p({
-      ["input-align"]: "right",
-      disabled: true,
-      placeholder: "请选择",
-      modelValue: $data.form.signUpDeadline
-    }),
-    E: common_vendor.p({
-      type: "forward",
-      size: "30rpx",
-      color: "#c6c6c6"
-    }),
-    F: common_vendor.p({
-      label: "报名截止时间",
-      prop: "signUpDeadline"
-    }),
-    G: common_vendor.o(($event) => $data.form.exitDeadline = $event),
+    F: common_vendor.o(($event) => $options.selectTime("signUpDeadline")),
+    G: common_vendor.o(($event) => $data.form.signUpDeadline = $event),
     H: common_vendor.p({
       ["input-align"]: "right",
       disabled: true,
       placeholder: "请选择",
-      modelValue: $data.form.exitDeadline
+      modelValue: $data.form.signUpDeadline
     }),
     I: common_vendor.p({
       type: "forward",
@@ -211,11 +221,28 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       color: "#c6c6c6"
     }),
     J: common_vendor.p({
+      label: "报名截止时间",
+      prop: "signUpDeadline"
+    }),
+    K: common_vendor.o(($event) => $options.selectTime("exitDeadline")),
+    L: common_vendor.o(($event) => $data.form.exitDeadline = $event),
+    M: common_vendor.p({
+      ["input-align"]: "right",
+      disabled: true,
+      placeholder: "请选择",
+      modelValue: $data.form.exitDeadline
+    }),
+    N: common_vendor.p({
+      type: "forward",
+      size: "30rpx",
+      color: "#c6c6c6"
+    }),
+    O: common_vendor.p({
       label: "退出截止时间",
       prop: "exitDeadline",
       ["border-bottom"]: false
     }),
-    K: common_vendor.f($data.signUpConfigList, (item, index, i0) => {
+    P: common_vendor.f($data.signUpConfigList, (item, index, i0) => {
       return common_vendor.e($data.signUpConfigList.length > 1 ? {
         a: common_vendor.t(index + 1),
         b: "819605c9-22-" + i0 + ",819605c9-0",
@@ -259,45 +286,61 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         s: item.id
       });
     }),
-    L: $data.signUpConfigList.length > 1,
-    M: common_vendor.p({
+    Q: $data.signUpConfigList.length > 1,
+    R: common_vendor.p({
       label: "活动人数(人)"
     }),
-    N: common_vendor.p({
+    S: common_vendor.p({
       ["label-width"]: "180"
     }),
-    O: common_vendor.o(($event) => $data.form.phone = $event),
-    P: common_vendor.p({
+    T: common_vendor.o(($event) => $data.form.phone = $event),
+    U: common_vendor.p({
       ["input-align"]: "right",
       placeholder: "请输入电话号码",
       modelValue: $data.form.phone
     }),
-    Q: common_vendor.p({
+    V: common_vendor.p({
       label: "联系电话",
       prop: "phone"
     }),
-    R: common_vendor.o(($event) => $data.form.groupChatQrcode = $event),
-    S: common_vendor.p({
+    W: common_vendor.o(($event) => $data.form.groupChatQrcode = $event),
+    X: common_vendor.p({
       ["input-align"]: "right",
       disabled: true,
       placeholder: "请选择",
       modelValue: $data.form.groupChatQrcode
     }),
-    T: common_vendor.p({
+    Y: common_vendor.p({
       type: "forward",
       size: "30rpx",
       color: "#c6c6c6"
     }),
-    U: common_vendor.p({
+    Z: common_vendor.p({
       label: "群聊二维码",
       prop: "groupChatQrcode",
       ["border-bottom"]: false
     }),
-    V: common_vendor.sr("form1", "819605c9-0"),
-    W: common_vendor.p({
+    aa: common_vendor.sr("form", "819605c9-0"),
+    ab: common_vendor.p({
       model: $data.form,
       errorType: ["toast"],
       ["label-width"]: 180
+    }),
+    ac: common_vendor.o((...args) => $options.submit && $options.submit(...args)),
+    ad: common_vendor.o($options.timePickerConfirm),
+    ae: common_vendor.o(($event) => $data.timerPickerShow = $event),
+    af: common_vendor.p({
+      mode: "time",
+      params: {
+        year: true,
+        month: true,
+        day: true,
+        hour: true,
+        minute: true,
+        second: false
+      },
+      ["confirm-color"]: "#272a30",
+      modelValue: $data.timerPickerShow
     })
   };
 }

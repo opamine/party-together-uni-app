@@ -70,7 +70,7 @@
           v-model="regionSelectorShow"
           mode="region"
           :default-region="value"
-          confirm-color="#333"
+          confirm-color="#272a30"
           @confirm="regionSelectConfirm"
         ></u-picker>
       </view>
@@ -101,7 +101,7 @@
           mode="multiSelector"
           :range="careerData"
           :default-selector="careerSelectorDefaultSelect"
-          confirm-color="#333"
+          confirm-color="#272a30"
           @columnchange="careerColumnChange"
           @confirm="careerSelectConfirm"
         ></u-picker>
@@ -115,7 +115,7 @@
           mode="selector"
           :range="MbtiData"
           :default-selector="mbtiSelectorDefaultSelect"
-          confirm-color="#333"
+          confirm-color="#272a30"
           @confirm="mbtiSelectConfirm"
         ></u-picker>
       </view>

@@ -1,7 +1,7 @@
 <template>
   <view class="page-container">
     <view class="form-container">
-      <u-form :model="form" ref="form1" :errorType="['toast']" :label-width="180">
+      <u-form :model="form" ref="form" :errorType="['toast']" :label-width="180">
         <view class="base-form-container card">
           <u-form-item label="" prop="title">
             <u-input v-model="form.title" placeholder="活动标题" maxlength="20" />
@@ -43,6 +43,7 @@
               input-align="right"
               :disabled="true"
               placeholder="请选择"
+              @click="selectTime('startTime')"
             />
             <template v-slot:right
               ><uni-icons type="forward" size="30rpx" color="#c6c6c6"></uni-icons
@@ -54,6 +55,7 @@
               input-align="right"
               :disabled="true"
               placeholder="请选择"
+              @click="selectTime('endTime')"
             />
             <template v-slot:right
               ><uni-icons type="forward" size="30rpx" color="#c6c6c6"></uni-icons
@@ -65,6 +67,7 @@
               input-align="right"
               :disabled="true"
               placeholder="请选择"
+              @click="selectAddress"
             />
             <template v-slot:right
               ><uni-icons type="location" size="36rpx" color="#c6c6c6"></uni-icons
@@ -76,6 +79,7 @@
               input-align="right"
               :disabled="true"
               placeholder="请选择"
+              @click="selectTime('signUpDeadline')"
             />
             <template v-slot:right
               ><uni-icons type="forward" size="30rpx" color="#c6c6c6"></uni-icons
@@ -87,12 +91,13 @@
               input-align="right"
               :disabled="true"
               placeholder="请选择"
+              @click="selectTime('exitDeadline')"
             />
             <template v-slot:right
               ><uni-icons type="forward" size="30rpx" color="#c6c6c6"></uni-icons
             ></template>
           </u-form-item>
-          <view style="margin-top: -20rpx; font-size: 24rpx; color: #646464"
+          <view style="padding-bottom: 20rpx; font-size: 24rpx; color: #646464"
             >截止时间后，用户无法退款和退出活动</view
           >
         </view>
@@ -162,8 +167,22 @@
     </view>
     <view class="action-container">
       <view class="draft-button">存草稿</view>
-      <view class="primary-button">发布</view>
+      <view class="primary-button" @click="submit">发布</view>
     </view>
+    <u-picker
+      mode="time"
+      v-model="timerPickerShow"
+      :params="{
+        year: true,
+        month: true,
+        day: true,
+        hour: true,
+        minute: true,
+        second: false,
+      }"
+      confirm-color="#272a30"
+      @confirm="timePickerConfirm"
+    ></u-picker>
   </view>
 </template>
 
@@ -178,8 +197,8 @@
           startTime: undefined, // 活动开始时间
           endTime: undefined, // 活动结束时间
           address: undefined, // 活动地址
-          signUpDeadline: undefined, // 报名截止
-          exitDeadline: undefined, // 退出截止
+          signUpDeadline: undefined, // 报名截止时间
+          exitDeadline: undefined, // 退出截止时间
           phone: undefined, // 负责人联系电话
           groupChatQrcode: undefined, // 群聊二维码图片
         },
@@ -188,11 +207,15 @@
         rules: {
           title: [{ required: true, message: '请输入活动标题' }],
           content: [{ required: true, message: '请输入活动内容' }],
+          startTime: [{ required: true, message: '请选择活动开始时间' }],
+          endTime: [{ required: true, message: '请选择活动结束时间' }],
         },
+        tempTimeField: undefined, // 时间选择器要存取的字段
+        timerPickerShow: false,
       };
     },
     onReady() {
-      this.$refs.form1.setRules(this.rules);
+      this.$refs.form.setRules(this.rules);
     },
     methods: {
       uploadSuccess(data) {
@@ -217,10 +240,26 @@
       deleteSignUpGroup(index) {
         this.signUpConfigList.splice(index, 1);
       },
+      selectAddress() {
+        console.log(1);
+        uni.navigateTo({
+          url: '/pages/common/location',
+        });
+      },
+      selectTime(field) {
+        this.tempTimeField = field;
+        this.timerPickerShow = true;
+      },
+      timePickerConfirm(val) {
+        this.form[
+          this.tempTimeField
+        ] = `${val.year}-${val.month}-${val.day} ${val.hour}:${val.minute}`;
+      },
+      saveDraft() {},
       submit() {
         const re = this.$refs.uploader.upload();
         console.log(re);
-        this.$refs.form1.validate((valid) => {
+        this.$refs.form.validate((valid) => {
           console.log(valid);
           if (valid) {
             uni.showToast({

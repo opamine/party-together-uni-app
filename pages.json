@@ -77,6 +77,16 @@
         "enablePullDownRefresh": false,
         "disableScroll": true
       }
+    },
+    {
+      "path": "pages/common/location",
+      "style": {
+        "navigationBarTitleText": "位置获取",
+        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#ffffff",
+        "enablePullDownRefresh": false,
+        "disableScroll": true
+      }
     }
   ],
   "tabBar": {

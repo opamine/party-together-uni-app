@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "位置获取",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#ffffff",
+  "enablePullDownRefresh": false,
+  "disableScroll": true,
+  "usingComponents": {
+    "u-input": "../../uni_modules/vk-uview-ui/components/u-input/u-input"
+  }
+}

@@ -11,6 +11,7 @@ if (!Math) {
   "./pages/personal/editField.js";
   "./pages/activity/activityRelease.js";
   "./pages/dynamic/dynamicRelease.js";
+  "./pages/common/location.js";
 }
 const BaseUserInfoFieldsList = [
   { fieldName: "账号", fieldKey: "account" },

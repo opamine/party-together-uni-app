@@ -7,7 +7,8 @@
     "pages/personal/edit",
     "pages/personal/editField",
     "pages/activity/activityRelease",
-    "pages/dynamic/dynamicRelease"
+    "pages/dynamic/dynamicRelease",
+    "pages/common/location"
   ],
   "window": {
     "navigationBarTextStyle": "white",
