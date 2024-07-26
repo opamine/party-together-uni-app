@@ -17,6 +17,6 @@ iconfont.css 的首行代码需要修改这样：
 
 H5 中使用 https://apis.map.qq.com/ws/geocoder/v1 接口进行逆地址解析
 
-微信小程序中使用 qqmap-wx-jssdk 中的 reverseGeocoder 进行逆地址解析，注意：需要再腾讯地图后台授权小程序 APP ID，需要在微信公众平台配置 request 白名单 https://apis.map.qq.com
+微信小程序中使用 qqmap-wx-jssdk 中的 reverseGeocoder 进行逆地址解析，注意：需要在腾讯地图后台授权小程序 APP ID，需要在微信公众平台配置 request 白名单 https://apis.map.qq.com
 
 具体文档请见 https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/jsSdkOverview
