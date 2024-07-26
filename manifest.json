@@ -91,7 +91,8 @@
             "scope.userLocation" : {
                 "desc" : "获取位置信息供用户使用"
             }
-        }
+        },
+        "requiredPrivateInfos" : [ "getLocation" ]
     },
     "mp-alipay" : {
         "usingComponents" : true

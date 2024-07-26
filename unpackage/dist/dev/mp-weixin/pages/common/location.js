@@ -1,6 +1,5 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
-const utils_qqmapWxJssdk_min = require("../../utils/qqmap-wx-jssdk.min.js");
 const common_assets = require("../../common/assets.js");
 function setMorKm(m) {
   var n = "";
@@ -23,7 +22,7 @@ const _sfc_main = {
       latitude: 30.242448,
       current_longitude: 120.213752,
       current_latitude: 30.242448,
-      key: "W4WBZ-TUD65-IDAIR-QPM36-HMFQ5-CGBZP",
+      key: "JGABZ-MZHWI-IALG6-U4OF5-TTZBS-CGB4O",
       mapCtx: null,
       qqmapsdk: null,
       keyword: "",
@@ -34,16 +33,13 @@ const _sfc_main = {
     };
   },
   onLoad() {
-    setTimeout(() => {
-      this.qqmapsdk = new utils_qqmapWxJssdk_min.QQMapWX({
-        key: this.key
-      });
-      this.currentLocation();
-    }, 100);
+    this.currentLocation();
   },
   onReady() {
   },
   methods: {
+    innerJsonp(url, callback, callbackname) {
+    },
     regionchange(e) {
       let isEnd = e.type == "end";
       isEnd = e.type == "end" && (e.causedBy == "scale" || e.causedBy == "drag");
@@ -63,18 +59,20 @@ const _sfc_main = {
         });
       }
     },
+    // 逆地址解析 小程序
     getAddress(lng, lat) {
-      this.qqmapsdk.reverseGeocoder({
-        location: {
-          latitude: lat,
-          longitude: lng
+      common_vendor.index.request({
+        url: "https://apis.map.qq.com/ws/geocoder/v1",
+        data: {
+          key: this.key,
+          location: `${lat},${lng}`
         },
         success: (res) => {
-          this.address = res.result.formatted_addresses.recommend;
+          var _a, _b, _c;
+          this.address = (_c = (_b = (_a = res == null ? void 0 : res.data) == null ? void 0 : _a.result) == null ? void 0 : _b.formatted_addresses) == null ? void 0 : _c.recommend;
           this.getNearbyAddressList();
         },
         fail: () => {
-          this.address = "逆地址解析失败";
           common_vendor.index.showToast({
             title: "逆地址解析失败",
             icon: "none"
@@ -82,9 +80,7 @@ const _sfc_main = {
         }
       });
     },
-    innerJsonp(url, callback, callbackname) {
-    },
-    //根据经纬度对象获取位置详细信息
+    // 逆地址解析 h5
     getAddressH5(lng, lat) {
       let url = `https://apis.map.qq.com/ws/geocoder/v1/?location=${lat + "," + lng}&key=${this.key}&get_poi=0&callbackName=QQmap&output=jsonp&coord_type=5`;
       this.innerJsonp(
@@ -92,7 +88,7 @@ const _sfc_main = {
         (res) => {
           if (res.status === 0) {
             this.address = res.result.formatted_addresses.recommend;
-            this.getNearbyAddressList();
+            this.getNearbyAddressListH5();
           } else {
             this.address = "逆地址解析失败";
             common_vendor.index.showToast({
@@ -104,7 +100,9 @@ const _sfc_main = {
         "QQmap"
       );
     },
-    getNearbyAddressList(callback) {
+    // 获取附近地址 小程序
+    getNearbyAddressList() {
+      this.selectedNearbyAddressId = void 0;
       common_vendor.index.request({
         url: "https://apis.map.qq.com/ws/place/v1/search",
         data: {
@@ -116,8 +114,6 @@ const _sfc_main = {
         success: (res) => {
           var _a;
           this.nearbyAddressList = ((_a = res.data) == null ? void 0 : _a.data) ?? [];
-          if (callback)
-            callback();
         },
         fail: () => {
           common_vendor.index.showToast({
@@ -127,22 +123,30 @@ const _sfc_main = {
         }
       });
     },
-    handleSearchNearbyAddress() {
+    // 获取附近地址 h5
+    getNearbyAddressListH5() {
       this.selectedNearbyAddressId = void 0;
-      if (this.keyword) {
-        const callback = () => {
-          const firstMatchAddress = this.nearbyAddressList[0];
-          if (firstMatchAddress) {
-            const {
-              title,
-              location: { lat: latitude, lng: longitude }
-            } = firstMatchAddress;
-            this.address = title;
-            this.longitude = longitude;
-            this.latitude = latitude;
+      const url = `https://apis.map.qq.com/ws/place/v1/search/?keyword=${encodeURI(
+        this.keyword || this.address
+      )}&key=${this.key}&boundary=${"nearby(" + this.current_latitude + "," + this.current_longitude + ",1000)"}&callbackName=QQmap&output=jsonp`;
+      this.innerJsonp(
+        url,
+        (res) => {
+          if (res.status === 0) {
+            this.nearbyAddressList = res.data ?? [];
+          } else {
+            common_vendor.index.showToast({
+              title: "地址搜索失败",
+              icon: "none"
+            });
           }
-        };
-        this.getNearbyAddressList(callback);
+        },
+        "QQmap"
+      );
+    },
+    handleSearchNearbyAddress() {
+      if (this.keyword) {
+        this.getNearbyAddressList();
       } else {
         this.currentLocation();
       }
@@ -173,7 +177,6 @@ const _sfc_main = {
             title: "获取当前位置信息失败",
             icon: "none"
           });
-          this.getAddress(this.longitude, this.latitude);
         }
       });
     }

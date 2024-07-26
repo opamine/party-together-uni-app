@@ -11,8 +11,12 @@ iconfont.css 的首行代码需要修改这样：
 
 2. 在 App.vue 文件中引入 iconfont.css，引入方式为：@import './static/iconfont/iconfont.css';
 
-3. iconfont 使用方式为：<uni-icons custom-prefix="iconfont" type="icon-yuyuejilu" size="20" color="#ffffff" />
+3. iconfont 使用方式为：`<uni-icons custom-prefix="iconfont" type="icon-yuyuejilu" size="20" color="#ffffff" />`
 
-### 调用腾讯地图地址搜索注意事项
+### 调用腾讯地图逆地址解析 API 和 搜索地点 注意事项
 
-在文件 pages/common/location.vue 的第 202 行，在 h5 端存在跨域的情况，需要后端写一个地址搜索接口，来调用腾讯地图的 API.
+H5 中使用 https://apis.map.qq.com/ws/geocoder/v1 接口进行逆地址解析
+
+微信小程序中使用 qqmap-wx-jssdk 中的 reverseGeocoder 进行逆地址解析，注意：需要再腾讯地图后台授权小程序 APP ID，需要在微信公众平台配置 request 白名单 https://apis.map.qq.com
+
+具体文档请见 https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/jsSdkOverview
