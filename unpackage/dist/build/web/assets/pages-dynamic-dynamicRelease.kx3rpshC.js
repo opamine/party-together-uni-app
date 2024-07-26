@@ -1,0 +1,1 @@
+import{a as e,w as r,k as s,o as a,h as o}from"./index-dWdSE1tu.js";import{_ as t}from"./_plugin-vue_export-helper.BCo6x5W8.js";const n=t({},[["render",function(t,n){const u=s;return a(),e(u,null,{default:r((()=>[o("动态发布页")])),_:1})}]]);export{n as default};

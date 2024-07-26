@@ -88,9 +88,9 @@ const _sfc_main = {
         (res) => {
           if (res.status === 0) {
             this.address = res.result.formatted_addresses.recommend;
+            this.getNearbyAddressList();
           } else {
             this.address = "逆地址解析失败";
-            this.getNearbyAddressList();
           }
         },
         "QQmap"
@@ -154,7 +154,8 @@ const _sfc_main = {
           this.current_longitude = res.longitude;
           this.getAddress(res.longitude, res.latitude);
         },
-        fail: () => {
+        fail: (err) => {
+          console.log(err);
           common_vendor.index.showToast({
             title: "获取当前位置信息失败",
             icon: "none"
