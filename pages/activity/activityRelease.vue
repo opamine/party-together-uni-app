@@ -241,7 +241,6 @@
         this.signUpConfigList.splice(index, 1);
       },
       selectAddress() {
-        console.log(1);
         uni.navigateTo({
           url: '/pages/common/location',
         });
@@ -258,7 +257,6 @@
       saveDraft() {},
       submit() {
         const re = this.$refs.uploader.upload();
-        console.log(re);
         this.$refs.form.validate((valid) => {
           console.log(valid);
           if (valid) {

@@ -73,8 +73,12 @@ const _sfc_main = {
           this.address = res.result.formatted_addresses.recommend;
           this.getNearbyAddressList();
         },
-        fail: (res) => {
+        fail: () => {
           this.address = "逆地址解析失败";
+          common_vendor.index.showToast({
+            title: "逆地址解析失败",
+            icon: "none"
+          });
         }
       });
     },
@@ -91,6 +95,10 @@ const _sfc_main = {
             this.getNearbyAddressList();
           } else {
             this.address = "逆地址解析失败";
+            common_vendor.index.showToast({
+              title: "逆地址解析失败",
+              icon: "none"
+            });
           }
         },
         "QQmap"
@@ -99,7 +107,6 @@ const _sfc_main = {
     getNearbyAddressList(callback) {
       common_vendor.index.request({
         url: "https://apis.map.qq.com/ws/place/v1/search",
-        //仅为示例，并非真实接口地址。
         data: {
           keyword: this.keyword || this.address,
           key: this.key,
@@ -111,6 +118,12 @@ const _sfc_main = {
           this.nearbyAddressList = ((_a = res.data) == null ? void 0 : _a.data) ?? [];
           if (callback)
             callback();
+        },
+        fail: () => {
+          common_vendor.index.showToast({
+            title: "地址搜索失败",
+            icon: "none"
+          });
         }
       });
     },
@@ -160,6 +173,7 @@ const _sfc_main = {
             title: "获取当前位置信息失败",
             icon: "none"
           });
+          this.getAddress(this.longitude, this.latitude);
         }
       });
     }

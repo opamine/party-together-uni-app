@@ -65,7 +65,6 @@ const _sfc_main = {
       this.signUpConfigList.splice(index, 1);
     },
     selectAddress() {
-      console.log(1);
       common_vendor.index.navigateTo({
         url: "/pages/common/location"
       });
@@ -80,8 +79,7 @@ const _sfc_main = {
     saveDraft() {
     },
     submit() {
-      const re = this.$refs.uploader.upload();
-      console.log(re);
+      this.$refs.uploader.upload();
       this.$refs.form.validate((valid) => {
         console.log(valid);
         if (valid) {

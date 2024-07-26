@@ -166,8 +166,12 @@
             this.address = res.result.formatted_addresses.recommend;
             this.getNearbyAddressList();
           },
-          fail: (res) => {
+          fail: () => {
             this.address = '逆地址解析失败';
+            uni.showToast({
+              title: '逆地址解析失败',
+              icon: 'none',
+            });
           },
         });
       },
@@ -194,6 +198,10 @@
               this.getNearbyAddressList();
             } else {
               this.address = '逆地址解析失败';
+              uni.showToast({
+                title: '逆地址解析失败',
+                icon: 'none',
+              });
             }
           },
           'QQmap'
@@ -201,7 +209,7 @@
       },
       getNearbyAddressList(callback) {
         uni.request({
-          url: 'https://apis.map.qq.com/ws/place/v1/search', //仅为示例，并非真实接口地址。
+          url: 'https://apis.map.qq.com/ws/place/v1/search',
           data: {
             keyword: this.keyword || this.address,
             key: this.key,
@@ -212,6 +220,12 @@
           success: (res) => {
             this.nearbyAddressList = res.data?.data ?? [];
             if (callback) callback();
+          },
+          fail: () => {
+            uni.showToast({
+              title: '地址搜索失败',
+              icon: 'none',
+            });
           },
         });
       },
@@ -271,6 +285,13 @@
               title: '获取当前位置信息失败',
               icon: 'none',
             });
+            // #ifdef H5
+            this.getAddressH5(this.longitude, this.latitude);
+            // #endif
+
+            // #ifdef MP
+            this.getAddress(this.longitude, this.latitude);
+            // #endif
           },
         });
       },
