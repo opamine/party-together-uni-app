@@ -191,9 +191,9 @@
           (res) => {
             if (res.status === 0) {
               this.address = res.result.formatted_addresses.recommend;
+              this.getNearbyAddressList();
             } else {
               this.address = '逆地址解析失败';
-              this.getNearbyAddressList();
             }
           },
           'QQmap'
@@ -265,7 +265,8 @@
             this.getAddress(res.longitude, res.latitude);
             // #endif
           },
-          fail: () => {
+          fail: (err) => {
+            console.log(err);
             uni.showToast({
               title: '获取当前位置信息失败',
               icon: 'none',

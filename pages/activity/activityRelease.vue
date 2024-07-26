@@ -41,7 +41,6 @@
             <u-input
               v-model="form.startTime"
               input-align="right"
-              :disabled="true"
               placeholder="请选择"
               @click="selectTime('startTime')"
             />
@@ -53,7 +52,6 @@
             <u-input
               v-model="form.endTime"
               input-align="right"
-              :disabled="true"
               placeholder="请选择"
               @click="selectTime('endTime')"
             />
@@ -65,7 +63,6 @@
             <u-input
               v-model="form.address"
               input-align="right"
-              :disabled="true"
               placeholder="请选择"
               @click="selectAddress"
             />
@@ -77,7 +74,6 @@
             <u-input
               v-model="form.signUpDeadline"
               input-align="right"
-              :disabled="true"
               placeholder="请选择"
               @click="selectTime('signUpDeadline')"
             />
@@ -89,7 +85,6 @@
             <u-input
               v-model="form.exitDeadline"
               input-align="right"
-              :disabled="true"
               placeholder="请选择"
               @click="selectTime('exitDeadline')"
             />
@@ -155,7 +150,6 @@
             <u-input
               v-model="form.groupChatQrcode"
               input-align="right"
-              :disabled="true"
               placeholder="请选择"
             />
             <template v-slot:right
