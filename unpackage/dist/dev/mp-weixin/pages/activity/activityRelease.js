@@ -16,6 +16,10 @@ const _sfc_main = {
         // 活动结束时间
         address: void 0,
         // 活动地址
+        longitude: void 0,
+        // 活动地址经度
+        latitude: void 0,
+        // 活动地址纬度
         signUpDeadline: void 0,
         // 报名截止时间
         exitDeadline: void 0,
@@ -31,7 +35,11 @@ const _sfc_main = {
         title: [{ required: true, message: "请输入活动标题" }],
         content: [{ required: true, message: "请输入活动内容" }],
         startTime: [{ required: true, message: "请选择活动开始时间" }],
-        endTime: [{ required: true, message: "请选择活动结束时间" }]
+        endTime: [{ required: true, message: "请选择活动结束时间" }],
+        address: [{ required: true, message: "请选择活动地点" }],
+        signUpDeadline: [{ required: true, message: "请选择报名截止时间" }],
+        exitDeadline: [{ required: true, message: "请选择退出截止时间" }],
+        phone: [{ required: true, message: "请输入负责人联系电话" }]
       },
       tempTimeField: void 0,
       // 时间选择器要存取的字段
@@ -42,15 +50,6 @@ const _sfc_main = {
     this.$refs.form.setRules(this.rules);
   },
   methods: {
-    uploadSuccess(data) {
-      console.log(data);
-    },
-    uploadError(res) {
-      console.log(res);
-    },
-    uploadAllSuccess(lists) {
-      console.log(lists);
-    },
     changeCycle(val) {
       this.form.cycle = val;
     },
@@ -66,7 +65,15 @@ const _sfc_main = {
     },
     selectAddress() {
       common_vendor.index.navigateTo({
-        url: "/pages/common/location"
+        url: "/pages/common/location",
+        events: {
+          acceptDataFromLocationPage: (data) => {
+            const { address, longitude, latitude } = data;
+            this.form.address = address;
+            this.form.longitude = longitude;
+            this.form.latitude = latitude;
+          }
+        }
       });
     },
     selectTime(field) {
@@ -87,6 +94,10 @@ const _sfc_main = {
             icon: "none",
             title: "表单验证通过"
           });
+          const files = this.$refs.uploader.lists.filter((val) => {
+            return val.progress == 100;
+          });
+          console.log(files);
         }
       });
     }
@@ -138,109 +149,105 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       prop: "content"
     }),
     j: common_vendor.sr("uploader", "819605c9-6,819605c9-5"),
-    k: common_vendor.o($options.uploadSuccess),
-    l: common_vendor.o($options.uploadError),
-    m: common_vendor.o($options.uploadAllSuccess),
-    n: common_vendor.p({
+    k: common_vendor.p({
       action: "https://ramses.cn/api/upload/file",
       header: {
         Authorization: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjU2YjNhMzg1YjY1MjI3ZjBiYmFlODcwIiwiaWF0IjoxNzIxMzc0NjA1LCJleHAiOjE3MjE2MzM4MDV9.O6g4ZqUKVA_ig00lIXtXfeBHeXCqa66NT8XzKV3bRkypOPX9FGm-UqZPGtxUoWo9zVK64Z2dPrDyK-6DNkMrRt1JGOoY1b60jtrAvLt7c7eXSbC6TZbvVHZ36xSEm9o21l9DytSv4eKvGehmiGyM1JHyRiHj70Mqez9qZE2ksLP7b3SHqzbrFNI00yqY3QwwDeHz8D5rDPR5ko4NF1Inm5OE4Mq27gDeSmaKm5zVc0jCROvr-2BOY_8fRz3iolBiv1g6gXbn5newGWoPZufRx_QGwZlFUavt0gvqLmnJdATw8bOBR-9BmWBoB82BylUL5bGqzGbv89RvhWLOwwq83g"
       },
-      ["auto-upload"]: false,
       ["max-size"]: 30 * 1024 * 1024,
       ["max-count"]: 9
     }),
-    o: common_vendor.p({
+    l: common_vendor.p({
       label: "",
       ["border-bottom"]: false
     }),
-    p: common_vendor.o(($event) => $options.selectTime("startTime")),
-    q: common_vendor.o(($event) => $data.form.startTime = $event),
-    r: common_vendor.p({
+    m: common_vendor.o(($event) => $options.selectTime("startTime")),
+    n: common_vendor.o(($event) => $data.form.startTime = $event),
+    o: common_vendor.p({
       ["input-align"]: "right",
       disabled: true,
       placeholder: "请选择",
       modelValue: $data.form.startTime
     }),
-    s: common_vendor.p({
+    p: common_vendor.p({
       type: "forward",
       size: "30rpx",
       color: "#c6c6c6"
     }),
-    t: common_vendor.p({
+    q: common_vendor.p({
       label: "活动开始时间",
       prop: "startTime"
     }),
-    v: common_vendor.o(($event) => $options.selectTime("endTime")),
-    w: common_vendor.o(($event) => $data.form.endTime = $event),
-    x: common_vendor.p({
+    r: common_vendor.o(($event) => $options.selectTime("endTime")),
+    s: common_vendor.o(($event) => $data.form.endTime = $event),
+    t: common_vendor.p({
       ["input-align"]: "right",
       disabled: true,
       placeholder: "请选择",
       modelValue: $data.form.endTime
     }),
-    y: common_vendor.p({
+    v: common_vendor.p({
       type: "forward",
       size: "30rpx",
       color: "#c6c6c6"
     }),
-    z: common_vendor.p({
+    w: common_vendor.p({
       label: "活动结束时间",
       prop: "endTime"
     }),
-    A: common_vendor.o($options.selectAddress),
-    B: common_vendor.o(($event) => $data.form.address = $event),
-    C: common_vendor.p({
+    x: common_vendor.o($options.selectAddress),
+    y: common_vendor.o(($event) => $data.form.address = $event),
+    z: common_vendor.p({
       ["input-align"]: "right",
       disabled: true,
       placeholder: "请选择",
       modelValue: $data.form.address
     }),
-    D: common_vendor.p({
+    A: common_vendor.p({
       type: "location",
       size: "36rpx",
       color: "#c6c6c6"
     }),
-    E: common_vendor.p({
+    B: common_vendor.p({
       label: "活动地点",
       prop: "address"
     }),
-    F: common_vendor.o(($event) => $options.selectTime("signUpDeadline")),
-    G: common_vendor.o(($event) => $data.form.signUpDeadline = $event),
-    H: common_vendor.p({
+    C: common_vendor.o(($event) => $options.selectTime("signUpDeadline")),
+    D: common_vendor.o(($event) => $data.form.signUpDeadline = $event),
+    E: common_vendor.p({
       ["input-align"]: "right",
       disabled: true,
       placeholder: "请选择",
       modelValue: $data.form.signUpDeadline
     }),
-    I: common_vendor.p({
+    F: common_vendor.p({
       type: "forward",
       size: "30rpx",
       color: "#c6c6c6"
     }),
-    J: common_vendor.p({
+    G: common_vendor.p({
       label: "报名截止时间",
       prop: "signUpDeadline"
     }),
-    K: common_vendor.o(($event) => $options.selectTime("exitDeadline")),
-    L: common_vendor.o(($event) => $data.form.exitDeadline = $event),
-    M: common_vendor.p({
+    H: common_vendor.o(($event) => $options.selectTime("exitDeadline")),
+    I: common_vendor.o(($event) => $data.form.exitDeadline = $event),
+    J: common_vendor.p({
       ["input-align"]: "right",
       disabled: true,
       placeholder: "请选择",
       modelValue: $data.form.exitDeadline
     }),
-    N: common_vendor.p({
+    K: common_vendor.p({
       type: "forward",
       size: "30rpx",
       color: "#c6c6c6"
     }),
-    O: common_vendor.p({
+    L: common_vendor.p({
       label: "退出截止时间",
       prop: "exitDeadline",
       ["border-bottom"]: false
     }),
-    P: common_vendor.f($data.signUpConfigList, (item, index, i0) => {
+    M: common_vendor.f($data.signUpConfigList, (item, index, i0) => {
       return common_vendor.e($data.signUpConfigList.length > 1 ? {
         a: common_vendor.t(index + 1),
         b: "819605c9-22-" + i0 + ",819605c9-0",
@@ -284,50 +291,47 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         s: item.id
       });
     }),
-    Q: $data.signUpConfigList.length > 1,
-    R: common_vendor.p({
+    N: $data.signUpConfigList.length > 1,
+    O: common_vendor.p({
       label: "活动人数(人)"
     }),
-    S: common_vendor.p({
+    P: common_vendor.p({
       ["label-width"]: "180"
     }),
-    T: common_vendor.o(($event) => $data.form.phone = $event),
-    U: common_vendor.p({
+    Q: common_vendor.o(($event) => $data.form.phone = $event),
+    R: common_vendor.p({
       ["input-align"]: "right",
       placeholder: "请输入电话号码",
       modelValue: $data.form.phone
     }),
-    V: common_vendor.p({
+    S: common_vendor.p({
       label: "联系电话",
       prop: "phone"
     }),
-    W: common_vendor.o(($event) => $data.form.groupChatQrcode = $event),
-    X: common_vendor.p({
-      ["input-align"]: "right",
-      disabled: true,
-      placeholder: "请选择",
-      modelValue: $data.form.groupChatQrcode
+    T: common_vendor.sr("uploader2", "819605c9-32,819605c9-31"),
+    U: common_vendor.p({
+      header: {
+        Authorization: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYRhIjoiNjYzY2U3ZWEyNmRmYWNjZmYxM2UxOTYyIiwiaWF0IjoxNzIzNjMxNDg3LCJleHAiOjE3MjM4OTA2ODd9.I6ug1obFT5PYD-2TWVu6DPdTlfzjH9TkfSp5bfm7nL3LGItGplb2MRnNHDbjLK4VWEVFgg_8z2QX6B1JSftc1KVXwvWxpelvX4jTHEKysxF5RctMnNR6C0kuCm_8pEg8gL31PGUdEhwpuye_zBUqPuLYAA0ZMKmOsOHiLHVKAwq06DFq6uKIs9uX4MtpEPjR2pptQgutlW7n8w6BwylwjFXlwQjVTJl1Wigw2nbRzD7mGXP7SHoPPBMF-uWQc01EUeRC7POpVGt7AAPiL74gIHX8huMQC9N8TuUzeHsoR1A0ww9HT8Jc_QKg_bpth6xYvY2uS-fDM0N4g9LO8HhZEw"
+      },
+      action: "https://ramses.cn/api/upload/file",
+      ["max-size"]: 30 * 1024 * 1024,
+      ["max-count"]: 1
     }),
-    Y: common_vendor.p({
-      type: "forward",
-      size: "30rpx",
-      color: "#c6c6c6"
-    }),
-    Z: common_vendor.p({
+    V: common_vendor.p({
       label: "群聊二维码",
       prop: "groupChatQrcode",
       ["border-bottom"]: false
     }),
-    aa: common_vendor.sr("form", "819605c9-0"),
-    ab: common_vendor.p({
+    W: common_vendor.sr("form", "819605c9-0"),
+    X: common_vendor.p({
       model: $data.form,
       errorType: ["toast"],
       ["label-width"]: 180
     }),
-    ac: common_vendor.o((...args) => $options.submit && $options.submit(...args)),
-    ad: common_vendor.o($options.timePickerConfirm),
-    ae: common_vendor.o(($event) => $data.timerPickerShow = $event),
-    af: common_vendor.p({
+    Y: common_vendor.o((...args) => $options.submit && $options.submit(...args)),
+    Z: common_vendor.o($options.timePickerConfirm),
+    aa: common_vendor.o(($event) => $data.timerPickerShow = $event),
+    ab: common_vendor.p({
       mode: "time",
       params: {
         year: true,

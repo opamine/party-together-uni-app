@@ -52,7 +52,7 @@
         </view>
       </view>
       <view class="btn-container">
-        <view class="custom-btn">确定</view>
+        <view class="custom-btn" @click="handleConfirmAddress">确定</view>
       </view>
     </view>
   </view>
@@ -296,6 +296,17 @@
             });
           },
         });
+      },
+      handleConfirmAddress() {
+        if (!this.selectedNearbyAddressId)
+          return uni.showToast({ icon: 'none', message: '请选择地址' });
+        const eventChannel = this.getOpenerEventChannel();
+        eventChannel.emit('acceptDataFromLocationPage', {
+          address: this.address,
+          longitude: this.longitude,
+          latitude: this.latitude,
+        });
+        uni.navigateBack();
       },
     },
   };

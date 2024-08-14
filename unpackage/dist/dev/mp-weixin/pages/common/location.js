@@ -179,6 +179,17 @@ const _sfc_main = {
           });
         }
       });
+    },
+    handleConfirmAddress() {
+      if (!this.selectedNearbyAddressId)
+        return common_vendor.index.showToast({ icon: "none", message: "请选择地址" });
+      const eventChannel = this.getOpenerEventChannel();
+      eventChannel.emit("acceptDataFromLocationPage", {
+        address: this.address,
+        longitude: this.longitude,
+        latitude: this.latitude
+      });
+      common_vendor.index.navigateBack();
     }
   }
 };
@@ -217,7 +228,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         e: common_vendor.n(item.id === $data.selectedNearbyAddressId ? "active" : ""),
         f: common_vendor.o(($event) => $options.handleSelectNearbyAddress(item), item.id)
       };
-    })
+    }),
+    l: common_vendor.o((...args) => $options.handleConfirmAddress && $options.handleConfirmAddress(...args))
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-77260e9c"]]);

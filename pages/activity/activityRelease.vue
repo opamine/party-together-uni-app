@@ -27,12 +27,8 @@
                 Authorization:
                   'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjU2YjNhMzg1YjY1MjI3ZjBiYmFlODcwIiwiaWF0IjoxNzIxMzc0NjA1LCJleHAiOjE3MjE2MzM4MDV9.O6g4ZqUKVA_ig00lIXtXfeBHeXCqa66NT8XzKV3bRkypOPX9FGm-UqZPGtxUoWo9zVK64Z2dPrDyK-6DNkMrRt1JGOoY1b60jtrAvLt7c7eXSbC6TZbvVHZ36xSEm9o21l9DytSv4eKvGehmiGyM1JHyRiHj70Mqez9qZE2ksLP7b3SHqzbrFNI00yqY3QwwDeHz8D5rDPR5ko4NF1Inm5OE4Mq27gDeSmaKm5zVc0jCROvr-2BOY_8fRz3iolBiv1g6gXbn5newGWoPZufRx_QGwZlFUavt0gvqLmnJdATw8bOBR-9BmWBoB82BylUL5bGqzGbv89RvhWLOwwq83g',
               }"
-              :auto-upload="false"
               :max-size="30 * 1024 * 1024"
               :max-count="9"
-              @on-success="uploadSuccess"
-              @on-error="uploadError"
-              @on-uploaded="uploadAllSuccess"
             ></u-upload>
           </u-form-item>
         </view>
@@ -152,15 +148,23 @@
             <u-input v-model="form.phone" input-align="right" placeholder="请输入电话号码" />
           </u-form-item>
           <u-form-item label="群聊二维码" prop="groupChatQrcode" :border-bottom="false">
-            <u-input
+            <!-- <u-input
               v-model="form.groupChatQrcode"
               input-align="right"
               :disabled="true"
               placeholder="请选择"
-            />
+            /> -->
             <template v-slot:right
-              ><uni-icons type="forward" size="30rpx" color="#c6c6c6"></uni-icons
-            ></template>
+              ><u-upload
+                ref="uploader2"
+                :header="{
+                  Authorization:
+                    'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYRhIjoiNjYzY2U3ZWEyNmRmYWNjZmYxM2UxOTYyIiwiaWF0IjoxNzIzNjMxNDg3LCJleHAiOjE3MjM4OTA2ODd9.I6ug1obFT5PYD-2TWVu6DPdTlfzjH9TkfSp5bfm7nL3LGItGplb2MRnNHDbjLK4VWEVFgg_8z2QX6B1JSftc1KVXwvWxpelvX4jTHEKysxF5RctMnNR6C0kuCm_8pEg8gL31PGUdEhwpuye_zBUqPuLYAA0ZMKmOsOHiLHVKAwq06DFq6uKIs9uX4MtpEPjR2pptQgutlW7n8w6BwylwjFXlwQjVTJl1Wigw2nbRzD7mGXP7SHoPPBMF-uWQc01EUeRC7POpVGt7AAPiL74gIHX8huMQC9N8TuUzeHsoR1A0ww9HT8Jc_QKg_bpth6xYvY2uS-fDM0N4g9LO8HhZEw',
+                }"
+                action="https://ramses.cn/api/upload/file"
+                :max-size="30 * 1024 * 1024"
+                :max-count="1"
+            /></template>
           </u-form-item>
         </view>
       </u-form>
@@ -197,6 +201,8 @@
           startTime: undefined, // 活动开始时间
           endTime: undefined, // 活动结束时间
           address: undefined, // 活动地址
+          longitude: undefined, // 活动地址经度
+          latitude: undefined, // 活动地址纬度
           signUpDeadline: undefined, // 报名截止时间
           exitDeadline: undefined, // 退出截止时间
           phone: undefined, // 负责人联系电话
@@ -209,6 +215,10 @@
           content: [{ required: true, message: '请输入活动内容' }],
           startTime: [{ required: true, message: '请选择活动开始时间' }],
           endTime: [{ required: true, message: '请选择活动结束时间' }],
+          address: [{ required: true, message: '请选择活动地点' }],
+          signUpDeadline: [{ required: true, message: '请选择报名截止时间' }],
+          exitDeadline: [{ required: true, message: '请选择退出截止时间' }],
+          phone: [{ required: true, message: '请输入负责人联系电话' }],
         },
         tempTimeField: undefined, // 时间选择器要存取的字段
         timerPickerShow: false,
@@ -218,15 +228,6 @@
       this.$refs.form.setRules(this.rules);
     },
     methods: {
-      uploadSuccess(data) {
-        console.log(data);
-      },
-      uploadError(res) {
-        console.log(res);
-      },
-      uploadAllSuccess(lists) {
-        console.log(lists);
-      },
       changeCycle(val) {
         this.form.cycle = val;
       },
@@ -243,6 +244,14 @@
       selectAddress() {
         uni.navigateTo({
           url: '/pages/common/location',
+          events: {
+            acceptDataFromLocationPage: (data) => {
+              const { address, longitude, latitude } = data;
+              this.form.address = address;
+              this.form.longitude = longitude;
+              this.form.latitude = latitude;
+            },
+          },
         });
       },
       selectTime(field) {
@@ -264,6 +273,13 @@
               icon: 'none',
               title: '表单验证通过',
             });
+            // 通过filter，筛选出上传进度为100的文件(因为某些上传失败的文件，进度值不为100，这个是可选的操作)
+            const files = this.$refs.uploader.lists.filter((val) => {
+              return val.progress == 100;
+            });
+            // 如果您不需要进行太多的处理，直接如下即可
+            // files = this.$refs.uploader.lists;
+            console.log(files);
           }
         });
       },
