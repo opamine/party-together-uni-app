@@ -25,7 +25,7 @@
               action="https://ramses.cn/api/upload/file"
               :header="{
                 Authorization:
-                  'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjU2YjNhMzg1YjY1MjI3ZjBiYmFlODcwIiwiaWF0IjoxNzIxMzc0NjA1LCJleHAiOjE3MjE2MzM4MDV9.O6g4ZqUKVA_ig00lIXtXfeBHeXCqa66NT8XzKV3bRkypOPX9FGm-UqZPGtxUoWo9zVK64Z2dPrDyK-6DNkMrRt1JGOoY1b60jtrAvLt7c7eXSbC6TZbvVHZ36xSEm9o21l9DytSv4eKvGehmiGyM1JHyRiHj70Mqez9qZE2ksLP7b3SHqzbrFNI00yqY3QwwDeHz8D5rDPR5ko4NF1Inm5OE4Mq27gDeSmaKm5zVc0jCROvr-2BOY_8fRz3iolBiv1g6gXbn5newGWoPZufRx_QGwZlFUavt0gvqLmnJdATw8bOBR-9BmWBoB82BylUL5bGqzGbv89RvhWLOwwq83g',
+                  'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjYzY2U3ZWEyNmRmYWNjZmYxM2UxOTYyIiwiaWF0IjoxNzI0MjI2MDk0LCJleHAiOjE3MjQ0ODUyOTR9.CTSg-3zAtJBAkfnUqd2TAjSBBX8iRFPQn2RJhuP4b3eUidaEKL87vTc5Wq1hsrp-GzH-D1AJVw8qVd6aeYaENslS5VZNrMOkykDHUWMxo-YN-_UCYQzuvCoFcsKo8qMnV06xETrV6wku7KEvOCsAhUpQMDj4oJEfYYDmntskemwFIm_dh4ZAA1iqLAdc0uDQ88MdF_6yaLpBJqr7XrSjdaNXIcCQyGND8xPYumZm_rPmuDXJEy7adb6PAKOWU4B3EOSgTaNZYuf5YZ-3FjXBdZRQLyAQXX3yNqpWHCsLgdDoHOU00a9nlA9QvfrnGSjiv3ZOM86p2kl6zzS2tw4rzQ',
               }"
               :max-size="30 * 1024 * 1024"
               :max-count="9"
@@ -126,7 +126,7 @@
                   <u-input
                     v-model="item.price"
                     input-align="right"
-                    placeholder="默认 0 即免费，可输入 0-20万"
+                    placeholder="默认 0 即免费，可输入 0-9999"
                   />
                 </u-form-item>
               </u-form>
@@ -159,7 +159,7 @@
                 ref="uploader2"
                 :header="{
                   Authorization:
-                    'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYRhIjoiNjYzY2U3ZWEyNmRmYWNjZmYxM2UxOTYyIiwiaWF0IjoxNzIzNjMxNDg3LCJleHAiOjE3MjM4OTA2ODd9.I6ug1obFT5PYD-2TWVu6DPdTlfzjH9TkfSp5bfm7nL3LGItGplb2MRnNHDbjLK4VWEVFgg_8z2QX6B1JSftc1KVXwvWxpelvX4jTHEKysxF5RctMnNR6C0kuCm_8pEg8gL31PGUdEhwpuye_zBUqPuLYAA0ZMKmOsOHiLHVKAwq06DFq6uKIs9uX4MtpEPjR2pptQgutlW7n8w6BwylwjFXlwQjVTJl1Wigw2nbRzD7mGXP7SHoPPBMF-uWQc01EUeRC7POpVGt7AAPiL74gIHX8huMQC9N8TuUzeHsoR1A0ww9HT8Jc_QKg_bpth6xYvY2uS-fDM0N4g9LO8HhZEw',
+                    'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNjYzY2U3ZWEyNmRmYWNjZmYxM2UxOTYyIiwiaWF0IjoxNzI0MjI2MDk0LCJleHAiOjE3MjQ0ODUyOTR9.CTSg-3zAtJBAkfnUqd2TAjSBBX8iRFPQn2RJhuP4b3eUidaEKL87vTc5Wq1hsrp-GzH-D1AJVw8qVd6aeYaENslS5VZNrMOkykDHUWMxo-YN-_UCYQzuvCoFcsKo8qMnV06xETrV6wku7KEvOCsAhUpQMDj4oJEfYYDmntskemwFIm_dh4ZAA1iqLAdc0uDQ88MdF_6yaLpBJqr7XrSjdaNXIcCQyGND8xPYumZm_rPmuDXJEy7adb6PAKOWU4B3EOSgTaNZYuf5YZ-3FjXBdZRQLyAQXX3yNqpWHCsLgdDoHOU00a9nlA9QvfrnGSjiv3ZOM86p2kl6zzS2tw4rzQ',
                 }"
                 action="https://ramses.cn/api/upload/file"
                 :max-size="30 * 1024 * 1024"
@@ -273,6 +273,7 @@
               icon: 'none',
               title: '表单验证通过',
             });
+
             // 通过filter，筛选出上传进度为100的文件(因为某些上传失败的文件，进度值不为100，这个是可选的操作)
             const files = this.$refs.uploader.lists.filter((val) => {
               return val.progress == 100;
@@ -280,6 +281,46 @@
             // 如果您不需要进行太多的处理，直接如下即可
             // files = this.$refs.uploader.lists;
             console.log(files);
+            if (files.length <= 0) {
+              return uni.showToast({
+                icon: 'none',
+                title: '请至少上传一张活动图片',
+              });
+            }
+            this.form.pictures = files.map((item) => item.url);
+
+            const files2 = this.$refs.uploader2.lists.filter((val) => {
+              return val.progress == 100;
+            });
+            console.log(files2);
+            if (files2.length <= 0) {
+              return uni.showToast({
+                icon: 'none',
+                title: '请上传微信群聊二维码',
+              });
+            }
+            this.form.groupChatQrcode = files2[0].url;
+
+            // 活动报名分组核验
+            const signUpConfigListValid = this.signUpConfigList.every((item) => {
+              if (
+                item.count &&
+                item.price &&
+                /^[1-9][0-9]{0,3}$/.test(item.count) &&
+                /^([0]|[1-9][0-9]{0,3})$/.test(item.price)
+              ) {
+                return true;
+              }
+              return false;
+            });
+            if (!signUpConfigListValid) {
+              uni.showToast({
+                icon: 'none',
+                title: '报名设置有误',
+              });
+            }
+
+            console.log(this.form);
           }
         });
       },
