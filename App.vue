@@ -83,6 +83,7 @@
   /* uview UI */
   @import './uni_modules/vk-uview-ui/index.scss';
   page {
+    height: 100%;
     background-color: #f8f8f8;
   }
 </style>

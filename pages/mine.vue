@@ -388,5 +388,6 @@
     background-color: #272a30;
     line-height: 100rpx;
     text-align: center;
+    z-index: 999;
   }
 </style>
